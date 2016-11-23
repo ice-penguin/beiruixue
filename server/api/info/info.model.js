@@ -7,7 +7,6 @@ var InfoSchema = new Schema({
 	name:String,
 	tel:Number,
 	exceptIncome:Number,
-	mainProduct:String,
 	orderQuantity:Number,
 	otherProducts:[{
 		_product:String,

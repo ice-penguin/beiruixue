@@ -1,12 +1,14 @@
 'use strict';
 
 var User = require('./user.model');
+var Role = require('../role/role.model');
+var Info = require('../info/info.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
-  return res.json(422, err);
+  return res.json(500, err);
 };
 
 /**
@@ -21,16 +23,67 @@ exports.index = function(req, res) {
 };
 
 /**
- * Creates a new user
+ * User 的创建都为最低的会员
  */
 exports.create = function (req, res, next) {
-  var newUser = new User(req.body);
-  newUser.provider = 'local';
-  newUser.role = 'user';
-  newUser.save(function(err, user) {
-    if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+  var account = req.body.account,
+      passport = req.body.passport,
+      name = req.body.name,
+      tel = req.body.tel;
+
+  if(!account){
+    return res.json(400,"缺少创建参数：account");
+  }
+  if(!passport){
+    return res.json(400,"缺少创建参数：passport");
+  }
+  if(!name){
+    return res.json(400,"缺少创建参数：name");
+  }
+  if(!tel){
+    return res.json(400,"缺少创建参数：tel");
+  }
+
+  var infoObj = {
+    name:name,
+    tel:tel,
+    exceptIncome:0,
+    orderQuantity:0,
+    otherProducts:[],
+    isDelete:false,
+    createDate:new Date()
+  };
+
+  Role.findOne({level:5},function (err,role){
+    if(err){
+      return validationError(res,err);
+    }
+    if(!role){
+      return res.json(404,"找不到对象：role");
+    }
+    Info.create(infoObj,function (err,info){
+      if(err){
+        return validationError(res,err);
+      }
+      var userObj = {
+        account:account,
+        _role:role._id,
+        role:role.level,
+        provider:'local',
+        _creator:req.user._id,
+        _info:info._id,
+        isDelete:false
+      }
+
+      User.create(userObj,function (err,user){
+        if(err){
+          return validationError(res,err);
+        }
+        var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+        res.json({ token: token });
+      });
+
+    });
   });
 };
 

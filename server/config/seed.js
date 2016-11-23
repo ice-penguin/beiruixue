@@ -8,6 +8,7 @@
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Role = require('../api/role/role.model');
+var Product = require('../api/product/product.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -78,3 +79,22 @@ Role.find({}).remove(function() {
     }
   );
 });
+// Product.find({}).remove(function() {
+//   Product.create({
+//     name:,
+//     description:,
+//     quantity:Number,
+//     price:Number,
+//     state:Number,//1.正常产品 2.按角色区分价格产品
+//     prices:[{
+//       _role:String,
+//       price:Number
+//     }],
+//     image:String,
+//     isActive:Boolean,
+//     createDate:Date
+//   }, function() {
+//       console.log('finished populating poroduct');
+//     }
+//   );
+// });
