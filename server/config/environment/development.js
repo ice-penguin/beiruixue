@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/beiruixue-dev'
   },
 
-  seedDB: true
+  // seedDB: true
 };

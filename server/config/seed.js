@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Role = require('../api/role/role.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -33,17 +34,47 @@ Thing.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'test'
-  }, {
-    provider: 'local',
-    role: 'admin',
-    name: 'Admin',
-    email: 'admin@admin.com',
-    password: 'admin'
+    account: 'admin@admin.com',
+    password: 'admin',
+    role:0
   }, function() {
       console.log('finished populating users');
+    }
+  );
+});
+Role.find({}).remove(function() {
+  Role.create([{
+  name:"特级代理",
+  requireQuantity:300,
+  primeCost:2600,
+  level:1,
+  createDate:new Date()
+},{
+  name:"一级代理",
+  requireQuantity:50,
+  primeCost:3000,
+  level:2,
+  createDate:new Date()
+},{
+  name:"二级代理",
+  requireQuantity:20,
+  primeCost:3400,
+  level:3,
+  createDate:new Date()
+},{
+  name:"三级代理",
+  requireQuantity:10,
+  primeCost:3800,
+  level:4,
+  createDate:new Date()
+},{
+  name:"加盟会员",
+  requireQuantity:1,
+  primeCost:8800,
+  level:5,
+  createDate:new Date()
+}], function() {
+      console.log('finished populating role');
     }
   );
 });

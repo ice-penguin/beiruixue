@@ -10,6 +10,7 @@ var UserSchema = new Schema({
     type: String,
     ref: 'Role'
   },
+  role:String,
   hashedPassword: String,
   provider: String,
   salt: String,
