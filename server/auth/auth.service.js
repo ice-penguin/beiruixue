@@ -44,8 +44,13 @@ function hasRole(roleRequired) {
   return compose()
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
-      if(req.user.role && roleRequired.indexOf(req.user.role)>-1){
-        return next();
+      if(req.user.role){
+        console.log(roleRequired);
+        if(roleRequired.indexOf(req.user.role)>-1){
+          return next();
+        }else{
+          return res.send(403);
+        }
       }
       if (roleRequired.indexOf(req.user._info.level)>-1) {
         next();

@@ -40,6 +40,7 @@ var updateInPerson=function (condition){
 			}
 			break;
 	}
+	console.log(isUpdateIncome);
 	var pr=_.find(dealArr,{name:product.name});
 	if(pr){
 		dealArr.orderQuantity+=orderQuantity;
@@ -52,11 +53,12 @@ var updateInPerson=function (condition){
 		dealArr.push(obj);
 	}
 	if(isUpdateRole){
-		Role.find({level:{$gt:inPerson.level}},function (err, roles){
+		Role.find({level:{$lt:inPerson.level}},function (err, roles){
 			if(err){inPerson.save();return;}
 			var maxQuantity=0;
+			console.log(roles);
 			_.each(roles,function (role){
-				if(inPerson.orderQuantity>role.requireQuantity && maxQuantity<role.requireQuantity){
+				if(inPerson.orderQuantity>=role.requireQuantity && maxQuantity<role.requireQuantity){
 					maxQuantity=role.requireQuantity;
 					inPerson._role=role._id;
 					inPerson.level=role.level;
@@ -73,7 +75,7 @@ var updateInPerson=function (condition){
 	}
 };
 
-var updateIncome=function (inPerson,outPerson){
+var updateIncome=function (condition){
 	var inPerson=condition.inPerson,
 		outPerson=condition.outPerson,
 		orderQuantity=condition.orderQuantity;
@@ -100,6 +102,7 @@ var updateIncome=function (inPerson,outPerson){
 		}else{
 			User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
 				if(err||!user){return;}
+				if(!user._creator){return;}
 				Role.findById(user._creator._role,function (err, outRole){
 					if(err||!outRole){return;}
 					if(outRole.level<inRole.level){
@@ -136,12 +139,13 @@ exports.shipment=function (req, res){
 	if(isNaN(orderQuantity)){
 		return res,json(400,'创建参数类型不正确：必须为数字!');
 	}
+	orderQuantity=parseInt(orderQuantity);
 	Info.findById(_inPerson,function (err, inPerson){
 		if(err){return handleError(err);}
 		if(!inPerson){return res.json(400,'进货者不存在!')}
 		Product.findById(_product,function (err, product){
 			if(err){return handleError(err);}
-			if(!outPerson){return res.json(400,'产品不存在!')}
+			if(!product){return res.json(400,'产品不存在!')}
 			if(outPerson && inPerson.level<=outPerson.level){
 				return res.json(400,'进货人代理等级需小于出货人代理等级!');
 			}

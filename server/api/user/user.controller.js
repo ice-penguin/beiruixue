@@ -8,7 +8,7 @@ var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
-  return res.json(500, err);
+  return res.json(500, err.toString());
 };
 
 /**
@@ -106,13 +106,15 @@ exports.create = function (req, res, next) {
       var userObj = {
         account:account,
         provider:'local',
-        _creator:req.user._id,
+        password:password,
+        _creator:req.user._info,
         _info:info._id,
         isDelete:false,
         createDate:new Date()
       }
       if(req.user.role == "subAdmin"){
         userObj.belong = req.user._id;
+        delete userObj._creator;
       }else{
         userObj.belong = req.user.belong;
       }

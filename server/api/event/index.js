@@ -7,6 +7,6 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', auth.hasRole(['1','2','3','4','admin','subAdmin']), controller.shipment);//出货记录创建
+router.post('/', auth.hasRole(['1','2','3','4','admin','subAdmin']), controller.shipment);//出货记录创建
 
 module.exports = router;
