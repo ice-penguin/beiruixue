@@ -22,6 +22,41 @@ exports.index = function(req, res) {
   });
 };
 
+// 创建子管理账号
+exports.createSubAdmin = function (req,res){
+  var account = req.body.account,
+      passport = req.body.passport,
+      name = req.body.name;
+  if(!account){
+    return res.json(400,"缺少创建参数：account");
+  }
+  if(!passport){
+    return res.json(400,"缺少创建参数：passport");
+  }
+  if(!name){
+    return res.json(400,"缺少创建参数：name");
+  }
+
+  var subAdminObj = {
+    account:account,
+    passport:passport,
+    name:name,
+    role:"subAdmin",
+    isDelete:false,
+    createDate:new Date()
+  };
+
+  User.create(subAdminObj,function (err,user){
+    if(err){
+      return validationError(res,err);
+    }
+    res.json(200,{user:user});
+    // var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    // res.json({ token: token });
+  });
+};
+
+
 /**
  * User 的创建都为最低的会员
  */
@@ -72,15 +107,20 @@ exports.create = function (req, res, next) {
         provider:'local',
         _creator:req.user._id,
         _info:info._id,
-        isDelete:false
+        isDelete:false,
+        createDate:new Date()
+      }
+      if(req.user.role == "subAdmin"){
+        userObj.belong = req.user._id;
+      }else{
+        userObj.belong = req.user.belong;
       }
 
       User.create(userObj,function (err,user){
         if(err){
           return validationError(res,err);
         }
-        var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-        res.json({ token: token });
+        res.json(200,{user:user});
       });
 
     });

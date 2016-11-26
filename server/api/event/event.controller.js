@@ -43,7 +43,7 @@ var updateInPerson=function (condition){
 		dealArr.push(obj);
 	}
 	if(open){
-		Role.find({level:($gt:inPerson.level)},function (err, roles){
+		Role.find({level:{$gt:inPerson.level}},function (err, roles){
 			if(err){inPerson.save();return;}
 			var maxQuantity=0;
 			_.each(roles,function (role){
@@ -53,7 +53,7 @@ var updateInPerson=function (condition){
 				}
 			});
 			inPerson.save();
-		}};
+		});
 	}else{
 		inPerson.save();
 	}
