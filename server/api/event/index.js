@@ -7,6 +7,6 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-// router.get('/', auth.hasRole('admin'), controller.index);
+router.get('/', auth.hasRole('0','1','2','3','4'), controller.index);
 
 module.exports = router;
