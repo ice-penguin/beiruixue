@@ -25,13 +25,13 @@ exports.index = function(req, res) {
 // 创建子管理账号
 exports.createSubAdmin = function (req,res){
   var account = req.body.account,
-      passport = req.body.passport,
+      password = req.body.password,
       name = req.body.name;
   if(!account){
     return res.json(400,"缺少创建参数：account");
   }
-  if(!passport){
-    return res.json(400,"缺少创建参数：passport");
+  if(!password){
+    return res.json(400,"缺少创建参数：password");
   }
   if(!name){
     return res.json(400,"缺少创建参数：name");
@@ -39,7 +39,7 @@ exports.createSubAdmin = function (req,res){
 
   var subAdminObj = {
     account:account,
-    passport:passport,
+    password:password,
     name:name,
     role:"subAdmin",
     isDelete:false,
@@ -62,15 +62,15 @@ exports.createSubAdmin = function (req,res){
  */
 exports.create = function (req, res, next) {
   var account = req.body.account,
-      passport = req.body.passport,
+      password = req.body.password,
       name = req.body.name,
       tel = req.body.tel;
 
   if(!account){
     return res.json(400,"缺少创建参数：account");
   }
-  if(!passport){
-    return res.json(400,"缺少创建参数：passport");
+  if(!password){
+    return res.json(400,"缺少创建参数：password");
   }
   if(!name){
     return res.json(400,"缺少创建参数：name");
@@ -82,7 +82,8 @@ exports.create = function (req, res, next) {
   var infoObj = {
     name:name,
     tel:tel,
-    exceptIncome:0,
+    saleIncome:0,
+    income:0,
     orderQuantity:0,
     otherProducts:[],
     isDelete:false,
@@ -145,9 +146,10 @@ exports.show = function (req, res, next) {
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
-  User.findByIdAndRemove(req.params.id, function(err, user) {
+  User.findById(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
-    return res.send(204);
+    user.isDelete=true;
+    user.save(200,'删除成功!');
   });
 };
 

@@ -7,7 +7,7 @@ var InfoSchema = new Schema({
 	name:String,
 	tel:Number,
 	saleIncome:Number,//销售
-	rebateIncome:Number,//返利
+	income:Number,//返利,或差价
 	orderQuantity:Number,
 	mainProducts:[{
 		_product:String,
@@ -24,7 +24,6 @@ var InfoSchema = new Schema({
 		ref: 'Role'
 	},
 	level:String,
-	isDelete:Boolean,
 	createDate:Date
 });
 
