@@ -6,15 +6,13 @@ var crypto = require('crypto');
 
 var UserSchema = new Schema({
   account: { type: String, lowercase: true },
-  _role: {
-    type: String,
-    ref: 'Role'
-  },
-  role:String,
   hashedPassword: String,
   provider: String,
   salt: String,
-  _creator:String,
+  _creator:{
+    type: String,
+    ref: 'Info'
+  },
   _info:{
     type: String,
     ref: 'Info'

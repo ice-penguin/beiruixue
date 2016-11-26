@@ -61,14 +61,14 @@ exports.create = function (req, res, next) {
     if(!role){
       return res.json(404,"找不到对象：role");
     }
+    infoObj._role=role.id;
+    infoObj.level=role.level;
     Info.create(infoObj,function (err,info){
       if(err){
         return validationError(res,err);
       }
       var userObj = {
         account:account,
-        _role:role._id,
-        role:role.level,
         provider:'local',
         _creator:req.user._id,
         _info:info._id,

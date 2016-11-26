@@ -8,10 +8,21 @@ var InfoSchema = new Schema({
 	tel:Number,
 	exceptIncome:Number,
 	orderQuantity:Number,
-	otherProducts:[{
+	mainProducts:[{
 		_product:String,
+		name:String,
 		orderQuantity:Number
 	}],
+	otherProducts:[{
+		_product:String,
+		name:String,
+		orderQuantity:Number
+	}],
+	_role:{
+		type: String,
+		ref: 'Role'
+	},
+	level:String,
 	isDelete:Boolean,
 	createDate:Date
 });

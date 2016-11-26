@@ -8,7 +8,7 @@ var ProductSchema = new Schema({
 	description:String,
 	quantity:Number,
 	price:Number,
-	state:Number,//1.正常产品 2.按角色区分价格产品
+	state:String,//1.正常产品 2.按角色区分价格产品
 	image:String,
 	isActive:Boolean,
 	createDate:Date

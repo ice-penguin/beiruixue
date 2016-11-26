@@ -25,7 +25,7 @@ function isAuthenticated() {
     })
     // Attach user to request
     .use(function(req, res, next) {
-      User.findById(req.user._id, function (err, user) {
+      User.findById(req.user._id,'',{populate:'_info'}, function (err, user) {
         if (err) return next(err);
         if (!user) return res.send(401);
 
@@ -44,7 +44,10 @@ function hasRole(roleRequired) {
   return compose()
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {
-      if (roleRequired.indexOf(req.user.role)>-1) {
+      if(!req.user._info){
+        return next();
+      }
+      if (roleRequired.indexOf(req.user._info.level)>-1) {
         next();
       }
       else {

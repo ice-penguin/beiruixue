@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var RoleSchema = new Schema({
 	name:String,
-	requireQuantity:String,
+	requireQuantity:Number,
 	primeCost:Number,
 	level:String,
 	createDate:Date

@@ -36,8 +36,7 @@ User.find({}).remove(function() {
   User.create({
     provider: 'local',
     account: 'admin@admin.com',
-    password: 'admin',
-    role:0
+    password: 'admin'
   }, function() {
       console.log('finished populating users');
     }
