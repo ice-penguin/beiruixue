@@ -17,7 +17,13 @@ var UserSchema = new Schema({
     type: String,
     ref: 'Info'
   },
-  isDelete:Boolean
+  role:String,//admin,subAdmin,只有管理员和子管理员有
+  belong:{
+    type:String,
+    ref:'User'
+  },//属于哪个subAdmin
+  isDelete:Boolean,
+  createDate:Date
 });
 
 /**
