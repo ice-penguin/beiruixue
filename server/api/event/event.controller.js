@@ -133,7 +133,7 @@ exports.shipment=function (req, res){
 	if(!_product){
 		return res,json(400,'缺少创建参数：_product');
 	}
-	if(!orderQuantity){
+	if(!orderQuantity&&orderQuantity!=0){
 		return res,json(400,'缺少创建参数：orderQuantity');
 	}
 	if(isNaN(orderQuantity)){
@@ -187,9 +187,15 @@ exports.index=function (req, res){
 	var page = req.query.page || 1,
     	itemsPerPage = req.query.itemsPerPage || 100,
     	_info = req.query._info,
-    	belong = req.query.belong;
+    	belong = req.query.belong,
+    	isRead = req.query.isRead;
     var condition={};
     var count;
+    if(isRead=='true'){
+    	condition={isRead:true};
+    }else if(isRead=='false'){
+    	condition={isRead:false};
+    }
     if(_info){
     	condition=_.merge(condition,{_info:_info});
     }

@@ -15,7 +15,7 @@ var checkProduct=function (product){
 	if(!product.description){
 		return false;
 	}
-	if(!product.quantity){
+	if(!product.quantity&&product.quantity!=0){
 		return false;
 	}
 	if(isNaN(product.quantity)){
