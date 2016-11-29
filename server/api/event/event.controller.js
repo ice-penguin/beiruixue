@@ -140,7 +140,7 @@ exports.shipment=function (req, res){
 		return res,json(400,'创建参数类型不正确：必须为数字!');
 	}
 	orderQuantity=parseInt(orderQuantity);
-	Info.findById(_inPerson,function (err, inPerson){
+	User.findOne({_info:_inPerson},'',{populate:'_info'},function (err, inPerson){
 		if(err){return handleError(err);}
 		if(!inPerson){return res.json(400,'进货者不存在!')}
 		Product.findById(_product,function (err, product){
@@ -154,6 +154,8 @@ exports.shipment=function (req, res){
 				_info:_inPerson,
 				content:'进货'+orderQuantity+'套'+product.name,
 				_product:_product,
+				isRead:false,
+				belong:inPerson.belong,
 				createDate:now
 			};
 			Event.create(inObj);
@@ -162,12 +164,14 @@ exports.shipment=function (req, res){
 					_info:outPerson._id,
 					content:'出货'+orderQuantity+'套'+product.name,
 					_product:_product,
+					isRead:false,
+					belong:req.user.belong,
 					createDate:now
 				};
 				Event.create(outObj);
 			}
 			var condition={
-				inPerson:inPerson,
+				inPerson:inPerson._info,
 				outPerson:outPerson,
 				product:product,
 				orderQuantity:orderQuantity
@@ -176,4 +180,50 @@ exports.shipment=function (req, res){
 			res.json(200,'进货处理中!');
 		});	
 	});
+};
+
+
+exports.index=function (req, res){
+	var page = req.query.page || 1,
+    	itemsPerPage = req.query.itemsPerPage || 100,
+    	_info = req.query._info,
+    	belong = req.query.belong;
+    var condition={};
+    var count;
+    if(_info){
+    	condition=_.merge(condition,{_info:_info});
+    }
+    if(belong){
+    	condition=_.merge(condition,{belong:belong});
+    }
+    Event.find(condition).count(function (err, c){
+    	if(err){return handleError(err);}
+    	count=c;
+    });
+    Event.find(condition,{},{
+    	skip: (page - 1) * itemsPerPage,
+		limit: itemsPerPage,
+		populate:'_info _product belong'
+    })
+    .exec(function (err, events){
+    	if(err){return handleError(err);}
+    	return res.json(200,{
+    		events:events,
+    		count:count
+    	});
+    });
+};
+
+
+exports.read=function (req, res){
+	var id = req.params.id;
+    Event.findById(id,function (err, eve){
+    	if(err){return handleError(err);}
+    	if(!eve){return res.json(404, '事件不存在!');}
+    	eve.isRead=true;
+    	eve.save(function (err, eve){
+    		if(err){return handleError(err);}
+    		return res.json(200,{eve:eve});
+    	});
+    });
 };

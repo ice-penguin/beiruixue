@@ -8,6 +8,8 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.post('/', auth.hasRole('admin'), controller.create);
+router.get('/', auth.hasRole('admin'), controller.index);
+router.put('/changeState/:id', auth.hasRole('admin'), controller.changeState);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;

@@ -13,6 +13,11 @@ var EventSchema = new Schema({
 		type:String,
 		ref:'Product'
 	},
+	isRead:Boolean,
+	belong:{
+	    type:String,
+	    ref:'User'
+	 },//属于哪个subAdmin
 	createDate:Date
 });
 
