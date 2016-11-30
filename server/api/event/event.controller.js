@@ -56,7 +56,6 @@ var updateInPerson=function (condition){
 		Role.find({level:{$lt:inPerson.level}},function (err, roles){
 			if(err){inPerson.save();return;}
 			var maxQuantity=0;
-			console.log(roles);
 			_.each(roles,function (role){
 				if(inPerson.orderQuantity>=role.requireQuantity && maxQuantity<role.requireQuantity){
 					maxQuantity=role.requireQuantity;
@@ -232,4 +231,25 @@ exports.read=function (req, res){
     		return res.json(200,{eve:eve});
     	});
     });
+};
+
+
+exports.readAll=function (req, res){
+	var id = req.params.id,
+		role = req.user.role;
+	var condition={isRead:false};
+	if(role&&role=='subAdmin'){
+		condition=_.merge(condition,{belong:id});
+	}else{
+		condition=_.merge(condition,{_info:id});
+	}
+	Event.find(condition,function (err, events){
+		if(err){return handleError(err);}
+		_.each(events,function (event){
+			event.isRead=true;
+			event.save();
+		});
+		return res.json(200,{events:events});
+	});
+    
 };
