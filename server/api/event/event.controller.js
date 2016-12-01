@@ -43,12 +43,14 @@ var updateInPerson=function (condition){
 	console.log(isUpdateIncome);
 	var pr=_.find(dealArr,{name:product.name});
 	if(pr){
-		dealArr.orderQuantity+=orderQuantity;
+		pr.orderQuantity+=orderQuantity;
+		pr.lastQuantity+=orderQuantity;
 	}else{
 		var obj={
 			_product:product._id,
 			name:product.name,
-			orderQuantity:orderQuantity
+			orderQuantity:orderQuantity,
+			lastQuantity:orderQuantity
 		};
 		dealArr.push(obj);
 	}
@@ -157,8 +159,10 @@ exports.shipment=function (req, res){
 				belong:inPerson.belong,
 				createDate:now
 			};
-			Event.create(inObj);
+			
 			if(outPerson){
+				product.quantity-=orderQuantity;
+				product.save();
 				var outObj={
 					_info:outPerson._id,
 					content:'出货'+orderQuantity+'套'+product.name,
@@ -167,8 +171,18 @@ exports.shipment=function (req, res){
 					belong:req.user.belong,
 					createDate:now
 				};
+
+				var pr = _.findWhere(outPerson.mainProducts,{_product:_product});
+				if(!pr || pr.lastQuantity<orderQuantity){
+					return res.json(400,'没有足够的货物!');
+				}else{
+					pr.lastQuantity-=orderQuantity;
+					outPerson.save();
+				}
 				Event.create(outObj);
 			}
+			Event.create(inObj);
+
 			var condition={
 				inPerson:inPerson._info,
 				outPerson:outPerson,

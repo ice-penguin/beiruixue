@@ -85,6 +85,7 @@ exports.create = function (req, res, next) {
     saleIncome:0,
     income:0,
     orderQuantity:0,
+    mainProducts:[],
     otherProducts:[],
     isDelete:false,
     createDate:new Date()

@@ -8,12 +8,13 @@ var InfoSchema = new Schema({
 	tel:Number,
 	saleIncome:Number,//销售
 	income:Number,//返利,或差价
-	orderQuantity:Number,
+	orderQuantity:Number,//主推产品累计
 	mainProducts:[{
 		_product:String,
 		name:String,
-		orderQuantity:Number
-	}],
+		orderQuantity:Number,//累计
+		lastQuantity:Number//剩余
+	}],//
 	otherProducts:[{
 		_product:String,
 		name:String,
