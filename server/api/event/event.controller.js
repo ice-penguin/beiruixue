@@ -161,8 +161,6 @@ exports.shipment=function (req, res){
 			};
 			
 			if(outPerson){
-				product.quantity-=orderQuantity;
-				product.save();
 				var outObj={
 					_info:outPerson._id,
 					content:'出货'+orderQuantity+'套'+product.name,
@@ -180,6 +178,9 @@ exports.shipment=function (req, res){
 					outPerson.save();
 				}
 				Event.create(outObj);
+			}else{
+				product.quantity-=orderQuantity;
+				product.save();
 			}
 			Event.create(inObj);
 
