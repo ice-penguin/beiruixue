@@ -224,15 +224,27 @@ exports.changePassword = function(req, res) {
   var newPass = String(req.body.newPassword);
 
   User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
+
+    // admin,subAdmin修改
+    if(req.user.role){
       user.password = newPass;
       user.save(function(err) {
         if (err) return validationError(res, err);
-        res.send(200);
+        res.json(200,{user:user});
       });
-    } else {
-      res.send(403);
+    }else{
+      // 通过旧密码修改
+      if(user.authenticate(oldPass)) {
+        user.password = newPass;
+        user.save(function(err) {
+          if (err) return validationError(res, err);
+          res.json(200,{user:user});
+        });
+      } else {
+        res.json(403,"没有操作权限");
+      }
     }
+
   });
 };
 
