@@ -204,11 +204,11 @@ exports.update = function (req, res) {
   }else{
     userId=req.user._id;
   }
-  User.findById(userId,function (err, user){
+  User.findById(userId,'',{populate:'_info'},function (err, user){
     if(err){return validationError(res,err);}
     if(!user){return res.json(404,'找不到user!');}
-    user._info=_assign(user._info,info);
-    user.save(function (err, user){
+    user._info=_.assign(user._info,info);
+    user._info.save(function (err, user){
       if(err){return validationError(res,err);}
       return res.json(200,{user:user});
     });
