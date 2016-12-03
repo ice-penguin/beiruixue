@@ -8,7 +8,8 @@ exports.setup = function (User, config) {
     },
     function(account, password, done) {
       User.findOne({
-        account: account.toLowerCase()
+        account: account.toLowerCase(),
+        isDelete:{$ne:true}
       }, function(err, user) {
         if (err) return done(err);
 
