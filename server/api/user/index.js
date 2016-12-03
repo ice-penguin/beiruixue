@@ -9,9 +9,9 @@ var router = express.Router();
 
 router.get('/', auth.hasRole(['admin','subAdmin','1','2','3','4']), controller.index);
 router.put('/destroy/:id', auth.hasRole(['admin','subAdmin']), controller.destroy);
-router.put('/destroyAll/:id', auth.hasRole(['admin','subAdmin']), controller.destroyAll);
+router.put('/destroyAll', auth.hasRole(['admin','subAdmin']), controller.destroyAll);
 router.put('/recovery/:id', auth.hasRole(['admin']), controller.recovery);
-router.put('/recoveryAll/:id', auth.hasRole(['admin']), controller.recoveryAll);
+router.put('/recoveryAll', auth.hasRole(['admin']), controller.recoveryAll);
 // router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 // router.put('/:id', auth.hasRole(['admin','subAdmin','1','2','3','4']), controller.update);

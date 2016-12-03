@@ -12,7 +12,7 @@ var _ = require('lodash');
 
 
 
-var handleError = function (res, err) {
+var handleError= function (res, err) {
   return res.send(500, err);
 };
 
@@ -142,10 +142,10 @@ exports.shipment=function (req, res){
 	}
 	orderQuantity=parseInt(orderQuantity);
 	User.findOne({_info:_inPerson},'',{populate:'_info'},function (err, inPerson){
-		if(err){return handleError(err);}
+		if(err){return handleError(res,err);}
 		if(!inPerson){return res.json(400,'进货者不存在!')}
 		Product.findById(_product,function (err, product){
-			if(err){return handleError(err);}
+			if(err){return handleError(res,err);}
 			if(!product){return res.json(400,'产品不存在!')}
 			if(outPerson && inPerson.level<=outPerson.level){
 				return res.json(400,'进货人代理等级需小于出货人代理等级!');
@@ -217,7 +217,7 @@ exports.index=function (req, res){
     	condition=_.merge(condition,{belong:belong});
     }
     Event.find(condition).count(function (err, c){
-    	if(err){return handleError(err);}
+    	if(err){return handleError(res,err);}
     	count=c;
     });
     Event.find(condition,{},{
@@ -226,7 +226,7 @@ exports.index=function (req, res){
 		populate:'_info _product belong'
     })
     .exec(function (err, events){
-    	if(err){return handleError(err);}
+    	if(err){return handleError(res,err);}
     	return res.json(200,{
     		events:events,
     		count:count
@@ -238,11 +238,11 @@ exports.index=function (req, res){
 exports.read=function (req, res){
 	var id = req.params.id;
     Event.findById(id,function (err, eve){
-    	if(err){return handleError(err);}
+    	if(err){return handleError(res,err);}
     	if(!eve){return res.json(404, '事件不存在!');}
     	eve.isRead=true;
     	eve.save(function (err, eve){
-    		if(err){return handleError(err);}
+    		if(err){return handleError(res,err);}
     		return res.json(200,{eve:eve});
     	});
     });
@@ -259,7 +259,7 @@ exports.readAll=function (req, res){
 		condition=_.merge(condition,{_info:id});
 	}
 	Event.find(condition,function (err, events){
-		if(err){return handleError(err);}
+		if(err){return handleError(res,err);}
 		_.each(events,function (event){
 			event.isRead=true;
 			event.save();

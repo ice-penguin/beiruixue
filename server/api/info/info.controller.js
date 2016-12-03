@@ -1,6 +1,7 @@
 'use strict';
 
 var Info = require('./info.model');
+var _ = require('lodash');
 
 
 
@@ -10,18 +11,18 @@ var handleError = function (res, err) {
 
 
 exports.update = function (req, res) {
-  var id = req.params.id,
+  var _id = req.body._id,
       role = req.user.role;
-  var info = _.pick(req.body,'name','tel');
+  var body = _.pick(req.body,'name','tel');
   if(role){
-    if(!id){return res.json(400,'缺少更新参数:id!');}
+    if(!_id){return res.json(400,'缺少更新参数:_id!');}
   }else{
-    id=req.user._info;
+    _id=req.user._info._id;
   }
-  Info.findById(id,function (err, info){
+  Info.findById(_id,function (err, info){
     if(err){return handleError(res,err);}
     if(!info){return res.json(404,'找不到info!');}
-    info=_.assign(info,info);
+    info=_.assign(info,body);
     info.save(function (err, info){
       if(err){return handleError(res,err);}
       return res.json(200,{info:info});

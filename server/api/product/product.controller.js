@@ -94,7 +94,7 @@ exports.index=function (req, res){
 exports.show=function (req, res){
 	var id=req.params.id;
 	Product.findById(id,function (err, product){
-		if(err){return handleError(err);}
+		if(err){return handleError(res,err);}
 		if(!product){return res.json(404,'产品不存在!');}
 		return res.json(200,{product:product});
 	});
@@ -104,14 +104,14 @@ exports.show=function (req, res){
 exports.changeState=function (req, res){
 	var id=req.params.id;
 	Product.findById(id,function (err, product){
-		if(err){return handleError(err);}
+		if(err){return handleError(res,err);}
 		if(!product){return res.json(404,'产品不存在!')}
 		if(product.isActive==false){
 			if(checkProduct(product)==false){return res.json(400,'信息不完整或数据类型错误!');}
 		}
 		product.isActive=!product.isActive;
 		product.save(function (err, product){
-			if(err){return handleError(err);}
+			if(err){return handleError(res,err);}
 			return res.json(200,{
 				product:product
 			});

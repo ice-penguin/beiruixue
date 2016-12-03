@@ -193,7 +193,7 @@ exports.show = function (req, res) {
   var userId = req.params.id;
 
   User.findById(userId,'',{populate:'_info _create'},function (err, user) {
-    if (err){return validationError(err);}
+    if (err){return validationError(res,err);}
     if (!user) return res.json(404,'找不到user!');
     return res.json(200,{user:user});
   });
@@ -206,10 +206,10 @@ exports.show = function (req, res) {
  */
 exports.destroy = function(req, res) {
   User.findById(req.params.id, function(err, user) {
-    if (err){return validationError(err);}
+    if (err){return validationError(res,err);}
     user.isDelete=true;
     user.save(function (err, user){
-      if (err){return validationError(err);}
+      if (err){return validationError(res,err);}
       return res.json(200,'删除成功!');
     });
   });
@@ -217,20 +217,21 @@ exports.destroy = function(req, res) {
 
 exports.recovery = function(req, res) {
   User.findById(req.params.id, function(err, user) {
-    if (err){return validationError(err);}
+    if (err){return validationError(res,err);}
     user.isDelete=false;
     user.save(function (err, user){
-      if (err){return validationError(err);}
-      return res.json(200,'删除成功!');
+      if (err){return validationError(res,err);}
+      return res.json(200,'恢复成功!');
     });
   });
 };
 
 exports.destroyAll = function(req, res) {
   var userIds=req.body.userIds;
+  console.log(userIds);
   _.each(userIds,function (id){
     User.findById(id, function(err, user) {
-      if (err){return validationError(err);}
+      if (err){return validationError(res,err);}
       user.isDelete=true;
       user.save();
     });
@@ -242,12 +243,12 @@ exports.recoveryAll = function(req, res) {
   var userIds=req.body.userIds;
   _.each(userIds,function (id){
     User.findById(id, function(err, user) {
-      if (err){return validationError(err);}
+      if (err){return validationError(res,err);}
       user.isDelete=false;
       user.save();
     });
   });
-  return res.json(200,'删除成功!');
+  return res.json(200,'恢复成功!');
 };
 
 /**
