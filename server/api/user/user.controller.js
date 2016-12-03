@@ -20,19 +20,23 @@ exports.index = function(req, res) {
   var page = req.query.page || 1,
       itemsPerPage = req.query.itemsPerPage || 100,
       role=req.user.role,
-      retrieval=req.query.retrieval;
+      retrieval=req.query.retrieval,
+      isDelete=req.query.isDelete;
   var count=0;
-  var condition;
+  var condition={isDelete:false};
 
   switch(role){
     case 'admin':
-      condition={role:{$ne:'admin'}};
+      if(isDelete=='true'){
+        condition.isDelete=true;
+      }
+      condition=_.merge(condition,{role:{$ne:'admin'}});
       break;
     case 'subAdmin':
-      condition={belong:req.user._id};
+      condition=_.merge(condition,{belong:req.user._id});
       break;
     default:
-      condition={_creator:req.user._id};
+      condition=_.merge(condition,{_creator:req.user._id});
   };
 
   var doQuery=function (){
@@ -195,25 +199,6 @@ exports.show = function (req, res) {
   });
 };
 
-exports.update = function (req, res) {
-  var userId = req.params.id,
-      role = req.user.role;
-  var info = _.pick(req.body,'name','tel');
-  if(role){
-    if(!userId){return res.json(400,'缺少更新参数:userId!');}
-  }else{
-    userId=req.user._id;
-  }
-  User.findById(userId,'',{populate:'_info'},function (err, user){
-    if(err){return validationError(res,err);}
-    if(!user){return res.json(404,'找不到user!');}
-    user._info=_.assign(user._info,info);
-    user._info.save(function (err, user){
-      if(err){return validationError(res,err);}
-      return res.json(200,{user:user});
-    });
-  });
-};
 
 /**
  * Deletes a user
@@ -230,12 +215,35 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.recovery = function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (err){return validationError(err);}
+    user.isDelete=false;
+    user.save(function (err, user){
+      if (err){return validationError(err);}
+      return res.json(200,'删除成功!');
+    });
+  });
+};
+
 exports.destroyAll = function(req, res) {
   var userIds=req.body.userIds;
   _.each(userIds,function (id){
     User.findById(id, function(err, user) {
       if (err){return validationError(err);}
       user.isDelete=true;
+      user.save();
+    });
+  });
+  return res.json(200,'删除成功!');
+};
+
+exports.recoveryAll = function(req, res) {
+  var userIds=req.body.userIds;
+  _.each(userIds,function (id){
+    User.findById(id, function(err, user) {
+      if (err){return validationError(err);}
+      user.isDelete=false;
       user.save();
     });
   });
