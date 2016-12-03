@@ -16,8 +16,32 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
+  // var page = req.query.page || 1,
+  //     itemsPerPage = req.query.itemsPerPage || 100,
+  //     role=req.user.role;
+  // var count;
+  // if(role=='admin'){
+  //   User.find({role:{$nin:['admin']}}).count(function (err, c) {
+  //     if(err) return res.send(500, err);
+  //     count=c;
+  //     console.log(count);
+  //   });
+
+  //   User.find({role:{$nin:['admin']}}, '-salt -hashedPassword',{
+  //     skip: (page - 1) * itemsPerPage,
+  //     limit: itemsPerPage,
+  //     populate:'_info _creator'
+  //   })
+  //   .exec(function (err, users) {
+  //     if(err) return res.send(500, err);
+  //     res.json(200, {
+  //       users:users,
+  //       count:count
+  //     });
+  //   });
+  // }
   User.find({}, '-salt -hashedPassword', function (err, users) {
-    if(err) return res.send(500, err);
+    if (err){return validationError(err);}
     res.json(200, users);
   });
 };
@@ -60,7 +84,7 @@ exports.createSubAdmin = function (req,res){
 /**
  * User 的创建都为最低的会员
  */
-exports.create = function (req, res, next) {
+exports.create = function (req, res) {
   var account = req.body.account,
       password = req.body.password,
       name = req.body.name,
@@ -134,13 +158,33 @@ exports.create = function (req, res, next) {
 /**
  * Get a single user
  */
-exports.show = function (req, res, next) {
+exports.show = function (req, res) {
   var userId = req.params.id;
 
-  User.findById(userId, function (err, user) {
-    if (err) return next(err);
-    if (!user) return res.send(401);
-    res.json(user.profile);
+  User.findById(userId,'',{populate:'_info _create'},function (err, user) {
+    if (err){return validationError(err);}
+    if (!user) return res.json(404,'找不到user!');
+    return res.json(200,{user:user});
+  });
+};
+
+exports.update = function (req, res) {
+  var userId = req.params.id,
+      role = req.user.role;
+  var info = _.pick(req.body,'name','tel');
+  if(role){
+    if(!userId){return res.json(400,'缺少更新参数:userId!');}
+  }else{
+    userId=req.user._id;
+  }
+  User.findById(userId,function (err, user){
+    if(err){return validationError(res,err);}
+    if(!user){return res.json(404,'找不到user!');}
+    user._info=_assign(user._info,info);
+    user.save(function (err, user){
+      if(err){return validationError(res,err);}
+      return res.json(200,{user:user});
+    });
   });
 };
 
@@ -150,16 +194,31 @@ exports.show = function (req, res, next) {
  */
 exports.destroy = function(req, res) {
   User.findById(req.params.id, function(err, user) {
-    if(err) return res.send(500, err);
+    if (err){return validationError(err);}
     user.isDelete=true;
-    user.save(200,'删除成功!');
+    user.save(function (err, user){
+      if (err){return validationError(err);}
+      return res.json(200,'删除成功!');
+    });
   });
+};
+
+exports.destroyAll = function(req, res) {
+  var userIds=req.body.userIds;
+  _.each(userIds,function (id){
+    User.findById(id, function(err, user) {
+      if (err){return validationError(err);}
+      user.isDelete=true;
+      user.save();
+    });
+  });
+  return res.json(200,'删除成功!');
 };
 
 /**
  * Change a users password
  */
-exports.changePassword = function(req, res, next) {
+exports.changePassword = function(req, res) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
@@ -180,7 +239,7 @@ exports.changePassword = function(req, res, next) {
 /**
  * Get my info
  */
-exports.me = function(req, res, next) {
+exports.me = function(req, res) {
   var userId = req.user._id;
   User.findOne({
     _id: userId
@@ -194,6 +253,6 @@ exports.me = function(req, res, next) {
 /**
  * Authentication callback
  */
-exports.authCallback = function(req, res, next) {
+exports.authCallback = function(req, res) {
   res.redirect('/');
 };

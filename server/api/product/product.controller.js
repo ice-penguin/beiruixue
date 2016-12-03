@@ -91,6 +91,15 @@ exports.index=function (req, res){
 	});
 };
 
+exports.show=function (req, res){
+	var id=req.params.id;
+	Product.findById(id,function (err, product){
+		if(err){return handleError(err);}
+		if(!product){return res.json(404,'产品不存在!');}
+		return res.json(200,{product:product});
+	});
+};
+
 
 exports.changeState=function (req, res){
 	var id=req.params.id;
