@@ -219,20 +219,15 @@ exports.destroyAll = function(req, res) {
  * Change a users password
  */
 exports.changePassword = function(req, res) {
-  var userId = req.user._id;
+  var userId = req.user.id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
   User.findById(userId, function (err, user) {
+    if(err){return validationError(res,err);}
+    if(!user){return res.json(404,'找不到user!');}
 
-    // admin,subAdmin修改
-    if(req.user.role){
-      user.password = newPass;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.json(200,{user:user});
-      });
-    }else{
+    if(userId == req.user._id.toString()){
       // 通过旧密码修改
       if(user.authenticate(oldPass)) {
         user.password = newPass;
@@ -242,6 +237,17 @@ exports.changePassword = function(req, res) {
         });
       } else {
         res.json(403,"没有操作权限");
+      }
+    }else{
+       // admin,subAdmin修改
+      if(req.user.role){
+        user.password = newPass;
+        user.save(function(err) {
+          if (err) return validationError(res, err);
+          res.json(200,{user:user});
+        });
+      }else{
+       res.json(403,"没有操作权限"); 
       }
     }
 
