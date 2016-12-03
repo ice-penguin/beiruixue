@@ -6,6 +6,7 @@ var Info = require('../info/info.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(500, err.toString());
@@ -16,34 +17,60 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  // var page = req.query.page || 1,
-  //     itemsPerPage = req.query.itemsPerPage || 100,
-  //     role=req.user.role;
-  // var count;
-  // if(role=='admin'){
-  //   User.find({role:{$nin:['admin']}}).count(function (err, c) {
-  //     if(err) return res.send(500, err);
-  //     count=c;
-  //     console.log(count);
-  //   });
+  var page = req.query.page || 1,
+      itemsPerPage = req.query.itemsPerPage || 100,
+      role=req.user.role,
+      retrieval=req.query.retrieval;
+  var count=0;
+  var condition;
 
-  //   User.find({role:{$nin:['admin']}}, '-salt -hashedPassword',{
-  //     skip: (page - 1) * itemsPerPage,
-  //     limit: itemsPerPage,
-  //     populate:'_info _creator'
-  //   })
-  //   .exec(function (err, users) {
-  //     if(err) return res.send(500, err);
-  //     res.json(200, {
-  //       users:users,
-  //       count:count
-  //     });
-  //   });
-  // }
-  User.find({}, '-salt -hashedPassword', function (err, users) {
-    if (err){return validationError(err);}
-    res.json(200, users);
-  });
+  switch(role){
+    case 'admin':
+      condition={role:{$ne:'admin'}};
+      break;
+    case 'subAdmin':
+      condition={belong:req.user._id};
+      break;
+    default:
+      condition={_creator:req.user._id};
+  };
+
+  var doQuery=function (){
+    console.log(condition);
+    User.find(condition).count(function (err, c) {
+      if (err){return validationError(err);}
+      count=c;
+      console.log(count);
+    });
+    User.find(condition, '-salt -hashedPassword',{
+      skip: (page - 1) * itemsPerPage,
+      limit: itemsPerPage,
+      populate:'_info _creator'
+    })
+    .exec(function (err, users) {
+      if (err){return validationError(err);}
+      res.json(200, {
+        users:users,
+        count:count,
+        page:page
+      });
+    });
+  };
+
+  if(retrieval){
+    var infoIds=[];
+    var condition2={name:{'$regex':'.*'+retrieval+'.*','$options':'i'}};
+    Info.find(condition2,'_id',{},function (err, infos){
+      if(err){return validationError(err);}
+      _.each(infos,function (info){
+        infoIds.push(info._id);
+      });
+      condition=_.merge(condition,{$or:[{_info:{$in:infoIds}},{account:{'$regex':'.*'+retrieval+'.*','$options':'i'}}]});
+      doQuery();
+    });
+  }else{
+    doQuery();
+  }  
 };
 
 // 创建子管理账号
@@ -132,7 +159,7 @@ exports.create = function (req, res) {
         account:account,
         provider:'local',
         password:password,
-        _creator:req.user._info,
+        _creator:req.user._id,
         _info:info._id,
         isDelete:false,
         createDate:new Date()

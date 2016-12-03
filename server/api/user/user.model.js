@@ -11,7 +11,7 @@ var UserSchema = new Schema({
   salt: String,
   _creator:{
     type: String,
-    ref: 'Info'
+    ref: 'User'
   },
   _info:{
     type: String,
