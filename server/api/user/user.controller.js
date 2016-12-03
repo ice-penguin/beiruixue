@@ -166,7 +166,14 @@ exports.changePassword = function(req, res, next) {
 
   User.findById(userId, function (err, user) {
 
-    if(oldPass){
+    // admin,subAdmin修改
+    if(req.user.role){
+      user.password = newPass;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.json(200,{user:user});
+      });
+    }else{
       // 通过旧密码修改
       if(user.authenticate(oldPass)) {
         user.password = newPass;
@@ -177,21 +184,8 @@ exports.changePassword = function(req, res, next) {
       } else {
         res.json(403,"没有操作权限");
       }
-    }else{
-      // admin,subAdmin修改
-      if(req.user.role){
-        user.password = newPass;
-        user.save(function(err) {
-          if (err) return validationError(res, err);
-          res.json(200,{user:user});
-        });
-      }else{
-        res.json(403,"没有操作权限");
-      }
     }
 
-
-    
   });
 };
 
