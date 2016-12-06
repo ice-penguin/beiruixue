@@ -1,0 +1,132 @@
+#login-body-box{
+	background-image: url("../../assets/images/bg.jpg");
+	background-position:center 158px;
+	background-repeat: no-repeat;
+    /*background-size: cover;*/
+    width: 100%;
+    min-width: 1190px;
+    height: 1080px;
+}
+#login-content{
+	width: 1190px;
+	margin:0 auto;
+	position: relative;
+}
+#login-top{
+	height: 158px;
+}
+#login-top img,#login-top div{
+	position: absolute;
+}
+#login-top-box{
+	width: 2px;
+  	height: 95px;
+  	background-color: #2e67c1;
+  	top: 37px;
+  	left: 450px;
+}
+#login-top-text{
+	width: 100px;
+	height: 28px;
+	font-family: PingFangSC;
+	font-size: 20px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	color: #9b9b9b;
+	top: 100px;
+	right: 15px;
+}
+#login-top-img1{
+	left: 22px;
+	top: 47px;
+}
+#login-top-img2{
+	right: 342px;
+	top: 38px;
+}
+#login-top-img3{
+	right: 191px;
+	top: 102px;
+}
+#login-center{
+	height: 600px;
+	position: relative;
+}
+#login-box{
+	width: 360px;
+	height: 320px;
+	border-radius: 6px;
+	background-color: #c7daf3;
+	font-family: PingFangSC;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	position: absolute;
+	right: 76px;
+	top: 163px;
+}
+#login-box-title{
+	width: 360px;
+	height: 55px;
+	background-color: #6b97df;
+	line-height: 55px;
+	text-indent: 31px;
+	font-size: 20px;
+	color: #ffffff;
+}
+#login-error{
+	width: 299px;
+	height: 20px;
+	background-color: #fff9ec;
+	border: solid 1px #ffb95a;
+	font-size: 12px;
+	color: #ff9200;
+	margin: 12px 0 0 31px;
+	text-indent: 9px;
+}
+#login-error-empt{
+	width: 299px;
+	height: 20px;
+	margin: 12px 0 0 31px;
+}
+.login-enter-box{
+	width: 298px;
+	height: 38px;
+	border-radius: 5px;
+	background-color: #ffffff;
+	/*border: solid 1px #d4d4d4;*/
+	margin: 12px 0 0 31px;
+}
+.login-enter-box input{
+	width: 270px;
+	height: 38px;
+	line-height: 38px;
+	text-indent: 10px;
+}
+.login-enter-box img{
+	position: relative;
+	top:5px;
+}
+#login-btn{
+	width: 298px;
+	height: 38px;
+	border-radius: 5px;
+	background-color: #5389dd;
+	margin: 48px 0 0 31px;
+	font-size: 20px;
+	color: #ffffff;
+	line-height: 38px;
+	text-align: center;
+	cursor: pointer;
+}
+#login-bottom{
+	height: 320px;
+}
+#login-bottom-text{
+	margin: 28px auto 0 auto;
+	width: 236px;
+	height: 28px;
+	font-size: 20px;
+	color: #4a4a4a;
+}

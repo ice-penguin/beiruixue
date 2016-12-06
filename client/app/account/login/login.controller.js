@@ -8,26 +8,22 @@
 
   /* @ngInject */
   function LoginCtrl($scope, Auth, $location) {
-    $scope.user = {};
-    $scope.errors = {};
-    $scope.login = login;
+    var self = this;
 
-    function login(form) {
-      $scope.submitted = true;
+    self.login = login;
 
-      if(form.$valid) {
-        Auth.login({
-          email: $scope.user.email,
-          password: $scope.user.password
+    function login() {
+       Auth.login({
+          account: self.account,
+          password: self.pwd
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          // $location.path('/');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          self.showError = true;
         });
-      }
     };
     
   }

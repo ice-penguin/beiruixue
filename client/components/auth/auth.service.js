@@ -86,7 +86,7 @@
       var deferred = $q.defer();
 
       $http.post('/auth/local', {
-        email: user.email,
+        account: user.account,
         password: user.password
       }).
       success(function(data) {

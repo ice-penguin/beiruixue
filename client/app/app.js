@@ -18,8 +18,12 @@
   /* @ngInject */
   function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/login');
 
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
     $httpProvider.interceptors.push('authInterceptor');
   }
 

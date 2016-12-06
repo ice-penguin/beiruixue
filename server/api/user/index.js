@@ -12,7 +12,7 @@ router.put('/destroy/:id', auth.hasRole(['admin','subAdmin']), controller.destro
 router.put('/destroyAll', auth.hasRole(['admin','subAdmin']), controller.destroyAll);
 router.put('/recovery/:id', auth.hasRole(['admin']), controller.recovery);
 router.put('/recoveryAll', auth.hasRole(['admin']), controller.recoveryAll);
-// router.get('/me', auth.isAuthenticated(), controller.me);
+router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 // router.put('/:id', auth.hasRole(['admin','subAdmin','1','2','3','4']), controller.update);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);//修改密码，需输入旧密码和新密码和上级修改下级
