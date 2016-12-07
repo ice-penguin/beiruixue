@@ -19,5 +19,35 @@ body {
 .content{
 	width: 1190px;
 	margin: 0 auto;
-	border:1px solid red;
+}
+
+/*表格基本属性*/
+.table_captions{
+	height: 60px;
+	line-height: 60px;
+ 	background-color: #5389dd;
+}
+.table_caption{
+	float: left;
+	height: 60px;
+	font: 14px/60px PingFangSC; /*size/line-height family*/
+	font-weight: 600;
+	color: #ffffff;
+}
+.table_contents{
+	height: 60px;
+	border: solid 1px #ebebeb;
+	border-top: none;
+}
+.table_content{
+	float: left;
+	height: 60px;
+	font: 14px/60px PingFangSC; /*size/line-height family*/
+	color: #535353;	
+}
+.table_contents:nth-child(odd){
+	background: #f5f8fd;
+}
+.table_contents:nth-child(even){
+	background: #fff;
 }
