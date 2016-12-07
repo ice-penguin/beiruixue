@@ -4,10 +4,10 @@
 
   angular
     .module('beiruixueApp')
-    .controller('AdminCtrl', AdminCtrl);
+    .controller('AdminAccountViewCtrl', adminAccountViewCtrl);
 
   /* @ngInject */
-  function AdminCtrl($scope, $http, Auth, User) {
+  function adminAccountViewCtrl($scope, $http, Auth, User) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();

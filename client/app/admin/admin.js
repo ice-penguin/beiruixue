@@ -2,16 +2,16 @@
 
   'use strict';
 
-  angular
-    .module('beiruixueApp')
-    .config(config);
+  angular.module('beiruixueApp')
+  .config(config);
 
   function config($stateProvider) {
     $stateProvider
-      .state('admin', {
-        url: '/admin',
-        templateUrl: 'app/admin/admin.html',
-        controller: 'AdminCtrl'
+      .state('admin-account-view', {
+        url: '/admin/account/view',
+        templateUrl: 'app/admin/account/account-view.html',
+        controller: 'AdminAccountViewCtrl',
+        controllerAs: 'adminAccountViewCtrl'
       });
   };
 

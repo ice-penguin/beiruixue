@@ -19,7 +19,7 @@
         })
         .then( function() {
           // Logged in, redirect to home
-          // $location.path('/');
+          $location.path('/admin/account/view');
         })
         .catch( function(err) {
           self.showError = true;
