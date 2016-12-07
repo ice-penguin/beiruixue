@@ -1,0 +1,61 @@
+#navbar-box{
+	height: 110px;
+	background-color: #fafafa;
+	box-shadow: 0 1px 0 0 #2e67c1;
+}
+#navbar-content{
+	width: 1190px;
+	margin: 0 auto;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	font-family: PingFangSC;
+}
+#navbar-logo{
+	float: left;
+	margin: 40px 0 0 35px;
+}
+#navbar-lead{
+	float: left;
+	margin: 20px 0 0 58px;
+	color: #535353;
+}
+#navbar-lead div{
+	float: left;
+	width: 80px;
+	height: 90px;
+	line-height: 80px;
+	margin-right: 60px;
+	cursor: pointer;
+	font-size: 18px;
+}
+#navbar-lead-select{
+	color: #2e68c0;
+	border-bottom:4px solid #2e67c1;
+}
+#navbar-news{
+	width: 65px;
+	height: 20px;
+	float: right;
+	margin: 45px 55px 0 0;
+	font-size: 14px;
+	color: #535353;
+	position: relative;
+}
+#navbar-news img{
+	margin-top: 2px;
+	cursor: pointer;
+}
+#navbar-news-text{
+	float: right;
+	cursor: pointer;
+}
+#navbar-news-icon{
+	width: 7px;
+	height: 7px;
+	background-color: #ff0000;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	right: -7px;
+}

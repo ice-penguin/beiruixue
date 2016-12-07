@@ -1,3 +1,15 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  
+<div class="navbar navbar-default navbar-static-top" id="navbar-box" ng-controller="NavbarCtrl as navbarCtrl">
+  <div id="navbar-content">
+  	<div id="navbar-logo">
+  		<img src="assets/images/beiruixue.png">
+  	</div>
+  	<div id="navbar-lead">
+  		<div ng-repeat="menu in navbarCtrl.menus" id="{{menu.navCss}}" ng-bind="menu.title" ui-sref="{{menu.link}}"></div>
+  	</div>
+  	<div id="navbar-news" ui-sref="login">
+  		<img src="assets/images/shape.png">
+  		<div id="navbar-news-text">新消息</div>
+  		<div id="navbar-news-icon"></div>
+  	</div>
+  </div>
 </div>
