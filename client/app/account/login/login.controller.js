@@ -7,7 +7,7 @@
     .controller('LoginCtrl', LoginCtrl);
 
   /* @ngInject */
-  function LoginCtrl($scope, Auth, $location) {
+  function LoginCtrl($scope, Auth, $location, $state) {
     var self = this;
 
     self.login = login;
@@ -19,7 +19,8 @@
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/admin/account/view');
+          // $location.path('/view');
+          $state.go('admin-account-view');
         })
         .catch( function(err) {
           self.showError = true;
