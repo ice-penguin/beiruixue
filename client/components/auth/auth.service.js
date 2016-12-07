@@ -75,10 +75,22 @@
        */
       isAdmin: isAdmin,
 
+      /*
+      判断是否是代理登录
+       */
+      isAgent:isAgent,
+
+      /*
+      判断是否是会员登录
+       */
+      isMember: isMember,
+
       /**
        * Get auth token
        */
-      getToken: getToken
+      getToken: getToken,
+
+      setCurrentUser: setCurrentUser
     };
 
     function login(user, callback) {
@@ -160,11 +172,28 @@
     }
 
     function isAdmin() {
-      return currentUser.role === 'admin';
+      return currentUser.role === 'admin' || currentUser.role === 'subAdmin';
+    }
+
+    function isAgent() {
+      return currentUser._info && currentUser._info.level != "5";
+    }
+
+    function isMember() {
+      return currentUser._info && currentUser._info.level == "5";
     }
 
     function getToken() {
       return $cookieStore.get('token');
+    }
+
+    // set currentUser
+    function setCurrentUser(cb){
+      User.get({},{},function (user){
+        currentUser =user;
+        return cb(currentUser);
+      });
+      
     }
 
   }
