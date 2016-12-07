@@ -20,7 +20,7 @@
         .then( function() {
           // Logged in, redirect to home
           // $location.path('/view');
-          $state.go('admin-account-view');
+          $state.go('main');
         })
         .catch( function(err) {
           self.showError = true;
