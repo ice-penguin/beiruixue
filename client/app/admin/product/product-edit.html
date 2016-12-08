@@ -1,0 +1,47 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content">
+	<div class="product-addPosition">
+		<div class="account-title">产品管理->编辑产品</div>
+		<div class="account-line"></div>
+		<div class="account-inputs">
+			<div class="input_content">
+				<div class="input_name"><span class="necessary">*</span>产品名:</div>
+				<input type="text" class="input_value" style="width:400px;">
+				<span class="prompt">20字以内</span>
+			</div>
+			<div class="textarea_content">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>描述:</div>
+				<textarea type="text" class="textarea_value"></textarea>
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div style="clear:both"></div>
+			<div class="input_content">
+				<div class="input_name"><span class="necessary">*</span>库存:</div>
+				<input type="text" class="input_value" style="width:80px;">
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div class="input_content">
+				<div class="input_name"><span class="necessary">*</span>产品图片:</div>
+				<div class="product-submitImg"></div>
+				<div class="product-submitPrompt">点击更换</div>
+			</div>
+			<div style="clear:both"></div>
+			<div class="input_content" style="position:relative">
+				<div class="input_name"><span class="necessary">*</span>产品类型:</div>
+				<div type="text" class="input_value" style="width:168px;">
+					<div class="account-selectBox"></div>
+					<div class="account-selectBtn">∨</div>
+				</div>
+				<div class="account-selectChooses">
+					<div class="account-selectChoose">普通产品</div>
+					<div class="account-selectChoose">特殊产品</div>
+				</div>
+			</div>
+			<div>
+				<div class="account-save">保存</div>
+				<div class="account-back" ui-sref="admin-account-view">返回</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>

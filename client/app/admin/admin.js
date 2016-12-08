@@ -65,13 +65,29 @@
         controllerAs: 'adminRoleViewCtrl'
       })
 
-      // 角色管理
+      // 产品管理
       .state('admin-product-view', {
         params:{"navValue":"admin-product-view"},
         url: '/admin/product/view',
         templateUrl: 'app/admin/product/product-view.html',
         controller: 'AdminProductViewCtrl',
         controllerAs: 'adminProductViewCtrl'
+      })
+
+      .state('admin-product-add', {
+        params:{"navValue":"admin-product-add"},
+        url: '/admin/product/add',
+        templateUrl: 'app/admin/product/product-add.html',
+        controller: 'AdminProductAddCtrl',
+        controllerAs: 'adminProductAddCtrl'
+      })
+
+      .state('admin-product-edit', {
+        params:{"navValue":"admin-product-edit"},
+        url: '/admin/product/edit',
+        templateUrl: 'app/admin/product/product-edit.html',
+        controller: 'AdminProductEditCtrl',
+        controllerAs: 'adminProductEditCtrl'
       })
 
       // 事件管理

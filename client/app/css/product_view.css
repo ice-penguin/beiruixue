@@ -80,3 +80,30 @@
 	background: url(../../assets/images/add.png);
 	cursor: pointer;
 }
+/*product-add*/
+.product-addPosition{
+	margin-top: 15px;
+	width: 1190px;
+	height: 791px;
+	background-color: #ffffff;
+	border: solid 1px #ebebeb;
+}
+.product-submitImg{
+	float: left;
+	margin-left: 20px;
+	width: 60px;
+  	height: 60px;
+  	background: url(../../assets/images/productImage.png) no-repeat;
+}
+.product-submitPrompt{
+	float: left;
+	margin-left: 16px;
+	margin-top: 38px;
+	margin-bottom: 14px;
+	width: 64px;
+	height: 22px;
+	font-family: PingFangSC;
+	font-size: 16px;
+	color: #9b9b9b;
+	cursor: pointer;
+}
