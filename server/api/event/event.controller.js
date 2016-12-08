@@ -33,9 +33,14 @@ var updateInPerson=function (condition){
 			isUpdateIncome=true;
 			dealArr=inPerson.mainProducts;
 			inPerson.orderQuantity+=orderQuantity;
-			if(inPerson.level==5&&orderQuantity>=10){
-				isUpdateRole=true;
-			}else if(inPerson.level>1 && inPerson.level<5){
+			// 累计升级
+			// if(inPerson.level==5&&orderQuantity>=10){
+			// 	isUpdateRole=true;
+			// }else if(inPerson.level>1 && inPerson.level<5){
+			// 	isUpdateRole=true;
+			// }
+			// 一次性到升级
+			if(inPerson.level>1 && inPerson.level<=5&&orderQuantity>=10){
 				isUpdateRole=true;
 			}
 			break;
@@ -59,7 +64,14 @@ var updateInPerson=function (condition){
 			if(err){inPerson.save();return;}
 			var maxQuantity=0;
 			_.each(roles,function (role){
-				if(inPerson.orderQuantity>=role.requireQuantity && maxQuantity<role.requireQuantity){
+				// 累计升级
+				// if(inPerson.orderQuantity>=role.requireQuantity && maxQuantity<role.requireQuantity){
+				// 	maxQuantity=role.requireQuantity;
+				// 	inPerson._role=role._id;
+				// 	inPerson.level=role.level;
+				// }
+				// 一次性到升级
+				if(orderQuantity>=role.requireQuantity && maxQuantity<role.requireQuantity){
 					maxQuantity=role.requireQuantity;
 					inPerson._role=role._id;
 					inPerson.level=role.level;
