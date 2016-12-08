@@ -51,6 +51,24 @@ body {
 .table_contents:nth-child(even){
 	background: #fff;
 }
+/*大表格基本属性*/
+.table_contents2{
+	height: 100px;
+	border: solid 1px #ebebeb;
+	border-top: none;
+}
+.table_content2{
+	float: left;
+	height: 100px;
+	font: 14px/100px PingFangSC; /*size/line-height family*/
+	color: #535353;	
+}
+.table_contents2:nth-child(odd){
+	background: #f5f8fd;
+}
+.table_contents2:nth-child(even){
+	background: #fff;
+}
 
 /*输入框的基本属性*/
 .input_content{

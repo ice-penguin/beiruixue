@@ -21,43 +21,43 @@
         if(self.user.role){
           self.menus=[{
             'title': '账户管理',
-            'link': '/login',
+            'link': 'admin-account-view',
             'navCss':"",
-            "state":""
+            "state":"admin-account-view"
           },{
             'title': '角色管理',
-            'link': '/login',
+            'link': 'admin-role-view',
             'navCss':"",
-            "state":""
+            "state":"admin-role-view"
           },{
             'title': '产品管理',
-            'link': '/login',
+            'link': 'admin-product-view',
             'navCss':"",
-            "state":""
+            "state":"admin-product-view"
           },{
             'title': '事件管理',
-            'link': '/login',
+            'link': 'admin-event-view',
             'navCss':"",
-            "state":""
+            "state":"admin-event-view"
           }];
         }else if(self.user._info&&self.user._info.level == 5){
           self.menus=[{
             'title': '事件管理',
-            'link': '/login',
+            'link': 'member-event-view',
             'navCss':"",
-            "state":""
+            "state":"member-event-view"
           }];
         }else{
           self.menus=[{
             'title': '账户管理',
-            'link': '/login',
+            'link': 'agent-account-view',
             'navCss':"",
-            "state":""
+            "state":"agent-account-view"
           },{
             'title': '事件管理',
-            'link': '/login',
+            'link': 'agent-event-view',
             'navCss':"",
-            "state":""
+            "state":"agent-event-view"
           }];
         }
         //页面

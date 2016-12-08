@@ -1,0 +1,54 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content">
+	<div class="role-content">
+		<div class="account-title">产品管理</div>
+		<div class="account-line"></div>
+		<div class="account-search">
+			<input class="account-searchInput" placeholder="请输入产品名">
+			<div class="account-searchBtn">搜索</div>
+		</div>
+		<div style="botn:clear"></div>
+		<div class="account-table">
+			<div class="table_captions">
+				<div class="table_caption product-one"></div>
+				<div class="table_caption product-two">产品名</div>
+				<div class="table_caption product-three">描述</div>
+				<div class="table_caption product-four">库存</div>
+				<div class="table_caption product-five">产品图片</div>
+				<div class="table_caption product-six">产品类别</div>
+				<div class="table_caption product-seven">状态</div>
+				<div class="table_caption product-eight">操作</div>
+			</div>
+			<div class="account-deleteBtn">
+				<div>
+					<div class="account-selectAll"></div>
+					<div class="account-selectAllWord">全选</div>
+					<div class="account-deleteWord">删除</div>
+					<div style="botn:clear"></div>
+				</div>
+			</div>
+			<div class="table_contents2">
+				<div class="table_content2 product-one"><div class="product-selectAll"></div></div>
+				<div class="table_content2 product-two"><span>特级代理</span></div>
+				<div class="table_content2 product-three"><span>特级代理</span></div>
+				<div class="table_content2 product-four"><span style="color:#f86701">阿夏</span></div>
+				<div class="table_content2 product-five"><div class="product-productImg"></div></div>
+				<div class="table_content2 product-six"><span>普通产品</span></div>
+				<div class="table_content2 product-seven">
+					<div class="product-active" ng-show="true"></div>
+					<div class="product-unactive" ng-hide="true"></div>
+				</div>
+				<div class="table_content2 product-eight">
+					<div>
+						<div class="product-update" ui-sref="admin-product-edit">查看/修改</div>
+						<div class="product-activeBtn">下架</div>
+					</div>
+				</div>
+			</div>
+			<div class="table_contents2">
+				<div class="product-addNewImg"></div>
+				<div class="product-addNewWord">添加新商品</div>
+			</div>
+		</div>
+	</div>
+</div>

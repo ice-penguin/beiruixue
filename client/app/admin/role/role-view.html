@@ -1,0 +1,43 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content">
+	<div class="role-content">
+		<div class="account-title">账户管理->编辑</div>
+		<div class="account-line"></div>
+		<div class="role-table">
+			<div class="table_captions">
+				<div class="table_caption role-one">名称</div>
+				<div class="table_caption role-two">要求数量</div>
+				<div class="table_caption role-three">代理价格</div>
+			</div>
+			<div class="table_contents">
+				<div class="table_content role-one"><span style="color:#3c8d04">特级代理</span></div>
+				<div class="table_content role-two">
+					<div ng-hide="adminRoleViewCtrl.editQuantity">
+						<span style="float:left;color:#2e68c0">300</span>
+						<div class="role-editImg" ng-click="adminRoleViewCtrl.editQuantity=true"></div>
+					</div>
+					<div ng-show="adminRoleViewCtrl.editQuantity">
+						<input type="text" class="role-quantityInput">
+						<div class="role-btns">
+							<div class="role-saveBtn">确认</div>
+							<div class="role-cancelBtn" ng-click="adminRoleViewCtrl.editQuantity=false">取消</div>
+						</div>
+					</div>
+				</div>
+				<div class="table_content role-three">
+					<div ng-hide="adminRoleViewCtrl.editPrice">
+						<span style="float:left;color:#f86701">2600</span>
+						<div class="role-editImg" ng-click="adminRoleViewCtrl.editPrice=true"></div>
+					</div>
+					<div ng-show="adminRoleViewCtrl.editPrice">
+						<input type="text" class="role-quantityInput">
+						<div class="role-btns">
+							<div class="role-saveBtn">确认</div>
+							<div class="role-cancelBtn" ng-click="adminRoleViewCtrl.editPrice=false">取消</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

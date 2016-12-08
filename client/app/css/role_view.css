@@ -1,0 +1,66 @@
+.role-content{
+	margin-top: 15px;
+	width: 1190px;
+	height: 608px;
+	background-color: #ffffff;
+	border: solid 1px #ebebeb;
+}
+.role-table{
+	width: 1120px;
+	margin: 0 auto;
+	margin-top: 31px;
+}
+.role-one{
+	text-indent: 90px;
+	width: 33%;
+}
+.role-two{
+	width: 33%;
+}
+.role-three{
+	width: 34%;
+}
+.role-editImg{
+	float: left;
+	margin-top: 22px;
+	margin-left: 21px;
+	width: 13px;
+	height: 14px;
+	background: url(../../assets/images/edit.png) no-repeat;
+	cursor: pointer;
+}
+.role-quantityInput{
+	float: left;
+	margin-top: 20px;
+	width: 42px;
+	height: 20px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	border: solid 1px #dcdcdc;
+	text-indent: 5px;
+}
+.role-btns{
+	float: left;
+	margin-top: 20px;
+	width: 104px;
+	height: 20px;
+}
+.role-saveBtn,
+.role-cancelBtn{
+	float: left;
+	margin-left: 10px;
+	width: 42px;
+	height: 22px;
+	line-height: 20px;
+	text-align: center;
+	border-radius: 4px;
+	background-color: #2e67c1;
+	font-family: PingFangSC;
+	font-size: 14px;
+	font-weight: 600;
+	color: #ffffff;
+	cursor: pointer;
+}
+.role-cancelBtn{
+	background-color: #f6a623;
+}
