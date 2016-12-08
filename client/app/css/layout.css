@@ -51,3 +51,47 @@ body {
 .table_contents:nth-child(even){
 	background: #fff;
 }
+
+/*输入框的基本属性*/
+.input_content{
+	margin-bottom: 14px;
+	height: 38px;
+}
+.necessary{
+	float: left;
+	width: 8px;
+	line-height: 36px;
+	font-family: PingFangSC;
+	font-size: 14px;
+	color: #ff0000;
+}
+.input_name{
+	float: left;
+	margin-left: 2px;
+	width: 103px;
+	line-height: 36px;
+	font-family: PingFangSC;
+	font-size: 16px;
+	color: #535353;
+}
+.input_value{
+	float: left;
+	margin-left: 20px;
+	width: 298px;
+	height: 38px;
+	line-height: 36px;
+	border-radius: 5px;
+	background-color: #ffffff;
+	border: solid 1px #d4d4d4;
+	text-indent: 14px;
+	font-size: 16px;
+	color: #535353;
+}
+.prompt{
+	float: left;
+	margin-left: 13px;
+	line-height: 36px;
+	font-family: PingFangSC;
+	font-size: 16px;
+	color: #9b9b9b;
+}

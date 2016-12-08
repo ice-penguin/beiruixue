@@ -1,8 +1,9 @@
 body{
 	background-color: #f7f7f7;
 }
+/*account-view*/
 .account-header{
-	margin-top: 50px;
+	margin-top: 15px;
 	width: 1190px;
 	height: 186px;
 	background-color: #ffffff;
@@ -12,7 +13,7 @@ body{
 	/*border:1px solid red;*/
 	margin-left: 49px;
 	margin-top: 22px;
-	width: 80px;
+	/*width: 180px;*/
 	height: 28px;
 	line-height: 28px;
 	font-family: PingFangSC;
@@ -185,4 +186,86 @@ body{
 	font-weight: 600;
 	color: #ffffff;
 	cursor: pointer;
+}
+/*account-add*/
+.account-addPosition{
+	margin-top: 15px;
+	width: 1190px;
+	height: 608px;
+	background-color: #ffffff;
+	border: solid 1px #ebebeb;
+}
+.account-inputs{
+	/*border:1px solid red;*/
+	margin-top: 122px;
+	margin-left: 377px;
+	height: 329px;
+}
+.account-save{
+	float: left;
+	margin-top: 32px;
+	margin-left: 103px;
+	width: 150px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	border-radius: 5px;
+	background-color: #5389dd;
+	font-family: PingFangSC;
+	font-size: 20px;
+	font-weight: 600;
+	color: #ffffff;
+	cursor:pointer;
+}
+.account-back{
+	float: left;
+	margin-top: 32px;
+	margin-left: 27px;
+	width: 40px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	font-family: PingFangSC;
+	font-size: 20px;
+	color: #2e68c0;
+	cursor: pointer;
+}
+/*account-out*/
+.account-selectBtn{
+	float: right;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 5px;
+	background-color: #5389dd;
+	color:#fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+.account-selectChooses{
+	position: absolute;
+	top:37px;
+	left: 105px;
+	margin-left: 20px;
+	width: 168px;
+	height: 76px;
+	line-height: 36px;
+	border-radius: 5px;
+	background-color: #ffffff;
+	border: solid 1px #d4d4d4;
+	text-indent: 14px;
+	font-size: 16px;
+	color: #535353;
+}
+.account-selectChoose{
+	width: 168px;
+	height: 38px;
+	line-height: 36px;
+	border-radius: 5px;
+	background-color: #ffffff;
+	border: solid 1px #d4d4d4;
+	border-top: none;
+	text-indent: 14px;
+	font-size: 16px;
+	color: #535353;
 }
