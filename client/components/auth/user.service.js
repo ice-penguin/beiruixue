@@ -12,10 +12,31 @@
         id: '@_id'
       },
       {
-        changePassword: {
+        index: {
+          method: 'GET'
+        },
+        destroy: {
           method: 'PUT',
           params: {
-            controller:'password'
+            id:'destroy'
+          }
+        },
+        destroyAll: {
+          method: 'PUT',
+          params: {
+            id:'destroyAll'
+          }
+        },
+        recovery: {
+          method: 'PUT',
+          params: {
+            id:'recovery'
+          }
+        },
+        recoveryAll: {
+          method: 'PUT',
+          params: {
+            id:'recoveryAll'
           }
         },
         get: {
@@ -23,7 +44,26 @@
           params: {
             id:'me'
           }
+        },
+        show: {
+          method: 'GET'
+        },
+        changePassword: {
+          method: 'PUT',
+          params: {
+            controller:'password'
+          }
+        },
+        createSubAdmin: {
+          method: 'POST',
+          params: {
+            id:'subAdmin'
+          }
+        },
+        createMember: {
+          method: 'POST'
         }
+
       });
   }
 
