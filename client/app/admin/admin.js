@@ -26,7 +26,7 @@
 
       .state('admin-account-edit', {
         params:{"navValue":"admin-account-view"},
-        url: '/admin/account/edit',
+        url: '/admin/account/edit/:id',
         templateUrl: 'app/admin/account/account-edit.html',
         controller: 'AdminAccountEditCtrl',
         controllerAs: 'adminAccountEditCtrl'

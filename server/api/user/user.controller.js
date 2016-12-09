@@ -106,6 +106,7 @@ exports.createSubAdmin = function (req,res){
     createDate:new Date()
   };
 
+  console.log(subAdminObj);
   User.create(subAdminObj,function (err,user){
     if(err){
       return validationError(res,err);

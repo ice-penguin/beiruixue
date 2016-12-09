@@ -38,18 +38,18 @@
 					<div style="botn:clear"></div>
 				</div>
 			</div>
-			<div class="table_contents">
+			<div class="table_contents" ng-repeat="agent in adminAccountViewCtrl.agents">
 				<div class="table_content account-one"><div class="account-selectAll"></div></div>
-				<div class="table_content account-two">18806712362</div>
-				<div class="table_content account-three"><span style="color:#3c8d04">特级代理</span></div>
-				<div class="table_content account-four">阿夏</div>
-				<div class="table_content account-five">18806712362</div>
-				<div class="table_content account-six"><span style="color:#f86701">1500</span></div>
-				<div class="table_content account-seven"><span style="color:#f86701">3000</span></div>
+				<div class="table_content account-two" ng-bind="agent.account">18806712362</div>
+				<div class="table_content account-three"><span style="color:#3c8d04" ng-bind="agent.level">特级代理</span></div>
+				<div class="table_content account-four"><span ng-bind="agent._info.name?agent._info.name:agent.name">阿夏</span></div>
+				<div class="table_content account-five"><span ng-bind="agent._info.tel?agent._info.tel:agent.tel">18806712362</span></div>
+				<div class="table_content account-six"><span ng-bind="agent._info.saleIncome?agent._info.saleIncome:'无'" style="color:#f86701">1500</span></div>
+				<div class="table_content account-seven"><span ng-bind="agent._info.income?agent._info.income:'无'" style="color:#f86701">3000</span></div>
 				<div class="table_content account-eight">
 					<div>
-						<div class="account-changePassword" ui-sref="admin-account-changePassword({state:'other'})">修改密码</div>
-						<div class="account-changeUpdate" ui-sref="admin-account-edit">查看/修改</div>
+						<div class="account-changePassword" ui-sref="admin-account-changePassword({id:agent._id,state:'other'})">修改密码</div>
+						<div class="account-changeUpdate" ui-sref="admin-account-edit({id:agent._id})">查看/修改</div>
 						<div class="account-changeOutput" ui-sref="admin-account-out">发货</div>
 					</div>
 				</div>
