@@ -1,0 +1,59 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content">
+	<div class="account-header">
+		<div class="account-title">账户管理</div>
+		<div class="account-line"></div>
+		<div>
+			<div class="account-adminWord">代理xx</div>
+			<div class="account-btnGroup">
+				<div class="account-btn" ui-sref="admin-account-add">添加代理</div>
+				<div class="account-btn" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
+				<div class="account-btn" ui-sref="admin-account-edit({state:'own'})">信息管理</div>
+				<div style="botn:clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="account-list">
+		<div class="account-search">
+			<input class="account-searchInput" placeholder="请输入账号或姓名">
+			<div class="account-searchBtn">搜索</div>
+		</div>
+		<div style="botn:clear"></div>
+		<div class="account-table">
+			<div class="table_captions">
+				<div class="table_caption account-one"></div>
+				<div class="table_caption account-two">账号</div>
+				<div class="table_caption account-three">角色</div>
+				<div class="table_caption account-four">姓名</div>
+				<div class="table_caption account-five">联系号码</div>
+				<div class="table_caption account-six">销售收益</div>
+				<div class="table_caption account-seven">返利收益</div>
+				<div class="table_caption account-eight">操作</div>
+			</div>
+			<div class="account-deleteBtn">
+				<div>
+					<div class="account-selectAll"></div>
+					<div class="account-selectAllWord">全选</div>
+					<div class="account-deleteWord">删除</div>
+					<div style="botn:clear"></div>
+				</div>
+			</div>
+			<div class="table_contents">
+				<div class="table_content account-one"><div class="account-selectAll"></div></div>
+				<div class="table_content account-two">18806712362</div>
+				<div class="table_content account-three"><span style="color:#3c8d04">特级代理</span></div>
+				<div class="table_content account-four">阿夏</div>
+				<div class="table_content account-five">18806712362</div>
+				<div class="table_content account-six"><span style="color:#f86701">1500</span></div>
+				<div class="table_content account-seven"><span style="color:#f86701">3000</span></div>
+				<div class="table_content account-eight">
+					<div>
+						<div class="account-changePassword" ui-sref="admin-account-changePassword({state:'other'})">修改密码</div>
+						<div class="account-changeUpdate" ui-sref="admin-account-edit({state:'other'})">查看/修改</div>
+						<div class="account-changeOutput" ui-sref="admin-account-out">发货</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

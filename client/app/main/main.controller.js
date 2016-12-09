@@ -14,10 +14,10 @@
           	$state.go('admin-account-view');
         } else if (Auth.isMember()) {
         	console.log("会员");
-          	$state.go('login');
+          	$state.go('member-event-view');
         } else if (Auth.isAgent()) {
         	console.log("代理");
-          	$state.go('login');
+          	$state.go('agent-account-view');
         } else {
         	console.log("未登录");
           	$state.go('login');
