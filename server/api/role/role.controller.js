@@ -11,7 +11,7 @@ exports.index = function (req,res){
 	var page = req.query.page||1,
 		itemsPerPage = req.query.itemsPerPage||100;
 
-	Role.find({},function (err,roles){
+	Role.find({},"",{sort:{level:1}},function (err,roles){
 		if(err){return handleError(res, err);}
 		return res.json(200,{roles:roles});
 	});

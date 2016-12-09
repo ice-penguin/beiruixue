@@ -9,30 +9,30 @@
 				<div class="table_caption role-two">要求数量</div>
 				<div class="table_caption role-three">代理价格</div>
 			</div>
-			<div class="table_contents">
-				<div class="table_content role-one"><span style="color:#3c8d04">特级代理</span></div>
+			<div class="table_contents" ng-repeat="role in adminRoleViewCtrl.roles">
+				<div class="table_content role-one"><span style="color:#3c8d04" ng-bind="role.name">特级代理</span></div>
 				<div class="table_content role-two">
 					<div ng-hide="adminRoleViewCtrl.editQuantity">
-						<span style="float:left;color:#2e68c0">300</span>
+						<span style="float:left;color:#2e68c0" ng-bind="role.requireQuantity">300</span>
 						<div class="role-editImg" ng-click="adminRoleViewCtrl.editQuantity=true"></div>
 					</div>
 					<div ng-show="adminRoleViewCtrl.editQuantity">
-						<input type="text" class="role-quantityInput">
+						<input type="text" class="role-quantityInput" ng-model="role.editQuantity">
 						<div class="role-btns">
-							<div class="role-saveBtn">确认</div>
+							<div class="role-saveBtn" ng-click="adminRoleViewCtrl.submitQuantity(role)">确认</div>
 							<div class="role-cancelBtn" ng-click="adminRoleViewCtrl.editQuantity=false">取消</div>
 						</div>
 					</div>
 				</div>
 				<div class="table_content role-three">
 					<div ng-hide="adminRoleViewCtrl.editPrice">
-						<span style="float:left;color:#f86701">2600</span>
+						<span style="float:left;color:#f86701" ng-bind="role.primeCost">2600</span>
 						<div class="role-editImg" ng-click="adminRoleViewCtrl.editPrice=true"></div>
 					</div>
 					<div ng-show="adminRoleViewCtrl.editPrice">
-						<input type="text" class="role-quantityInput">
+						<input type="text" class="role-quantityInput" ng-model="role.editPrice">
 						<div class="role-btns">
-							<div class="role-saveBtn">确认</div>
+							<div class="role-saveBtn" ng-click="adminRoleViewCtrl.submitPrice(role)">确认</div>
 							<div class="role-cancelBtn" ng-click="adminRoleViewCtrl.editPrice=false">取消</div>
 						</div>
 					</div>
