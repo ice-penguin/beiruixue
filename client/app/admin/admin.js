@@ -34,7 +34,7 @@
 
       .state('admin-account-changePassword', {
         params:{"navValue":"admin-account-view"},
-        url: '/admin/account/changePassword?state',
+        url: '/admin/account/changePassword?state&id',
         templateUrl: 'app/admin/account/account-changePassword.html',
         controller: 'AdminAccountPsdCtrl',
         controllerAs: 'adminAccountPsdCtrl'

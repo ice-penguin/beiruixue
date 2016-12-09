@@ -6,31 +6,31 @@
 		<div class="account-inputs">
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>账号名:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="adminAccountAddCtrl.accountInfo.account">
 				<span class="prompt">英文字母开头</span>
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>姓名:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="adminAccountAddCtrl.accountInfo.name">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>联系号码:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="adminAccountAddCtrl.accountInfo.tel">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>密码:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="adminAccountAddCtrl.accountInfo.password">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>重复密码:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="adminAccountAddCtrl.accountInfo.rePassword">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div>
-				<div class="account-save">保存</div>
+				<div class="account-save" ng-click="adminAccountAddCtrl.create()">保存</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
 		</div>

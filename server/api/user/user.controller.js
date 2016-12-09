@@ -81,7 +81,8 @@ exports.index = function(req, res) {
 exports.createSubAdmin = function (req,res){
   var account = req.body.account,
       password = req.body.password,
-      name = req.body.name;
+      name = req.body.name,
+      tel = req.body.tel;
   if(!account){
     return res.json(400,"缺少创建参数：account");
   }
@@ -91,11 +92,15 @@ exports.createSubAdmin = function (req,res){
   if(!name){
     return res.json(400,"缺少创建参数：name");
   }
+  if(!tel){
+    return res.json(400,"缺少创建参数：tel");
+  }
 
   var subAdminObj = {
     account:account,
     password:password,
     name:name,
+    tel:tel,
     role:"subAdmin",
     isDelete:false,
     createDate:new Date()
@@ -272,7 +277,7 @@ exports.changePassword = function(req, res) {
           res.json(200,{user:user});
         });
       } else {
-        res.json(403,"没有操作权限");
+        res.json(403,"原密码错误");
       }
     }else{
        // admin,subAdmin修改

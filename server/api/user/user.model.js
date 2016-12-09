@@ -17,6 +17,8 @@ var UserSchema = new Schema({
     type: String,
     ref: 'Info'
   },
+  tel:String,//subAdmin有
+  name:String,//subAdmin有
   role:String,//admin,subAdmin,只有管理员和子管理员有
   belong:{
     type:String,
@@ -51,14 +53,14 @@ UserSchema
   .path('account')
   .validate(function(account) {
     return account.length;
-  }, 'Account cannot be blank');
+  }, '账号不能为空');
 
 // Validate empty password
 UserSchema
   .path('hashedPassword')
   .validate(function(hashedPassword) {
     return hashedPassword.length;
-  }, 'Password cannot be blank');
+  }, '密码不能为空');
 
 // Validate email is not taken
 UserSchema
@@ -73,7 +75,7 @@ UserSchema
       }
       respond(true);
     });
-}, 'The specified account address is already in use.');
+}, '账号已被使用');
 
 var validatePresenceOf = function(value) {
   return value && value.length;
@@ -87,7 +89,7 @@ UserSchema
     if (!this.isNew) return next();
 
     if (!validatePresenceOf(this.hashedPassword))
-      next(new Error('Invalid password'));
+      next(new Error('无效密码'));
     else
       next();
   });
