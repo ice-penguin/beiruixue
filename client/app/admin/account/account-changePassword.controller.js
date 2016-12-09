@@ -1,48 +1,51 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminAccountPsdCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','User',
-    function ($scope, $location, $state,$stateParams,$cookieStore,User) {
-    var self=this;
- 	self.state=$stateParams.state;
+  .controller('AdminAccountPsdCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Auth','User',
+    function ($scope, $location, $state,$stateParams,$cookieStore,Auth,User) {
+    var self = this;
+    var id = $stateParams.id;
+   	self.state = $stateParams.state;
+   	self.body = {
+   		oldPassword:null,
+   		newPassword:null,
+   		reNewPassword:null
+   	}
 
- 	self.ownData={
- 		oldPassword:'',
- 		newPassword:'',
- 		confirmPassword:''
- 	};
 
- 	var me=function (){
- 		User.get({},{},function (data){
- 			self.me=data;
- 		},function (){
+   	if(self.state == "other"){
+   		if(!id){
+   			alert("操作错误，请重新操作");
+   			return $state.go("admin-account-view");
+   		}
+   		User.show({id:id},function (data){
+   			console.log(data);
+   			self.user = data.user;
+   		});
+   	}else{
+   		self.user = Auth.getCurrentUser();
+   		id = self.user._id;
+   		if(!id){
+   			User.get(function(data){
+   				self.user = data;
+   				id = self.user._id;
+   			});
+   		}
+   		
+   	}
 
- 		});
- 	};
-
- 	var init=function (){
- 		me();
- 	};
-
- 	self.save=function (value){
- 		switch(value){
- 			case'own':
- 				if(!(self.ownData.oldPassword&&self.ownData.newPassword&&self.ownData.confirmPassword)){
-		    		return alert('信息不完整!');
-		    	}
-		    	if(self.ownData.newPassword!=self.ownData.confirmPassword){
-		    		return alert('新密码不一致!');
-		    	}
- 				User.changePassword({id:self.me._id},self.ownData,function (){
- 					$state.go('admin-account-view');
- 				},function (){
- 					return alert('旧密码错误!');
- 				});
- 				break;
- 			case'other':
- 				break;
- 		};
- 	};
-
- 	init();
+   	self.changePassword = function(){
+   		if(self.body.reNewPassword && self.body.reNewPassword != self.body.newPassword){
+   			return alert("两次密码输入不同");
+   		}
+   		if(!self.body.newPassword){
+   			return alert("请输入新密码");
+   		}
+   		User.changePassword({id:id},self.body,function (data){
+   			alert("修改密码成功");
+   			$state.go("admin-account-view");
+   		},function (data){
+   			alert(data);
+   		});
+   	};
 }]);
