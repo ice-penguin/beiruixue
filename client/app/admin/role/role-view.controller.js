@@ -27,6 +27,7 @@ angular.module('beiruixueApp')
     		});
     	};
 
+    	//更新代理价格
     	self.submitPrice = function (role){
     		if(isNaN(role.editPrice)||role.editPrice<=0){
     			return alert("代理价格必须为一个大于零的数");
@@ -39,7 +40,7 @@ angular.module('beiruixueApp')
     	};
     	
 
-    	//更新代理价格
+    	
 
     	init();
 
