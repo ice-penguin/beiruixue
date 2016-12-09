@@ -255,10 +255,10 @@ exports.recoveryAll = function(req, res) {
  * Change a users password
  */
 exports.changePassword = function(req, res) {
-  var userId = req.user.id;
+  var userId = req.params.id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
-
+  console.log(userId,req.user._id);
   User.findById(userId, function (err, user) {
     if(err){return validationError(res,err);}
     if(!user){return res.json(404,'找不到user!');}
