@@ -69,7 +69,7 @@ exports.index = function(req, res) {
       _.each(infos,function (info){
         infoIds.push(info._id);
       });
-      condition=_.merge(condition,{$or:[{_info:{$in:infoIds}},{account:{'$regex':'.*'+retrieval+'.*','$options':'i'}}]});
+      condition=_.merge(condition,{$or:[{_info:{$in:infoIds}},{account:{'$regex':'.*'+retrieval+'.*','$options':'i'}},{name:{'$regex':'.*'+retrieval+'.*','$options':'i'}}]});
       doQuery();
     });
   }else{
@@ -235,14 +235,15 @@ exports.recovery = function(req, res) {
 exports.destroyAll = function(req, res) {
   var userIds=req.body.userIds;
   console.log(userIds);
-  _.each(userIds,function (id){
-    User.findById(id, function(err, user) {
-      if (err){return validationError(res,err);}
+  User.find({_id:{$in:userIds}}, function(err, users) {
+    if (err){return validationError(res,err);}
+    _.each(users,function (user){
       user.isDelete=true;
       user.save();
     });
+    return res.json(200,'删除成功!');
   });
-  return res.json(200,'删除成功!');
+  
 };
 
 exports.recoveryAll = function(req, res) {

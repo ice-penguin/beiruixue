@@ -15,8 +15,8 @@
 	</div>
 	<div class="account-list">
 		<div class="account-search">
-			<input class="account-searchInput" placeholder="请输入账号或姓名">
-			<div class="account-searchBtn">搜索</div>
+			<input class="account-searchInput" placeholder="请输入账号或姓名" ng-model="adminAccountViewCtrl.keywords">
+			<div class="account-searchBtn" ng-click="adminAccountViewCtrl.search()">搜索</div>
 		</div>
 		<div style="botn:clear"></div>
 		<div class="account-table">
@@ -32,14 +32,14 @@
 			</div>
 			<div class="account-deleteBtn">
 				<div>
-					<div class="account-selectAll"></div>
-					<div class="account-selectAllWord">全选</div>
-					<div class="account-deleteWord">删除</div>
+					<div class="account-selectAll" ng-click="adminAccountViewCtrl.selectAllChange()"><span ng-show="adminAccountViewCtrl.isSelectAll">√</span></div>
+					<div class="account-selectAllWord" ng-click="adminAccountViewCtrl.selectAllChange('true')">全选</div>
+					<div class="account-deleteWord" ng-click="adminAccountViewCtrl.destoryAccount()">删除</div>
 					<div style="botn:clear"></div>
 				</div>
 			</div>
 			<div class="table_contents" ng-repeat="agent in adminAccountViewCtrl.agents">
-				<div class="table_content account-one"><div class="account-selectAll"></div></div>
+				<div class="table_content account-one"><div class="account-selectAll" ng-click="agent.isSelect=!agent.isSelect;adminAccountViewCtrl.isSelectAll=false"><span ng-show="agent.isSelect">√</span></div></div>
 				<div class="table_content account-two" ng-bind="agent.account">18806712362</div>
 				<div class="table_content account-three"><span style="color:#3c8d04" ng-bind="agent.level">特级代理</span></div>
 				<div class="table_content account-four"><span ng-bind="agent._info.name?agent._info.name:agent.name">阿夏</span></div>
