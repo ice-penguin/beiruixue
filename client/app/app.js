@@ -9,7 +9,8 @@
 		  'ngSanitize',
 		  'btford.socket-io',
 		  'ui.router',
-		  'ui.bootstrap'
+		  'ui.bootstrap',
+      'ngFileUpload'
 		])
     .config(config)
     .factory('authInterceptor', authInterceptor)

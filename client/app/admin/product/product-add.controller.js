@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminProductAddCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Product',
-    function ($scope, $location, $state,$stateParams,$cookieStore,Product) {
+  .controller('AdminProductAddCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Product','Upload',
+    function ($scope, $location, $state,$stateParams,$cookieStore,Product,Upload) {
     var self=this;
 
     self.product={
@@ -10,8 +10,39 @@ angular.module('beiruixueApp')
     	description:'',
     	quantity:'',
     	price:'',
-    	state:'',
+    	state:'1',
     	image:''
+    };
+    var MAX = Math.pow(2, 32);
+    var MIN = 1;
+
+    self.imageFile="assets/uploadfile/";
+
+    //上传
+    self.upload=function(file){
+        console.log(file,file.length);
+        if(file.length>0){
+            console.log('3333');
+            var file=file[0];
+            var now = new Date().getTime();
+            var nowStr = now.toString();
+            var rand = (Math.floor(Math.random() * (MAX - MIN)) + MIN).toString();
+            var randStr = rand.toString();
+            var filename = nowStr + '_' + randStr + '_' + file.name.replace(/[^0-9a-z\.]+/gi, '');
+            console.log('hhhh');
+            Upload.upload({
+                method: 'POST',
+                url: 'api/upload',
+                data: {file: file, 'filename': filename}
+            }).then(function (resp) {
+                console.log(resp.data);
+                self.product.image=filename;
+            }, function (resp) {
+                alert("上传失败");
+            }, function (evt) {
+                // self.loaded = parseInt(100.0 * evt.loaded / evt.total);
+            });
+       };
     };
 
     self.chooseProduct=function (value){
@@ -21,7 +52,7 @@ angular.module('beiruixueApp')
     			self.product.state=1;
     			break;
     		case '2':
-    			self.productCategory="特殊产品";
+    			self.productCategory="主推产品";
     			self.product.state=2;
     			break;
     	};

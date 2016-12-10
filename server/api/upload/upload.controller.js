@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var fs = require('fs');
 var config = require('../../tool/config');
-var util = require('../../tool/util');
+// var util = require('../../tool/util');
 // var ImageGroup = require('../image-group/image-group.model');
 
 
@@ -19,10 +19,10 @@ exports.upload=function (req,res){
         fs.rename(file.path,__dirname+"/../../../"+config.localUploadFileImg+filename,function(err){
 			 if(err){
 			    console.log("重命名失败！",err);
-			    return res.json(200,util.code701(language));
+			    return res.json(400,'上传失败!');
 			 }else{
 			    console.log("重命名成功！");
-			    return res.json(200,util.code700(language));
+			    return res.json(200,'上传成功!');
 			 }
 		});
     // console.log(uploadPath); //uploads directory: (ie: /home/user/data/uploads)

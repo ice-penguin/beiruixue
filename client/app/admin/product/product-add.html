@@ -20,15 +20,19 @@
 				<input type="text" class="input_value" style="width:80px;" ng-model="adminProductAddCtrl.product.quantity">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
-			<div class="input_content">
+			<div class="input_content" ng-show="adminProductAddCtrl.product.state=='1'">
 				<div class="input_name"><span class="necessary" style="color:#fff">*</span>价格:</div>
 				<input type="text" class="input_value" style="width:80px;" ng-model="adminProductAddCtrl.product.price">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary" style="color:#fff">*</span>产品图片:</div>
-				<div class="product-submitImg"></div>
-				<div class="product-submitPrompt">点击更换</div>
+				<img class="product-submitImg" ng-hide="adminProductAddCtrl.product.image">
+				<img class="product-submitImg" ng-show="adminProductAddCtrl.product.image" ng-src="{{adminProductAddCtrl.imageFile+adminProductAddCtrl.product.image}}">
+				<!-- <progressbar ng-show="adminProductAddCtrl.loaded > 0" ng-class="{active: adminProductAddCtrl.loaded < 100}" max="100" value="adminProductAddCtrl.loaded">
+					<span ng-bind="adminProductAddCtrl.loaded" ></span>%
+				</progressbar > -->
+				<div class="product-submitPrompt" ngf-select ngf-change="adminProductAddCtrl.upload($files,0)">点击更换</div>
 			</div>
 			<div style="clear:both"></div>
 			<div class="input_content" style="position:relative">
@@ -39,7 +43,7 @@
 				</div>
 				<div class="account-selectChooses" ng-show="adminProductAddCtrl.showSelectChooses">
 					<div class="account-selectChoose" ng-click="adminProductAddCtrl.chooseProduct('1')">普通产品</div>
-					<div class="account-selectChoose" ng-click="adminProductAddCtrl.chooseProduct('2')">特殊产品</div>
+					<div class="account-selectChoose" ng-click="adminProductAddCtrl.chooseProduct('2')">主推产品</div>
 				</div>
 			</div>
 			<div>
