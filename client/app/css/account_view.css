@@ -236,6 +236,10 @@ body{
 	cursor: pointer;
 }
 /*account-out*/
+.account-selectBox{
+	float: left;
+	width: 130px;
+}
 .account-selectBtn{
 	float: right;
 	width: 36px;
@@ -273,4 +277,5 @@ body{
 	text-indent: 14px;
 	font-size: 16px;
 	color: #535353;
+	cursor: pointer;
 }

@@ -7,9 +7,10 @@
     .controller('NavbarCtrl', NavbarCtrl);
 
   /* @ngInject */
-  function NavbarCtrl($scope, $location, $stateParams, User) {
+  function NavbarCtrl($scope, $location, $stateParams, User,Event) {
 
     var self = this;
+    self.newsState="admin-event-view";
 
     var init = function(){
       initMenu();
@@ -19,6 +20,27 @@
       User.get(function (data){
         self.user = data;
         if(self.user.role){
+          switch(self.user.role){
+            case 'admin':
+              Event.index({isRead:false},{},function (data){
+                if(data.count>0){
+                  self.newsPrompt=true;
+                }
+              },function (){
+
+              });
+              break;
+            case 'subAdmin':
+              Event.index({isRead:false,belong:self.user._id},{},function (data){
+                if(data.count>0){
+                  self.newsPrompt=true;
+                }
+              },function (){
+
+              });
+              break;
+          };
+          self.newsState="admin-event-view";
           self.menus=[{
             'title': '账户管理',
             'link': 'admin-account-view',
@@ -41,6 +63,14 @@
             "state":"admin-event-view"
           }];
         }else if(self.user._info&&self.user._info.level == 5){
+          Event.index({isRead:false,_info:self.user._id},{},function (data){
+            if(data.count>0){
+              self.newsPrompt=true;
+            }
+          },function (){
+
+          });
+          self.newsState="member-event-view";
           self.menus=[{
             'title': '事件管理',
             'link': 'member-event-view',
@@ -48,6 +78,14 @@
             "state":"member-event-view"
           }];
         }else{
+          Event.index({isRead:false,_info:self.user._id},{},function (data){
+            if(data.count>0){
+              self.newsPrompt=true;
+            }
+          },function (){
+
+          });
+          self.newsState="agent-event-view";
           self.menus=[{
             'title': '账户管理',
             'link': 'agent-account-view',

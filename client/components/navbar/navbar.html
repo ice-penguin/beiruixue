@@ -6,10 +6,10 @@
   	<div id="navbar-lead">
   		<div ng-repeat="menu in navbarCtrl.menus" id="{{menu.navCss}}" ng-bind="menu.title" ui-sref="{{menu.link}}"></div>
   	</div>
-  	<div id="navbar-news" ui-sref="login">
+  	<div id="navbar-news" ui-sref="{{navbarCtrl.newsState}}">
   		<img src="assets/images/shape.png">
   		<div id="navbar-news-text">新消息</div>
-  		<div id="navbar-news-icon"></div>
+  		<div id="navbar-news-icon" ng-show="navbarCtrl.newsPrompt"></div>
   	</div>
   </div>
 </div>

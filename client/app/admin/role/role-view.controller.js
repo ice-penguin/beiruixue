@@ -12,6 +12,10 @@ angular.module('beiruixueApp')
     	var loadRoles = function(){
     		Role.index({},function (data){
     			self.roles = data.roles;
+                _.each(self.roles,function (role){
+                    role.editQuantity=role.requireQuantity;
+                    role.editPrice = role.primeCost;
+                });
     		});
     	};
 
@@ -22,8 +26,7 @@ angular.module('beiruixueApp')
     		}
     		Role.update({id:role._id},{requireQuantity:role.editQuantity},function (data){
     			role.requireQuantity = role.editQuantity;
-    			role.editQuantity = null;
-    			self.editQuantity = false;
+    			role.showEditQuantity = false;
     		});
     	};
 
@@ -34,8 +37,7 @@ angular.module('beiruixueApp')
     		}
     		Role.update({id:role._id},{primeCost:role.editPrice},function (data){
     			role.primeCost = role.editPrice;
-    			role.editPrice = null;
-    			self.editPrice = false;
+    			role.showEditPrice = false;
     		});
     	};
     	
