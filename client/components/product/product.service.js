@@ -27,6 +27,12 @@
             id:'changeState'
           }
         },
+        destroyAll:{
+          method:"DELETE",
+          params:{
+            id:"destroyAll"
+          }
+        },
         destroy:{
           method:"DELETE"
         }

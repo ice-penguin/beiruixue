@@ -71,7 +71,7 @@ exports.index=function (req, res){
 		condition=_.merge(condition,{state:state});
 	}
 	if(name){
-		condition=_.merge(condition,{name:{'$regex' : '.*' + name + '.*'}});
+		condition=_.merge(condition,{name:{'$regex' : '.*' + name + '.*',$options:"i"}});
 	}
 	console.log(condition);
 	Product.find(condition).count(function (err, c){
@@ -82,6 +82,7 @@ exports.index=function (req, res){
 		skip: (page - 1) * itemsPerPage,
 		limit: itemsPerPage
 	})
+	.sort({createDate:-1})
 	.exec(function (err, products){
 		if (err) {return handleError(res, err);}
 		return res.json(200, {
@@ -116,6 +117,17 @@ exports.changeState=function (req, res){
 				product:product
 			});
 		});
+	});
+};
+
+exports.destroyAll = function (req,res){
+	var ids = req.body.productIds || [];
+	Product.find({_id:{$in:ids}},function (products){
+		if(err){return handleError(res, err);}
+		_.each(products,function (product){
+			product.remove();
+		});
+		res.json(200,"删除成功");
 	});
 };
 

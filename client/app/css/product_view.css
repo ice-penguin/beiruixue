@@ -19,6 +19,10 @@
 	border-radius: 3px;
 	background-color: #ffffff;
 	border: solid 1px #979797;
+	cursor: pointer;
+	line-height: 20px;
+	text-indent: 5px;
+	color: #000;
 }
 .product-productImg{
 	margin-top: 20px;

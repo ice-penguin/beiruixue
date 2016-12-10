@@ -4,8 +4,8 @@
 		<div class="account-title">产品管理</div>
 		<div class="account-line"></div>
 		<div class="account-search">
-			<input class="account-searchInput" placeholder="请输入产品名">
-			<div class="account-searchBtn">搜索</div>
+			<input class="account-searchInput" placeholder="请输入产品名" ng-model="adminProductViewCtrl.keywords">
+			<div class="account-searchBtn" ng-click="adminProductViewCtrl.search()">搜索</div>
 		</div>
 		<div style="botn:clear"></div>
 		<div class="account-table">
@@ -21,19 +21,19 @@
 			</div>
 			<div class="account-deleteBtn">
 				<div>
-					<div class="account-selectAll"></div>
-					<div class="account-selectAllWord">全选</div>
-					<div class="account-deleteWord">删除</div>
+					<div class="account-selectAll" ng-click="adminProductViewCtrl.selectAllChange()"><span ng-show="adminProductViewCtrl.isSelectAll">√</span></div>
+					<div class="account-selectAllWord" ng-click="adminProductViewCtrl.selectAllChange('true')">全选</div>
+					<div class="account-deleteWord" ng-click="adminProductViewCtrl.destoryProduct()">删除</div>
 					<div style="botn:clear"></div>
 				</div>
 			</div>
-			<div class="table_contents2">
-				<div class="table_content2 product-one"><div class="product-selectAll"></div></div>
-				<div class="table_content2 product-two"><span>特级代理</span></div>
-				<div class="table_content2 product-three"><span>特级代理</span></div>
-				<div class="table_content2 product-four"><span style="color:#f86701">阿夏</span></div>
+			<div class="table_contents2" ng-repeat="product in adminProductViewCtrl.products">
+				<div class="table_content2 product-one"><div class="product-selectAll" ng-click="product.isSelect=!product.isSelect;adminProductViewCtrl.isSelectAll=false"><span ng-show="product.isSelect">√</span></div></div>
+				<div class="table_content2 product-two"><span ng-bind="product.name">特级代理</span></div>
+				<div class="table_content2 product-three"><span ng-bind="product.description">特级代理</span></div>
+				<div class="table_content2 product-four"><span style="color:#f86701" ng-bind="product.quantity || '暂无库存'">库存</span></div>
 				<div class="table_content2 product-five"><div class="product-productImg"></div></div>
-				<div class="table_content2 product-six"><span>普通产品</span></div>
+				<div class="table_content2 product-six"><span ng-bind="product.state == 1 ? '普通产品':'主推产品'">普通产品</span></div>
 				<div class="table_content2 product-seven">
 					<div class="product-active" ng-show="true"></div>
 					<div class="product-unactive" ng-hide="true"></div>
