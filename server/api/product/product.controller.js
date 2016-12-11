@@ -21,9 +21,9 @@ var checkProduct=function (product){
 	if(isNaN(product.quantity)){
 		return false;
 	}
-	if(!product.image){
-		return false;
-	}
+	// if(!product.image){
+	// 	return false;
+	// }
 	if(product.state==1){
 		if(!product.price){
 			return false;
@@ -71,7 +71,7 @@ exports.index=function (req, res){
 		condition=_.merge(condition,{state:state});
 	}
 	if(name){
-		condition=_.merge(condition,{name:{'$regex' : '.*' + name + '.*',$options:"i"}});
+		condition=_.merge(condition,{name:{'$regex' : '.*' + name + '.*',$options:'i'}});
 	}
 	console.log(condition);
 	Product.find(condition).count(function (err, c){
@@ -122,7 +122,7 @@ exports.changeState=function (req, res){
 
 exports.destroyAll = function (req,res){
 	var ids = req.body.productIds || [];
-	Product.find({_id:{$in:ids}},function (products){
+	Product.find({_id:{$in:ids}},function (err,products){
 		if(err){return handleError(res, err);}
 		_.each(products,function (product){
 			product.remove();

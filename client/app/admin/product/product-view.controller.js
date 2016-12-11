@@ -57,6 +57,14 @@ angular.module('beiruixueApp')
 		init();
 	};
 
+	self.changeState = function (product){
+		Product.changeState({controller:product._id},{},function (data){
+			product.isActive = !product.isActive
+		},function (data){
+			alert(data.data);
+		});
+	};
+
 	init();
 
 }]);

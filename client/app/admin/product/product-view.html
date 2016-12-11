@@ -35,13 +35,13 @@
 				<div class="table_content2 product-five"><div class="product-productImg"></div></div>
 				<div class="table_content2 product-six"><span ng-bind="product.state == 1 ? '普通产品':'主推产品'">普通产品</span></div>
 				<div class="table_content2 product-seven">
-					<div class="product-active" ng-show="true"></div>
-					<div class="product-unactive" ng-hide="true"></div>
+					<div class="product-active" ng-show="product.isActive"></div>
+					<div class="product-unactive" ng-hide="product.isActive"></div>
 				</div>
 				<div class="table_content2 product-eight">
 					<div>
 						<div class="product-update" ui-sref="admin-product-edit">查看/修改</div>
-						<div class="product-activeBtn">下架</div>
+						<div class="product-activeBtn" ng-bind="product.isActive?'下架':'上架'" ng-click="adminProductViewCtrl.changeState(product)"></div>
 					</div>
 				</div>
 			</div>

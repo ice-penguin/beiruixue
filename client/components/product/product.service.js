@@ -28,7 +28,7 @@
           }
         },
         destroyAll:{
-          method:"DELETE",
+          method:"PUT",
           params:{
             id:"destroyAll"
           }

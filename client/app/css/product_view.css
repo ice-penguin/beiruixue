@@ -35,7 +35,7 @@
 	width: 20px;
 	height: 20px;
 	border-radius: 20px;
-	background: url(../../assets/images/unactive.png) no-repeat;
+	background: url(../../assets/images/active.png) no-repeat;
 }
 .product-unactive{
 	margin-top: 40px;
