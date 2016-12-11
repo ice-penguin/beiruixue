@@ -261,22 +261,34 @@ exports.read=function (req, res){
 };
 
 
-exports.readAll=function (req, res){
-	var id = req.params.id,
-		role = req.user.role;
-	var condition={isRead:false};
-	if(role&&role=='subAdmin'){
-		condition=_.merge(condition,{belong:id});
-	}else{
-		condition=_.merge(condition,{_info:id});
-	}
-	Event.find(condition,function (err, events){
-		if(err){return handleError(res,err);}
-		_.each(events,function (event){
+// exports.readAll=function (req, res){
+// 	var id = req.params.id,
+// 		role = req.user.role;
+// 	var condition={isRead:false};
+// 	if(role&&role=='subAdmin'){
+// 		condition=_.merge(condition,{belong:id});
+// 	}else{
+// 		condition=_.merge(condition,{_info:id});
+// 	}
+// 	Event.find(condition,function (err, events){
+// 		if(err){return handleError(res,err);}
+// 		_.each(events,function (event){
+// 			event.isRead=true;
+// 			event.save();
+// 		});
+// 		return res.json(200,{events:events});
+// 	});
+    
+// };
+
+exports.readAll = function (req,res){
+	var ids = req.body.eventsIds || [];
+	Event.find({_id:{$in:ids}},function (err,products){
+		if(err){return handleError(res, err);}
+		_.each(products,function (product){
 			event.isRead=true;
 			event.save();
 		});
-		return res.json(200,{events:events});
+		res.json(200,"操作成功");
 	});
-    
 };

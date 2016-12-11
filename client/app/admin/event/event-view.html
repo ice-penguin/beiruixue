@@ -12,14 +12,14 @@
 			</div>
 			<div class="account-deleteBtn">
 				<div>
-					<div class="account-selectAll"></div>
-					<div class="account-selectAllWord">全选</div>
-					<div class="account-deleteWord">删除</div>
+					<div class="account-selectAll" ng-click="adminEventViewCtrl.selectAllChange()"><span ng-show="adminEventViewCtrl.isSelectAll">√</span></div>
+					<div class="account-selectAllWord" ng-click="adminEventViewCtrl.selectAllChange('true')">全选</div>
+					<div class="account-deleteWord" style="width: 70px;" ng-click="adminEventViewCtrl.readAll()">设为已读</div>
 					<div style="botn:clear"></div>
 				</div>
 			</div>
-			<div class="table_contents">
-				<div class="table_content event-one"><div class="account-selectAll"></div></div>
+			<div class="table_contents" ng-repeat="ev in adminEventViewCtrl.events">
+				<div class="table_content event-one"><div class="account-selectAll" ng-click="ev.isSelect=!ev.isSelect;adminEventViewCtrl.isSelectAll=false"><span ng-show="ev.isSelect">√</span></div></div>
 				<div class="table_content event-two"><span>18806712362</span></div>
 				<div class="table_content event-three"><span style="color:#f86701">特级代理</span></div>
 				<div class="table_content event-four"><span style="color:#2e68c0">特级代理</span></div>
