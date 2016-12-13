@@ -10,7 +10,7 @@
   function NavbarCtrl($scope, $location, $stateParams, User,Event) {
 
     var self = this;
-    self.newsState="admin-event-view";
+    self.newsState="admin-event-view({state:'false',index:null})";
 
     var init = function(){
       initMenu();
@@ -40,7 +40,7 @@
               });
               break;
           };
-          self.newsState="admin-event-view({state:'true'})";
+          self.newsState="admin-event-view({state:'false',index:null})";
           self.menus=[{
             'title': '账户管理',
             'link': 'admin-account-view',
@@ -58,7 +58,7 @@
             "state":"admin-product-view"
           },{
             'title': '事件管理',
-            'link': 'admin-event-view',
+            'link': 'admin-event-view({index:"true",state:null})',
             'navCss':"",
             "state":"admin-event-view"
           }];
@@ -70,10 +70,10 @@
           },function (){
 
           });
-          self.newsState="member-event-view({state:'true'})";
+          self.newsState="member-event-view({state:'false',index:null})";
           self.menus=[{
             'title': '事件管理',
-            'link': 'member-event-view',
+            'link': 'member-event-view({index:"true",state:null})',
             'navCss':"",
             "state":"member-event-view"
           }];
@@ -85,7 +85,7 @@
           },function (){
 
           });
-          self.newsState="agent-event-view({state:'true'})";
+          self.newsState="agent-event-view({state:'false',index:null})";
           self.menus=[{
             'title': '账户管理',
             'link': 'agent-account-view',
@@ -93,7 +93,7 @@
             "state":"agent-account-view"
           },{
             'title': '事件管理',
-            'link': 'agent-event-view',
+            'link': 'agent-event-view({index:"true",state:null})',
             'navCss':"",
             "state":"agent-event-view"
           }];

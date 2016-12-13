@@ -93,7 +93,7 @@
       // 事件管理
       .state('admin-event-view', {
         params:{"navValue":"admin-event-view"},
-        url: '/admin/event/view?itemsPerPage&page&state',
+        url: '/admin/event/view?itemsPerPage&page&state&index&_info&belong',
         templateUrl: 'app/admin/event/event-view.html',
         controller: 'AdminEventViewCtrl',
         controllerAs: 'adminEventViewCtrl'

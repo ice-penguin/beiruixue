@@ -9,6 +9,8 @@ angular.module('beiruixueApp')
 	var page = $stateParams.page || 1;
     var itemsPerPage = $stateParams.itemsPerPage || 30; 
     var state=$stateParams.state;
+    var belong=$stateParams.belong;
+    var _info=$stateParams._info;
 
 	self.pagination = {
       page: page,
@@ -20,6 +22,7 @@ angular.module('beiruixueApp')
 
     var doLocation=function(){
         $location
+        .search('state', state)
         .search('page', self.pagination.page)
         .search('itemsPerPage', self.pagination.itemsPerPage);
     };
@@ -29,8 +32,17 @@ angular.module('beiruixueApp')
 			page:self.pagination.page,
             itemsPerPage:self.pagination.itemsPerPage
 		};
-		if(state&&state=='true'){
+		if(state=='true'){
+			query=_.merge(query,{isRead:true});
+		}else if(state=='false'){
 			query=_.merge(query,{isRead:false});
+		}
+		if(belong){
+			query=_.merge(query,{belong:belong});
+		}else{
+			if (_info) {
+				query=_.merge(query,{_info:_info});
+			};
 		}
 		Event.index(query,function (data){
 			self.events = data.events;
