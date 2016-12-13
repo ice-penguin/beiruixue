@@ -3,6 +3,9 @@ body,div,ul,li,ol,p,input{
 	padding: 0;
 	margin: 0;
 }
+input{
+	color: #000
+}
 div{
 	box-sizing:border-box;
 	-moz-box-sizing:border-box; /* Firefox */
