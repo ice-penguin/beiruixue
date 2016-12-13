@@ -5,13 +5,40 @@ angular.module('beiruixueApp')
     function ($scope, $location, $state,$stateParams,$cookieStore,User) {
 	var self=this;
 
+	self.keywords = $stateParams.kw; 
+	var page = $stateParams.page || 1;
+    var itemsPerPage = $stateParams.itemsPerPage || 30; 
+
+	self.pagination = {
+      page: page,
+      itemsPerPage: itemsPerPage,
+      maxSize: 5,
+      numPages: null,
+      totalItems: null
+    };
+
+    var doLocation=function(){
+        $location
+        .search('kw', self.keywords)
+        .search('page', self.pagination.page)
+        .search('itemsPerPage', self.pagination.itemsPerPage);
+    };
+
 	var loadAgents=function (){
-		var query={};
+		var query={
+			page:self.pagination.page,
+            itemsPerPage:self.pagination.itemsPerPage
+		};
 		if(self.keywords&&self.keywords != ""){
 			query.retrieval = self.keywords;
 		}
 		User.index(query,function (data){
 			self.agents=data.users;
+			var totalItems = data.count;
+            self.pagination.totalItems = totalItems;
+            self.pagination.numPages = totalItems / itemsPerPage;
+            self.pagination.page = data.page;
+
 			_.each(self.agents,function (agent){
 				if(!agent._info){
 					agent.level='子账号';
@@ -76,8 +103,13 @@ angular.module('beiruixueApp')
 		if(self.keywords == ""){
 			self.keywords = null;
 		}
-		init();
+		doLocation();
 	};
+
+	//换页
+    self.pageChanged=function(){
+        doLocation();
+    };
 
 	init();
 }]);

@@ -54,6 +54,7 @@
 					</div>
 				</div>
 			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="adminAccountViewCtrl.pagination.numPages > 1" total-items="adminAccountViewCtrl.pagination.totalItems" ng-model="adminAccountViewCtrl.pagination.page" items-per-page="adminAccountViewCtrl.pagination.itemsPerPage" max-size="adminAccountViewCtrl.pagination.maxSize" boundary-links="{{adminAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountViewCtrl.pageChanged()"></pagination>
 		</div>
 	</div>
 </div>

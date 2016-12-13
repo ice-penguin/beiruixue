@@ -6,13 +6,39 @@ angular.module('beiruixueApp')
 
 	var self = this;
 
+	self.keywords = $stateParams.kw; 
+	var page = $stateParams.page || 1;
+    var itemsPerPage = $stateParams.itemsPerPage || 30; 
+
+	self.pagination = {
+      page: page,
+      itemsPerPage: itemsPerPage,
+      maxSize: 5,
+      numPages: null,
+      totalItems: null
+    };
+
+    var doLocation=function(){
+        $location
+        .search('kw', self.keywords)
+        .search('page', self.pagination.page)
+        .search('itemsPerPage', self.pagination.itemsPerPage);
+    };
+
 	var loadProduct=function (){
-		var query={};
+		var query={
+			page:self.pagination.page,
+            itemsPerPage:self.pagination.itemsPerPage
+		};
 		if(self.keywords&&self.keywords != ""){
 			query.name = self.keywords;
 		}
 		Product.index(query,function (data){
 			self.products = data.products;
+			var totalItems = data.count;
+            self.pagination.totalItems = totalItems;
+            self.pagination.numPages = totalItems / itemsPerPage;
+            self.pagination.page = data.page;
 		},function (){
 
 		});
@@ -54,7 +80,7 @@ angular.module('beiruixueApp')
 		if(self.keywords == ""){
 			self.keywords = null;
 		}
-		init();
+		doLocation();
 	};
 
 	self.changeState = function (product){
@@ -64,6 +90,12 @@ angular.module('beiruixueApp')
 			alert(data.data);
 		});
 	};
+
+	//换页
+    self.pageChanged=function(){
+        doLocation();
+    };
+
 
 	init();
 

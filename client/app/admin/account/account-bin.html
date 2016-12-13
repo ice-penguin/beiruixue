@@ -40,6 +40,7 @@
 					</div>
 				</div>
 			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="adminAccountBinCtrl.pagination.numPages > 1" total-items="adminAccountBinCtrl.pagination.totalItems" ng-model="adminAccountBinCtrl.pagination.page" items-per-page="adminAccountBinCtrl.pagination.itemsPerPage" max-size="adminAccountBinCtrl.pagination.maxSize" boundary-links="{{adminAccountBinCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountBinCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountBinCtrl.pageChanged()"></pagination>
 		</div>
 	</div>
 </div>

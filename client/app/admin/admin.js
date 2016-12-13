@@ -10,7 +10,7 @@
       // 账号管理
       .state('admin-account-view', {
         params:{"navValue":"admin-account-view"},
-        url: '/admin/account/view',
+        url: '/admin/account/view?itemsPerPage&page&kw',
         templateUrl: 'app/admin/account/account-view.html',
         controller: 'AdminAccountViewCtrl',
         controllerAs: 'adminAccountViewCtrl'
@@ -42,7 +42,7 @@
 
       .state('admin-account-bin', {
         params:{"navValue":"admin-account-view"},
-        url: '/admin/account/bin',
+        url: '/admin/account/bin?itemsPerPage&page&kw',
         templateUrl: 'app/admin/account/account-bin.html',
         controller: 'AdminAccountBinCtrl',
         controllerAs: 'adminAccountBinCtrl'
@@ -68,7 +68,7 @@
       // 产品管理
       .state('admin-product-view', {
         params:{"navValue":"admin-product-view"},
-        url: '/admin/product/view',
+        url: '/admin/product/view?itemsPerPage&page&kw',
         templateUrl: 'app/admin/product/product-view.html',
         controller: 'AdminProductViewCtrl',
         controllerAs: 'adminProductViewCtrl'
@@ -93,7 +93,7 @@
       // 事件管理
       .state('admin-event-view', {
         params:{"navValue":"admin-event-view"},
-        url: '/admin/event/view',
+        url: '/admin/event/view?itemsPerPage&page',
         templateUrl: 'app/admin/event/event-view.html',
         controller: 'AdminEventViewCtrl',
         controllerAs: 'adminEventViewCtrl'

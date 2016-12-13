@@ -83,6 +83,7 @@ body{
 	background-color: #ffffff;
 	border: solid 1px #9b9b9b;
 	text-indent: 9px;
+	color: #000;
 }
 .account-searchBtn{
 	float: left;

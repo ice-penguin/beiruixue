@@ -49,6 +49,7 @@
 				<div class="product-addNewImg" ui-sref="admin-product-add"></div>
 				<div class="product-addNewWord">添加新商品</div>
 			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="adminProductViewCtrl.pagination.numPages > 1" total-items="adminProductViewCtrl.pagination.totalItems" ng-model="adminProductViewCtrl.pagination.page" items-per-page="adminProductViewCtrl.pagination.itemsPerPage" max-size="adminProductViewCtrl.pagination.maxSize" boundary-links="{{adminProductViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminProductViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminProductViewCtrl.pageChanged()"></pagination>
 		</div>
 	</div>
 </div>
