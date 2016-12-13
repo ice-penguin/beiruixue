@@ -12,7 +12,7 @@
 				<div class="table_caption event-five">是否已读</div>
 			</div>
 			<div class="account-deleteBtn">
-				<div>
+				<div ng-hide="adminEventViewCtrl.belong || adminEventViewCtrl._info">
 					<div class="account-selectAll" ng-click="adminEventViewCtrl.selectAllChange()"><span ng-show="adminEventViewCtrl.isSelectAll">√</span></div>
 					<div class="account-selectAllWord" ng-click="adminEventViewCtrl.selectAllChange('true')">全选</div>
 					<div class="account-deleteWord" style="width: 70px;" ng-click="adminEventViewCtrl.readAll()">设为已读</div>

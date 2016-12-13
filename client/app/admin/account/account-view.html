@@ -50,8 +50,8 @@
 					<div>
 						<div class="account-changePassword" ui-sref="admin-account-changePassword({id:agent._id,state:'other'})">修改密码</div>
 						<div class="account-changeUpdate" ui-sref="admin-account-edit({id:agent._id})">查看/修改</div>
-						<div class="account-changeOutput" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 						<div class="account-changeOutput" ui-sref="admin-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._id})'}}" >动态</div>
+						<div class="account-changeOutput" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 					</div>
 				</div>
 			</div>

@@ -9,8 +9,8 @@ angular.module('beiruixueApp')
 	var page = $stateParams.page || 1;
     var itemsPerPage = $stateParams.itemsPerPage || 30; 
     var state=$stateParams.state;
-    var belong=$stateParams.belong;
-    var _info=$stateParams._info;
+    self.belong=$stateParams.belong;
+    self._info=$stateParams._info;
 
 	self.pagination = {
       page: page,
@@ -37,11 +37,11 @@ angular.module('beiruixueApp')
 		}else if(state=='false'){
 			query=_.merge(query,{isRead:false});
 		}
-		if(belong){
-			query=_.merge(query,{belong:belong});
+		if(self.belong){
+			query=_.merge(query,{belong:self.belong});
 		}else{
-			if (_info) {
-				query=_.merge(query,{_info:_info});
+			if (self._info) {
+				query=_.merge(query,{_info:self._info});
 			};
 		}
 		Event.index(query,function (data){
