@@ -37,7 +37,6 @@ angular.module('beiruixueApp')
 			var totalItems = data.count;
             self.pagination.totalItems = totalItems;
             self.pagination.numPages = totalItems / itemsPerPage;
-            self.pagination.page = data.page;
 
 			_.each(self.agents,function (agent){
 				if(!agent._info){
