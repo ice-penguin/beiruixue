@@ -119,6 +119,7 @@
     function logout() {
       $cookieStore.remove('token');
       currentUser = {};
+      $location.path('/login');
     };
 
     function createUser(user, callback) {

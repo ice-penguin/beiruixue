@@ -26,7 +26,7 @@
 
       .state('agent-account-edit', {
         params:{"navValue":"agent-account-view"},
-        url: '/agent/account/edit?state',
+        url: '/agent/account/edit/:id?state',
         templateUrl: 'app/agent/account/account-edit.html',
         controller: 'AgentAccountEditCtrl',
         controllerAs: 'agentAccountEditCtrl'
@@ -34,7 +34,7 @@
 
       .state('agent-account-changePassword', {
         params:{"navValue":"agent-account-view"},
-        url: '/agent/account/changePassword?state',
+        url: '/agent/account/changePassword/:id?state',
         templateUrl: 'app/agent/account/account-changePassword.html',
         controller: 'AgentAccountPsdCtrl',
         controllerAs: 'agentAccountPsdCtrl'

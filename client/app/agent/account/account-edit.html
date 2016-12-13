@@ -1,28 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="content">
 	<div class="account-addPosition">
-		<div class="account-title" ng-show="agentAccountEditCtrl.state=='own'">账户管理->修改信息</div>
-		<div class="account-title" ng-show="agentAccountEditCtrl.state=='other'">账户管理->修改子账号</div>
+		<div class="account-title">账户管理->修改子账号</div>
 		<div class="account-line"></div>
 		<div class="account-inputs">
 			<div class="input_content">
 				<div class="input_name"><span class="necessary" style="color:#fff">*</span>账号名:</div>
-				<div type="text" class="input_value" style="border:none">18806712362</div>
+				<div type="text" class="input_value" style="border:none" ng-bind="agentAccountEditCtrl.agent.account">18806712362</div>
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary" style="color:#fff">*</span>角色:</div>
-				<div type="text" class="input_value" style="border:none">一级代理</div>
+				<div type="text" class="input_value" style="border:none" ng-bind="agentAccountEditCtrl.agent.level">一级代理</div>
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>姓名:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="agentAccountEditCtrl.agent.name">
 			</div>
 			<div class="input_content">
 				<div class="input_name"><span class="necessary">*</span>联系号码:</div>
-				<input type="text" class="input_value">
+				<input type="text" class="input_value" ng-model="agentAccountEditCtrl.agent.tel">
 			</div>
 			<div>
-				<div class="account-save">确认修改</div>
+				<div class="account-save" ng-click="agentAccountEditCtrl.save()">确认修改</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
 		</div>

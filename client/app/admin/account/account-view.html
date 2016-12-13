@@ -4,11 +4,11 @@
 		<div class="account-title">账户管理</div>
 		<div class="account-line"></div>
 		<div>
-			<div class="account-adminWord">Admin</div>
+			<div class="account-adminWord">{{adminAccountViewCtrl.user.role=='admin'?'Admin':'subAdmin'}}</div>
 			<div class="account-btnGroup">
-				<div class="account-btn" ui-sref="admin-account-add">添加子账号</div>
+				<div class="account-btn" ui-sref="admin-account-add">{{adminAccountViewCtrl.user.role=='admin'?'添加子账号':'添加账号'}}</div>
 				<div class="account-btn" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
-				<div class="account-btn" ui-sref="admin-account-bin">账号回收站</div>
+				<div class="account-btn" ui-sref="admin-account-bin" ng-show="adminAccountViewCtrl.showBinshow">账号回收站</div>
 				<div style="botn:clear"></div>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 					<div>
 						<div class="account-changePassword" ui-sref="admin-account-changePassword({id:agent._id,state:'other'})">修改密码</div>
 						<div class="account-changeUpdate" ui-sref="admin-account-edit({id:agent._id})">查看/修改</div>
-						<div class="account-changeOutput" ui-sref="admin-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._id})'}}" >动态</div>
+						<div class="account-changeOutput" ui-sref="admin-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" >动态</div>
 						<div class="account-changeOutput" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 					</div>
 				</div>

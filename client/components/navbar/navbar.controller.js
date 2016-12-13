@@ -7,7 +7,7 @@
     .controller('NavbarCtrl', NavbarCtrl);
 
   /* @ngInject */
-  function NavbarCtrl($scope, $location, $stateParams, User,Event) {
+  function NavbarCtrl($scope, $location, $stateParams, User,Event,Auth) {
 
     var self = this;
     self.newsState="admin-event-view({state:'false',index:null})";
@@ -115,6 +115,8 @@
         c.navCss="navbar-lead-select";
       }
     };
+
+    self.logout=Auth.logout;
 
     init();
 

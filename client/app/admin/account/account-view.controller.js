@@ -9,6 +9,8 @@ angular.module('beiruixueApp')
 	var page = $stateParams.page || 1;
     var itemsPerPage = $stateParams.itemsPerPage || 30; 
 
+    self.user = {};
+
 	self.pagination = {
       page: page,
       itemsPerPage: itemsPerPage,
@@ -22,6 +24,17 @@ angular.module('beiruixueApp')
         .search('kw', self.keywords)
         .search('page', self.pagination.page)
         .search('itemsPerPage', self.pagination.itemsPerPage);
+    };
+
+    var loadMe=function (){
+    	User.get({},{},function (data){
+    		self.user=data;
+    		if(self.user.role=='admin'){
+    			self.showBinshow=true;
+    		}
+    	},function (){
+
+    	});
     };
 
 	var loadAgents=function (){
@@ -69,6 +82,7 @@ angular.module('beiruixueApp')
 	var init=function (){
 		self.isSelectAll = false;
 		loadAgents();
+		loadMe();
 	};
 
 	self.selectAllChange = function (state){

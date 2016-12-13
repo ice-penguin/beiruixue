@@ -14,6 +14,7 @@ exports.update = function (req, res) {
   var id = req.params.id,
       role = req.user.role;
   var body = _.pick(req.body,'name','tel');
+  console.log(id,'aaaaaaaaaaa');
   if(role){
     if(!id){return res.json(400,'缺少更新参数:id!');}
   }else{

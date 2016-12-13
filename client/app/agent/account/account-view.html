@@ -4,19 +4,19 @@
 		<div class="account-title">账户管理</div>
 		<div class="account-line"></div>
 		<div>
-			<div class="account-adminWord">代理xx</div>
+			<div class="account-adminWord" ng-bind="agentAccountViewCtrl.user._info.name">代理xx</div>
 			<div class="account-btnGroup">
-				<div class="account-btn" ui-sref="admin-account-add">添加代理</div>
-				<div class="account-btn" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
-				<div class="account-btn" ui-sref="admin-account-edit({state:'own'})">信息管理</div>
+				<div class="account-btn" ui-sref="agent-account-add">添加账号</div>
+				<div class="account-btn" ui-sref="agent-account-changePassword({state:'own'})">密码管理</div>
+				<div class="account-btn" ui-sref="agent-account-edit({state:'own'})">信息管理</div>
 				<div style="botn:clear"></div>
 			</div>
 		</div>
 	</div>
-	<div class="account-list">
+	<div class="account-list" style="padding-bottom:50px;">
 		<div class="account-search">
-			<input class="account-searchInput" placeholder="请输入账号或姓名">
-			<div class="account-searchBtn">搜索</div>
+			<input class="account-searchInput" placeholder="请输入账号或姓名" ng-model="agentAccountViewCtrl.keywords">
+			<div class="account-searchBtn" ng-click="agentAccountViewCtrl.search()">搜索</div>
 		</div>
 		<div style="botn:clear"></div>
 		<div class="account-table">
@@ -30,30 +30,32 @@
 				<div class="table_caption account-seven">返利收益</div>
 				<div class="table_caption account-eight">操作</div>
 			</div>
-			<div class="account-deleteBtn">
+			<!-- <div class="account-deleteBtn">
 				<div>
-					<div class="account-selectAll"></div>
-					<div class="account-selectAllWord">全选</div>
-					<div class="account-deleteWord">删除</div>
+					<div class="account-selectAll" ng-click="agentAccountViewCtrl.selectAllChange()"><span ng-show="agentAccountViewCtrl.isSelectAll">√</span></div>
+					<div class="account-selectAllWord" ng-click="agentAccountViewCtrl.selectAllChange('true')">全选</div>
+					<div class="account-deleteWord" ng-click="agentAccountViewCtrl.destoryAccount()">删除</div>
 					<div style="botn:clear"></div>
 				</div>
-			</div>
-			<div class="table_contents">
-				<div class="table_content account-one"><div class="account-selectAll"></div></div>
-				<div class="table_content account-two">18806712362</div>
-				<div class="table_content account-three"><span style="color:#3c8d04">特级代理</span></div>
-				<div class="table_content account-four">阿夏</div>
-				<div class="table_content account-five">18806712362</div>
-				<div class="table_content account-six"><span style="color:#f86701">1500</span></div>
-				<div class="table_content account-seven"><span style="color:#f86701">3000</span></div>
+			</div> -->
+			<div class="table_contents" ng-repeat="agent in agentAccountViewCtrl.agents">
+				<div class="table_content account-one"><!-- <div class="account-selectAll" ng-click="agent.isSelect=!agent.isSelect;agentAccountViewCtrl.isSelectAll=false"><span ng-show="agent.isSelect">√</span></div> --></div>
+				<div class="table_content account-two" ng-bind="agent.account">18806712362</div>
+				<div class="table_content account-three"><span style="color:#3c8d04" ng-bind="agent.level">特级代理</span></div>
+				<div class="table_content account-four"><span ng-bind="agent._info.name?agent._info.name:agent.name">阿夏</span></div>
+				<div class="table_content account-five"><span ng-bind="agent._info.tel?agent._info.tel:agent.tel">18806712362</span></div>
+				<div class="table_content account-six"><span ng-bind="agent._info.saleIncome?agent._info.saleIncome:'无'" style="color:#f86701">1500</span></div>
+				<div class="table_content account-seven"><span ng-bind="agent._info.income?agent._info.income:'无'" style="color:#f86701">3000</span></div>
 				<div class="table_content account-eight">
 					<div>
-						<div class="account-changePassword" ui-sref="admin-account-changePassword({state:'other'})">修改密码</div>
-						<div class="account-changeUpdate" ui-sref="admin-account-edit({state:'other'})">查看/修改</div>
-						<div class="account-changeOutput" ui-sref="admin-account-out">发货</div>
+						<div class="account-changePassword" ui-sref="agent-account-changePassword({id:agent._id,state:'other'})">修改密码</div>
+						<!-- <div class="account-changeUpdate" ui-sref="agent-account-edit({id:agent._id})">查看/修改</div> -->
+						<div class="account-changeOutput" ui-sref="agent-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" >动态</div>
+						<div class="account-changeOutput" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 					</div>
 				</div>
 			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="agentAccountViewCtrl.pagination.numPages > 1" total-items="agentAccountViewCtrl.pagination.totalItems" ng-model="agentAccountViewCtrl.pagination.page" items-per-page="agentAccountViewCtrl.pagination.itemsPerPage" max-size="agentAccountViewCtrl.pagination.maxSize" boundary-links="{{agentAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="agentAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="agentAccountViewCtrl.pageChanged()"></pagination>
 		</div>
 	</div>
 </div>
