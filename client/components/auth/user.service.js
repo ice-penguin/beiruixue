@@ -48,6 +48,9 @@
         show: {
           method: 'GET'
         },
+        update:{
+          method: 'PUT'
+        },
         changePassword: {
           method: 'PUT',
           params: {

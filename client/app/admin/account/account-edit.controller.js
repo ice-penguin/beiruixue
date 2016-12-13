@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminAccountEditCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','User',
-    function ($scope, $location, $state,$stateParams,$cookieStore,User) {
+  .controller('AdminAccountEditCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','User','Info',
+    function ($scope, $location, $state,$stateParams,$cookieStore,User,Info) {
     var self=this;
     var id=$stateParams.id;
 
@@ -39,6 +39,26 @@ angular.module('beiruixueApp')
 
     var init=function (){
 		loadAgent();
+	};
+
+	self.save=function (){
+		var obj={
+			name:self.agent.name,
+			tel:self.agent.tel
+		};
+		if(self.agent.level=='子账号'){
+			User.update({id:id},obj,function (){
+				$state.go('admin-account-view');
+			},function (data){
+				alert(data);
+			});
+		}else{
+			Info.update({id:self.agent._info._id},obj,function (){
+				$state.go('admin-account-view');
+			},function (data){
+				alert(data);
+			});
+		}
 	};
 
 	init();

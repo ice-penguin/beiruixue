@@ -205,6 +205,23 @@ exports.show = function (req, res) {
   });
 };
 
+// admin update subAdmin
+exports.update = function (req, res) {
+  var id = req.params.id,
+      role = req.user.role;
+  var body = _.pick(req.body,'name','tel');
+  if(role!='admin'){return res.json(400,'没有更新权限!');}
+  User.findById(id,function (err, subAdmin){
+    if(err){return handleError(res,err);}
+    if(!subAdmin){return res.json(404,'找不到subAdmin!');}
+    subAdmin=_.assign(subAdmin,body);
+    subAdmin.save(function (err, subAdmin){
+      if(err){return handleError(res,err);}
+      return res.json(200,{subAdmin:subAdmin});
+    });
+  });
+};
+
 
 /**
  * Deletes a user

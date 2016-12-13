@@ -64,7 +64,8 @@ exports.index=function (req, res){
 	var page = req.query.page || 1,
     	itemsPerPage = req.query.itemsPerPage || 100,
     	name=req.query.name,
-    	state=req.query.state;
+    	state=req.query.state,
+    	isActive=req.query.isActive;
     var condition={};
 	var count;
 	if(state){
@@ -72,6 +73,11 @@ exports.index=function (req, res){
 	}
 	if(name){
 		condition=_.merge(condition,{name:{'$regex' : '.*' + name + '.*',$options:'i'}});
+	}
+	if(isActive=='true'){
+		condition=_.merge(condition,{isActive:true});
+	}else if(isActive=='false'){
+		condition=_.merge(condition,{isActive:false});
 	}
 	console.log(condition);
 	Product.find(condition).count(function (err, c){

@@ -11,15 +11,15 @@ var handleError = function (res, err) {
 
 
 exports.update = function (req, res) {
-  var _id = req.body._id,
+  var id = req.params.id,
       role = req.user.role;
   var body = _.pick(req.body,'name','tel');
   if(role){
-    if(!_id){return res.json(400,'缺少更新参数:_id!');}
+    if(!id){return res.json(400,'缺少更新参数:id!');}
   }else{
-    _id=req.user._info._id;
+    id=req.user._info.id;
   }
-  Info.findById(_id,function (err, info){
+  Info.findById(id,function (err, info){
     if(err){return handleError(res,err);}
     if(!info){return res.json(404,'找不到info!');}
     info=_.assign(info,body);

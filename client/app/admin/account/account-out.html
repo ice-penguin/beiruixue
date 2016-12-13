@@ -6,25 +6,24 @@
 		<div class="account-inputs">
 			<div class="input_content">
 				<div class="input_name">账号:</div>
-				<div type="text" class="input_value" style="border:none">acdvf afsv</div>
+				<div type="text" class="input_value" style="border:none" ng-bind="adminAccountOutCtrl.agent.account">acdvf afsv</div>
 			</div>
 			<div class="input_content" style="position:relative">
-				<div class="input_name">产品类型:</div>
+				<div class="input_name">产品:</div>
 				<div type="text" class="input_value" style="width:168px;">
-					<div class="account-selectBox"></div>
-					<div class="account-selectBtn">∨</div>
+					<div class="account-selectBox" ng-bind="adminAccountOutCtrl.showProductName"></div>
+					<div class="account-selectBtn" ng-click="adminAccountOutCtrl.showProducts=!adminAccountOutCtrl.showProducts">∨</div>
 				</div>
-				<div class="account-selectChooses">
-					<div class="account-selectChoose">普通产品</div>
-					<div class="account-selectChoose">特殊产品</div>
+				<div class="account-selectChooses" style="height:auto" ng-show="adminAccountOutCtrl.showProducts">
+					<div class="account-selectChoose" ng-repeat="pr in adminAccountOutCtrl.products" ng-bind="pr.name" ng-click="adminAccountOutCtrl.chooseProduct(pr)">普通产品</div>
 				</div>
 			</div>
 			<div class="input_content">
 				<div class="input_name">发货数量:</div>
-				<input type="text" class="input_value" style="width:168px;">
+				<input type="text" class="input_value" style="width:168px;" ng-model="adminAccountOutCtrl.orderQuantity">
 			</div>
 			<div>
-				<div class="account-save">确认发货</div>
+				<div class="account-save" ng-click="adminAccountOutCtrl.save()">确认发货</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
 		</div>

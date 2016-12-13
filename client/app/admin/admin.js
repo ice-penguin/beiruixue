@@ -50,7 +50,7 @@
 
       .state('admin-account-out', {
         params:{"navValue":"admin-account-view"},
-        url: '/admin/account/out',
+        url: '/admin/account/out/:id',
         templateUrl: 'app/admin/account/account-out.html',
         controller: 'AdminAccountOutCtrl',
         controllerAs: 'adminAccountOutCtrl'
