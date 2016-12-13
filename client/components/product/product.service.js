@@ -21,6 +21,9 @@
         show:{
           method: 'GET'
         },
+        update:{
+          method: 'PUT'
+        },
         changeState:{
           method: 'PUT',
           params:{

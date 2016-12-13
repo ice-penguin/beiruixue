@@ -40,7 +40,7 @@
               });
               break;
           };
-          self.newsState="admin-event-view";
+          self.newsState="admin-event-view({state:'true'})";
           self.menus=[{
             'title': '账户管理',
             'link': 'admin-account-view',
@@ -70,7 +70,7 @@
           },function (){
 
           });
-          self.newsState="member-event-view";
+          self.newsState="member-event-view({state:'true'})";
           self.menus=[{
             'title': '事件管理',
             'link': 'member-event-view',
@@ -85,7 +85,7 @@
           },function (){
 
           });
-          self.newsState="agent-event-view";
+          self.newsState="agent-event-view({state:'true'})";
           self.menus=[{
             'title': '账户管理',
             'link': 'agent-account-view',

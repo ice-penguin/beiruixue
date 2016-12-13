@@ -8,7 +8,8 @@ angular.module('beiruixueApp')
 
 	self.keywords = $stateParams.kw; 
 	var page = $stateParams.page || 1;
-    var itemsPerPage = $stateParams.itemsPerPage || 30; 
+    var itemsPerPage = $stateParams.itemsPerPage || 30;
+    self.imageFile="assets/uploadfile/"; 
 
 	self.pagination = {
       page: page,

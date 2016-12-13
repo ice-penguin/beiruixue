@@ -1,6 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="content">
-	<div class="role-content" style="height:auto;">
+	<div class="role-content" style="height:auto;padding-bottom:50px;">
 		<div class="account-title">产品管理</div>
 		<div class="account-line"></div>
 		<div class="account-search">
@@ -32,7 +32,7 @@
 				<div class="table_content2 product-two"><span ng-bind="product.name">特级代理</span></div>
 				<div class="table_content2 product-three"><span ng-bind="product.description">特级代理</span></div>
 				<div class="table_content2 product-four"><span style="color:#f86701" ng-bind="product.quantity || '暂无库存'">库存</span></div>
-				<div class="table_content2 product-five"><div class="product-productImg"></div></div>
+				<div class="table_content2 product-five"><img class="product-productImg" ng-src="{{adminProductViewCtrl.imageFile+product.image}}"></div>
 				<div class="table_content2 product-six"><span ng-bind="product.state == 1 ? '普通产品':'主推产品'">普通产品</span></div>
 				<div class="table_content2 product-seven">
 					<div class="product-active" ng-show="product.isActive"></div>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="table_content2 product-eight">
 					<div>
-						<div class="product-update" ui-sref="admin-product-edit">查看/修改</div>
+						<div class="product-update" ui-sref="admin-product-edit({id:product._id})">查看/修改</div>
 						<div class="product-activeBtn" ng-bind="product.isActive?'下架':'上架'" ng-click="adminProductViewCtrl.changeState(product)"></div>
 					</div>
 				</div>

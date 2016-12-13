@@ -84,7 +84,7 @@
 
       .state('admin-product-edit', {
         params:{"navValue":"admin-product-edit"},
-        url: '/admin/product/edit',
+        url: '/admin/product/edit/:id',
         templateUrl: 'app/admin/product/product-edit.html',
         controller: 'AdminProductEditCtrl',
         controllerAs: 'adminProductEditCtrl'
@@ -93,7 +93,7 @@
       // 事件管理
       .state('admin-event-view', {
         params:{"navValue":"admin-event-view"},
-        url: '/admin/event/view?itemsPerPage&page',
+        url: '/admin/event/view?itemsPerPage&page&state',
         templateUrl: 'app/admin/event/event-view.html',
         controller: 'AdminEventViewCtrl',
         controllerAs: 'adminEventViewCtrl'

@@ -107,6 +107,33 @@ exports.show=function (req, res){
 	});
 };
 
+exports.update=function (req, res){
+	var id=req.params.id;
+	var body=_.pick(req.body,'name','description','quantity','state','price','image');
+	if(body.quantity&&isNaN(body.quantity)){
+		return res.json(400,"参数错误：quantity");
+	}
+	if(!body.state){return res.json(400,'缺少创建参数:state!');}
+	if(body.state == 2){
+		delete body.price;
+	}else{
+		body.state=1;
+		if(body.price && isNaN(body.price)){
+			return res.json(400,"参数错误：price");
+		}
+	}
+	body.isActive=false;
+	Product.findById(id,function (err, product){
+		if(err){return handleError(res,err);}
+		if(!product){return res.json(404,'产品不存在!');}
+		product=_.assign(product,body);
+		product.save(function (err, product){
+			if(err){return handleError(res,err);}
+			return res.json(200,{product:product});
+		});
+	});
+};
+
 
 exports.changeState=function (req, res){
 	var id=req.params.id;

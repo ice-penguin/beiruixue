@@ -283,11 +283,11 @@ exports.read=function (req, res){
 
 exports.readAll = function (req,res){
 	var ids = req.body.eventsIds || [];
-	Event.find({_id:{$in:ids}},function (err,products){
+	Event.find({_id:{$in:ids}},function (err,events){
 		if(err){return handleError(res, err);}
-		_.each(products,function (product){
-			event.isRead=true;
-			event.save();
+		_.each(events,function (eve){
+			eve.isRead=true;
+			eve.save();
 		});
 		res.json(200,"操作成功");
 	});

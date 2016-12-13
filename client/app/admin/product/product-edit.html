@@ -5,40 +5,49 @@
 		<div class="account-line"></div>
 		<div class="account-inputs">
 			<div class="input_content">
-				<div class="input_name"><span class="necessary">*</span>产品名:</div>
-				<input type="text" class="input_value" style="width:400px;">
-				<span class="prompt">20字以内</span>
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>产品名:</div>
+				<input type="text" class="input_value" style="width:400px;" ng-model="adminProductEditCtrl.product.name">
+				<!-- <span class="prompt">20字以内</span> -->
 			</div>
 			<div class="textarea_content">
 				<div class="input_name"><span class="necessary" style="color:#fff">*</span>描述:</div>
-				<textarea type="text" class="textarea_value"></textarea>
+				<textarea type="text" class="textarea_value" ng-model="adminProductEditCtrl.product.description"></textarea>
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div style="clear:both"></div>
 			<div class="input_content">
-				<div class="input_name"><span class="necessary">*</span>库存:</div>
-				<input type="text" class="input_value" style="width:80px;">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>库存:</div>
+				<input type="text" class="input_value" style="width:80px;" ng-model="adminProductEditCtrl.product.quantity">
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div class="input_content" ng-show="adminProductEditCtrl.product.state=='1'">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>价格:</div>
+				<input type="text" class="input_value" style="width:80px;" ng-model="adminProductEditCtrl.product.price">
 				<!-- <span class="prompt">英文字母开头</span> -->
 			</div>
 			<div class="input_content">
-				<div class="input_name"><span class="necessary">*</span>产品图片:</div>
-				<div class="product-submitImg"></div>
-				<div class="product-submitPrompt">点击更换</div>
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>产品图片:</div>
+				<img class="product-submitImg" ng-hide="adminProductEditCtrl.product.image">
+				<img class="product-submitImg" ng-show="adminProductEditCtrl.product.image" ng-src="{{adminProductEditCtrl.imageFile+adminProductEditCtrl.product.image}}">
+				<!-- <progressbar ng-show="adminProductEditCtrl.loaded > 0" ng-class="{active: adminProductEditCtrl.loaded < 100}" max="100" value="adminProductEditCtrl.loaded">
+					<span ng-bind="adminProductEditCtrl.loaded" ></span>%
+				</progressbar > -->
+				<div class="product-submitPrompt" ngf-select ngf-change="adminProductEditCtrl.upload($files,0)">点击更换</div>
 			</div>
 			<div style="clear:both"></div>
 			<div class="input_content" style="position:relative">
 				<div class="input_name"><span class="necessary">*</span>产品类型:</div>
 				<div type="text" class="input_value" style="width:168px;">
-					<div class="account-selectBox"></div>
-					<div class="account-selectBtn">∨</div>
+					<div class="account-selectBox" ng-bind="adminProductEditCtrl.productCategory"></div>
+					<div class="account-selectBtn" ng-click="adminProductEditCtrl.showSelectChooses=!adminProductEditCtrl.showSelectChooses">∨</div>
 				</div>
-				<div class="account-selectChooses">
-					<div class="account-selectChoose">普通产品</div>
-					<div class="account-selectChoose">特殊产品</div>
+				<div class="account-selectChooses" ng-show="adminProductEditCtrl.showSelectChooses">
+					<div class="account-selectChoose" ng-click="adminProductEditCtrl.chooseProduct('1')">普通产品</div>
+					<div class="account-selectChoose" ng-click="adminProductEditCtrl.chooseProduct('2')">主推产品</div>
 				</div>
 			</div>
 			<div>
-				<div class="account-save">保存</div>
+				<div class="account-save" ng-click="adminProductEditCtrl.update()">确认修改</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
 			<div style="clear:both"></div>
