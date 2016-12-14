@@ -45,7 +45,11 @@ angular.module('beiruixueApp')
    			alert("修改密码成功");
    			$state.go("agent-account-view");
    		},function (data){
-   			alert(data);
+            if(data.status == 403){
+               alert(data.data);
+            }else{
+               alert(data);
+            }
    		});
    	};
 }]);
