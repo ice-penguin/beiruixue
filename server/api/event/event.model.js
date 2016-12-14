@@ -13,7 +13,10 @@ var EventSchema = new Schema({
 		type:String,
 		ref:'Product'
 	},
-	isRead:Boolean,
+	hasRead:[{
+	    type:String,
+	    ref:'User'
+	}],
 	belong:{
 	    type:String,
 	    ref:'User'

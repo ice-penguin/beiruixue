@@ -10,7 +10,7 @@
       // 账号管理
       .state('agent-account-view', {
         params:{"navValue":"agent-account-view"},
-        url: '/agent/account/view',
+        url: '/agent/account/view?itemsPerPage&page',
         templateUrl: 'app/agent/account/account-view.html',
         controller: 'AgentAccountViewCtrl',
         controllerAs: 'agentAccountViewCtrl'
@@ -42,7 +42,7 @@
 
       .state('agent-account-out', {
         params:{"navValue":"agent-account-view"},
-        url: '/agent/account/out',
+        url: '/agent/account/out/:id',
         templateUrl: 'app/agent/account/account-out.html',
         controller: 'AgentAccountOutCtrl',
         controllerAs: 'agentAccountOutCtrl'
@@ -52,7 +52,7 @@
       // 事件管理
       .state('agent-event-view', {
         params:{"navValue":"agent-event-view"},
-        url: '/agent/event/view',
+        url: '/agent/event/view?itemsPerPage&page&state&index&_info&belong',
         templateUrl: 'app/agent/event/event-view.html',
         controller: 'AgentEventViewCtrl',
         controllerAs: 'agentEventViewCtrl'

@@ -18,7 +18,8 @@ var InfoSchema = new Schema({
 	otherProducts:[{
 		_product:String,
 		name:String,
-		orderQuantity:Number
+		orderQuantity:Number,//累计
+		lastQuantity:Number//剩余
 	}],
 	_role:{
 		type: String,

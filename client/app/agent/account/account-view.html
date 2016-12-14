@@ -8,7 +8,7 @@
 			<div class="account-btnGroup">
 				<div class="account-btn" ui-sref="agent-account-add">添加账号</div>
 				<div class="account-btn" ui-sref="agent-account-changePassword({state:'own'})">密码管理</div>
-				<div class="account-btn" ui-sref="agent-account-edit({state:'own'})">信息管理</div>
+				<div class="account-btn" ui-sref="agent-account-edit({id:agentAccountViewCtrl.user._id})">信息管理</div>
 				<div style="botn:clear"></div>
 			</div>
 		</div>
@@ -48,9 +48,9 @@
 				<div class="table_content account-seven"><span ng-bind="agent._info.income?agent._info.income:'无'" style="color:#f86701">3000</span></div>
 				<div class="table_content account-eight">
 					<div>
-						<div class="account-changePassword" ui-sref="agent-account-changePassword({id:agent._id,state:'other'})">修改密码</div>
-						<!-- <div class="account-changeUpdate" ui-sref="agent-account-edit({id:agent._id})">查看/修改</div> -->
-						<div class="account-changeOutput" ui-sref="agent-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" >动态</div>
+						<!-- <div class="account-changePassword" ui-sref="agent-account-changePassword({id:agent._id,state:'other'})">修改密码</div> -->
+						<!-- <div class="account-changeUpdate" ui-sref="agent-account-edit({id:agent._id})">查看</div> -->
+						<div class="account-changeOutput" ui-sref="agent-event-view({_info:agent._info._id})" >动态</div>
 						<div class="account-changeOutput" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 					</div>
 				</div>

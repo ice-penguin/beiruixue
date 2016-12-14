@@ -167,7 +167,7 @@ exports.shipment=function (req, res){
 				_info:_inPerson,
 				content:'进货'+orderQuantity+'套'+product.name,
 				_product:_product,
-				isRead:false,
+				hasRead:[],
 				belong:inPerson.belong,
 				createDate:now
 			};
@@ -177,19 +177,29 @@ exports.shipment=function (req, res){
 					_info:outPerson._id,
 					content:'出货'+orderQuantity+'套'+product.name,
 					_product:_product,
-					isRead:false,
+					hasRead:[],
 					belong:req.user.belong,
 					createDate:now
 				};
-
-				var pr = _.findWhere(outPerson.mainProducts,{_product:_product});
-				if(!pr || pr.lastQuantity<orderQuantity){
-					return res.json(400,'没有足够的货物!');
+				if(product.state=='2'){
+					var pr = _.findWhere(outPerson.mainProducts,{_product:_product});
+					if(!pr || pr.lastQuantity<orderQuantity){
+						return res.json(400,'没有足够的货物!');
+					}else{
+						pr.lastQuantity-=orderQuantity;
+						outPerson.save();
+					}
+					Event.create(outObj);
 				}else{
-					pr.lastQuantity-=orderQuantity;
-					outPerson.save();
+					var pr = _.findWhere(outPerson.otherProducts,{_product:_product});
+					if(!pr || pr.lastQuantity<orderQuantity){
+						return res.json(400,'没有足够的货物!');
+					}else{
+						pr.lastQuantity-=orderQuantity;
+						outPerson.save();
+					}
+					Event.create(outObj);
 				}
-				Event.create(outObj);
 			}else{
 				product.quantity-=orderQuantity;
 				product.save();
@@ -214,20 +224,22 @@ exports.index=function (req, res){
     	itemsPerPage = req.query.itemsPerPage || 100,
     	_info = req.query._info,
     	belong = req.query.belong,
-    	isRead = req.query.isRead;
+    	readId = req.user._id,
+    	isRead=req.query.isRead;
     var condition={};
     var count;
-    if(isRead=='true'){
-    	condition={isRead:true};
-    }else if(isRead=='false'){
-    	condition={isRead:false};
+    console.log(readId);
+    if(isRead){
+    	condition=_.merge(condition,{hasRead:{$nin:[readId]}});
     }
+    console.log(condition);
     if(_info){
     	condition=_.merge(condition,{_info:_info});
     }
     if(belong){
     	condition=_.merge(condition,{belong:belong});
     }
+    // console.log(condition,'aaaaaaaaaaaaaa');
     Event.find(condition).count(function (err, c){
     	if(err){return handleError(res,err);}
     	count=c;
@@ -239,6 +251,7 @@ exports.index=function (req, res){
     })
     .exec(function (err, events){
     	if(err){return handleError(res,err);}
+    	// console.log(events);
     	return res.json(200,{
     		events:events,
     		count:count
@@ -283,10 +296,13 @@ exports.read=function (req, res){
 
 exports.readAll = function (req,res){
 	var ids = req.body.eventsIds || [];
+	var id=req.user._id;
 	Event.find({_id:{$in:ids}},function (err,events){
 		if(err){return handleError(res, err);}
 		_.each(events,function (eve){
-			eve.isRead=true;
+			if(eve.hasRead.indexOf(id)<-1){
+				eve.hasRead.push(id);
+			}
 			eve.save();
 		});
 		res.json(200,"操作成功");
