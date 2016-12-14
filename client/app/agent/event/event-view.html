@@ -12,7 +12,7 @@
 				<div class="table_caption event-five">是否已读</div>
 			</div>
 			<div class="account-deleteBtn">
-				<div ng-hide="agentEventViewCtrl.belong || agentEventViewCtrl._info">
+				<div ng-hide="agentEventViewCtrl._info!=agentEventViewCtrl.user._info._id">
 					<div class="account-selectAll" ng-click="agentEventViewCtrl.selectAllChange()"><span ng-show="agentEventViewCtrl.isSelectAll">√</span></div>
 					<div class="account-selectAllWord" ng-click="agentEventViewCtrl.selectAllChange('true')">全选</div>
 					<div class="account-deleteWord" style="width: 70px;" ng-click="agentEventViewCtrl.readAll()">设为已读</div>
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 			<div class="table_contents" ng-repeat="ev in agentEventViewCtrl.events">
-				<div class="table_content event-one"><div class="account-selectAll" ng-click="ev.isSelect=!ev.isSelect;agentEventViewCtrl.isSelectAll=false"><span ng-show="ev.isSelect">√</span></div></div>
+				<div class="table_content event-one"><div ng-hide="agentEventViewCtrl._info!=agentEventViewCtrl.user._info._id" class="account-selectAll" ng-click="ev.isSelect=!ev.isSelect;agentEventViewCtrl.isSelectAll=false"><span ng-show="ev.isSelect">√</span></div></div>
 				<div class="table_content event-two"><span ng-bind="ev._info.name">18806712362</span></div>
 				<div class="table_content event-three"><span style="color:#f86701" ng-bind="ev.content">特级代理</span></div>
 				<div class="table_content event-four"><span style="color:#2e68c0" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">特级代理</span></div>

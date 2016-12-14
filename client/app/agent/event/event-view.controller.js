@@ -9,7 +9,6 @@ angular.module('beiruixueApp')
 	var page = $stateParams.page || 1;
     var itemsPerPage = $stateParams.itemsPerPage || 30; 
     var state=$stateParams.state;
-    self.belong=$stateParams.belong;
     self._info=$stateParams._info;
 
 	self.pagination = {
@@ -44,13 +43,14 @@ angular.module('beiruixueApp')
 		if(state){
 			query=_.merge(query,{isRead:'false'});
 		}
-		if(self.belong){
-			query=_.merge(query,{belong:self.belong});
+		
+		if (self._info) {
+			query=_.merge(query,{_info:self._info});
 		}else{
-			if (self._info) {
-				query=_.merge(query,{_info:self._info});
-			};
+			alert('操作错误!');
+			return $state.go('agent-account-view');
 		}
+		
 		Event.index(query,function (data){
 			self.events = data.events;
 

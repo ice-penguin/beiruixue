@@ -228,7 +228,7 @@ exports.index=function (req, res){
     	isRead=req.query.isRead;
     var condition={};
     var count;
-    console.log(_info,'aaaa');
+    // console.log(_info,'aaaa');
     if(isRead){
     	condition=_.merge(condition,{hasRead:{$nin:[readId]}});
     }
@@ -238,6 +238,7 @@ exports.index=function (req, res){
     if(belong){
     	condition=_.merge(condition,{belong:belong});
     }
+    console.log(condition,'aaaa');
     Event.find(condition).count(function (err, c){
     	if(err){return handleError(res,err);}
     	count=c;

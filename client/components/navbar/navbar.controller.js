@@ -63,7 +63,7 @@
             "state":"admin-event-view"
           }];
         }else if(self.user._info&&self.user._info.level == 5){
-          Event.index({isRead:false,_info:self.user._id},{},function (data){
+          Event.index({isRead:false,_info:self.user._info._id},{},function (data){
             if(data.count>0){
               self.newsPrompt=true;
             }
@@ -73,12 +73,12 @@
           self.newsState="member-event-view({state:'false',index:null})";
           self.menus=[{
             'title': '事件管理',
-            'link': 'member-event-view({index:"true",state:null})',
+            'link': 'member-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
             'navCss':"",
             "state":"member-event-view"
           }];
         }else{
-          Event.index({isRead:false,_info:self.user._id},{},function (data){
+          Event.index({isRead:false,_info:self.user._info._id},{},function (data){
             if(data.count>0){
               self.newsPrompt=true;
             }
@@ -93,7 +93,7 @@
             "state":"agent-account-view"
           },{
             'title': '事件管理',
-            'link': 'agent-event-view({index:"true",state:null})',
+            'link': 'agent-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
             'navCss':"",
             "state":"agent-event-view"
           }];
