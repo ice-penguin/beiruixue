@@ -224,22 +224,20 @@ exports.index=function (req, res){
     	itemsPerPage = req.query.itemsPerPage || 100,
     	_info = req.query._info,
     	belong = req.query.belong,
-    	readId = req.user._id,
+    	readId = (req.user._id).toString(),
     	isRead=req.query.isRead;
     var condition={};
     var count;
-    console.log(readId);
+    console.log(_info,'aaaa');
     if(isRead){
     	condition=_.merge(condition,{hasRead:{$nin:[readId]}});
     }
-    console.log(condition);
     if(_info){
     	condition=_.merge(condition,{_info:_info});
     }
     if(belong){
     	condition=_.merge(condition,{belong:belong});
     }
-    // console.log(condition,'aaaaaaaaaaaaaa');
     Event.find(condition).count(function (err, c){
     	if(err){return handleError(res,err);}
     	count=c;
@@ -251,7 +249,14 @@ exports.index=function (req, res){
     })
     .exec(function (err, events){
     	if(err){return handleError(res,err);}
-    	// console.log(events);
+    	for(var i=0;i<events.length;i++){
+    		events[i]=events[i].toObject();
+    		if(events[i].hasRead.indexOf(readId)<0){
+    			events[i].isRead=false;
+    		}else{
+    			events[i].isRead=true;
+    		}
+    	}
     	return res.json(200,{
     		events:events,
     		count:count
@@ -296,11 +301,11 @@ exports.read=function (req, res){
 
 exports.readAll = function (req,res){
 	var ids = req.body.eventsIds || [];
-	var id=req.user._id;
+	var id=(req.user._id).toString();
 	Event.find({_id:{$in:ids}},function (err,events){
 		if(err){return handleError(res, err);}
 		_.each(events,function (eve){
-			if(eve.hasRead.indexOf(id)<-1){
+			if(eve.hasRead.indexOf(id)<0){
 				eve.hasRead.push(id);
 			}
 			eve.save();

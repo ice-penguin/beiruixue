@@ -10,7 +10,7 @@
   function NavbarCtrl($scope, $location, $stateParams, User,Event,Auth) {
 
     var self = this;
-    self.newsState="admin-event-view({state:'false',index:null})";
+    // self.newsState="member-event-view({state:'false',index:null})";
 
     var init = function(){
       initMenu();

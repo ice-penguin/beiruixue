@@ -7,7 +7,7 @@
   		<div ng-repeat="menu in navbarCtrl.menus" id="{{menu.navCss}}" ng-bind="menu.title" ui-sref="{{menu.link}}"></div>
   	</div>
     <div style="float:right;color:#000;margin: 45px 55px 0 0;font-size:14px;cursor: pointer;" ng-click="navbarCtrl.logout()">登出</div>
-    <div id="navbar-news" ui-sref="{{navbarCtrl.newsState}}">
+    <div id="navbar-news" ng-if="navbarCtrl.newsState" ui-sref="{{navbarCtrl.newsState}}">
       <img src="assets/images/shape.png">
       <div id="navbar-news-text">新消息</div>
       <div id="navbar-news-icon" ng-show="navbarCtrl.newsPrompt"></div>

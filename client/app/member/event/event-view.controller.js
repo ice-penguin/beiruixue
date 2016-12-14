@@ -42,10 +42,8 @@ angular.module('beiruixueApp')
             itemsPerPage:self.pagination.itemsPerPage,
             _info:self.user._info._id
 		};
-		if(state=='true'){
-			query=_.merge(query,{isRead:true});
-		}else if(state=='false'){
-			query=_.merge(query,{isRead:false});
+		if(state){
+			query=_.merge(query,{isRead:'false'});
 		}
 		if(self.belong){
 			query=_.merge(query,{belong:self.belong});
