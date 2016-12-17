@@ -6,6 +6,7 @@
 }
 .mb_productBox{
 	width: 750px;
+	margin-bottom: 100px;
 }
 .mb_product_title{
 	font-size: 24px;
@@ -45,7 +46,7 @@
 }
 .mb_product_info_cell{
 	width: 98px;
-	margin-left: 10px;
+	margin:5px 0 0 10px;
 	float: left;
 }
 .mb_product_info_name{
@@ -57,4 +58,35 @@
 	font-size: 14px;
 	height: 20px;
 	color: #929292;
+}
+.mb_product_info_active{
+	float: left;
+	margin: 15px 18px 0 127px;
+	width: 60px;
+	height: 28px;
+	font-size: 20px;
+	color: #929292;
+}
+.mb_product_info_active_up{
+	float: left;
+	width: 175px;
+	height: 58px;
+	line-height: 58px;
+	border-radius: 8px;
+	background-color: #f6a623;
+	font-size: 30px;
+	text-align: center;
+  	color: #ffffff;
+}
+.mb_product_info_active_down{
+	float: left;
+	width: 175px;
+	height: 58px;
+	line-height: 58px;
+	border-radius: 8px;
+	background-color: #007cc2;
+	font-size: 30px;
+	text-align: center;
+  	color: #ffffff;
+  	cursor: pointer;
 }
