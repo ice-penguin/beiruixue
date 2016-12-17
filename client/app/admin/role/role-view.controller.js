@@ -40,6 +40,25 @@ angular.module('beiruixueApp')
     			role.showEditPrice = false;
     		});
     	};
+
+
+        self.save=function (){
+            if(!self.editRole){
+                return;
+            }
+            if(isNaN(self.editRole.requireQuantity)||self.editRole.requireQuantity<=0){
+                return alert("数量必须为一个大于零的数");
+            }
+            if(isNaN(self.editRole.primeCost)||self.editRole.primeCost<=0){
+                return alert("代理价格必须为一个大于零的数");
+            }
+            Role.update({id:self.editRole._id},{requireQuantity:self.editRole.requireQuantity,primeCost:self.editRole.primeCost},function (data){
+                alert('修改成功!');
+                self.mbShowDList=false;
+                self.mbShowDetail=false;
+                self.editRole=null;
+            });
+        };
     	
 
     	
