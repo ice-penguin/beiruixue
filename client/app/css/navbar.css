@@ -67,7 +67,7 @@
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
-	height: 60px;
+	height: 80px;
 	background-color: #fafafa;
 	box-shadow: 0 1px 0 0 #2e67c1;
 	box-shadow: #ccc 0 0 2px 0;
@@ -78,8 +78,46 @@
 #mobile-navbar-lead{
 	float: left;
 	width: 25%;
-	height: 60px;
-	line-height: 60px;
+	height: 80px;
+	line-height: 80px;
 	text-align: center;
 	color: #000;
+}
+.mobile-navbar-style{
+	/*border:1px solid red;*/
+	width: 46px;
+	height: 40px;
+	margin: 10px auto 0;
+}
+#mobile-accountGary-nav{
+	background: url(../../assets/images/mobile/accountGary.png) no-repeat;
+}
+#mobile-roleGary-nav{
+	background: url(../../assets/images/mobile/roleGary.png) no-repeat;
+}
+#mobile-productGary-nav{
+	background: url(../../assets/images/mobile/productGary.png) no-repeat;
+}
+#mobile-eventGary-nav{
+	background: url(../../assets/images/mobile/eventGary.png) no-repeat;
+}
+#mobile-accountGreen-nav{
+	background: url(../../assets/images/mobile/accountGreen.png) no-repeat;
+}
+#mobile-roleGreen-nav{
+	background: url(../../assets/images/mobile/roleGreen.png) no-repeat;
+}
+#mobile-productGreen-nav{
+	background: url(../../assets/images/mobile/productGreen.png) no-repeat;
+}
+#mobile-eventGreen-nav{
+	background: url(../../assets/images/mobile/eventGreen.png) no-repeat;
+}
+#mobile-navbar-word{
+	/*border:1px solid red;*/
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: 600;
+	font-family: PingFangSC;
 }

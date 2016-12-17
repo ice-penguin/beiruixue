@@ -280,3 +280,123 @@ body{
 	color: #535353;
 	cursor: pointer;
 }
+
+
+
+/*mobile*/
+.mb-account-head{
+	height: 170px;
+	background: #0095e5;
+}
+.mb-account-role{
+	float: left;
+	margin-top: 18px;
+	margin-left: 23px;
+	width: 134px;
+	height: 134px;
+	border:5px solid #fff;
+	border-radius: 134px;
+	line-height: 129px;
+	text-align: center;
+	font-size: 24px;
+	color: #fff;
+	font-weight: 600;
+	font-family: PingFangSC;
+	background: #007dc2;
+}
+.mb-account-name{
+	float: left;
+	margin-left: 36px;
+	height: 170px;
+	line-height: 170px;
+	color: #fff;
+	font-size: 26px;
+	font-family: PingFangSC;
+	font-weight: 600;
+}
+.mb-account-btns{
+	height: 120px;
+	background: #fff;
+}
+.mb-account-btns div{
+	margin-top: 15px;
+	float: left;
+	width: 250px;
+	height: 90px;
+	border-right: 1px solid #d9d9d9;
+	text-align: center;
+	line-height: 90px;
+	font-size: 20px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #282828;
+}
+.mb-account-add{
+	background: url(../../assets/images/mobile/add.png) no-repeat 106px 62px;
+}
+.mb-account-password{
+	background: url(../../assets/images/mobile/passwords.png) no-repeat 106px 62px;
+}
+.mb-account-bin{
+	background: url(../../assets/images/mobile/bin.png) no-repeat 106px 62px;
+}
+.mb-account-title{
+	margin-top: 20px;
+	height: 98px;
+	background:#fff url(../../assets/images/mobile/account2.png) no-repeat 20px 32px;
+	line-height: 98px;
+	text-indent: 90px;
+	font-size: 20px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #282828;
+}
+.mb-account-table{
+	margin-top: 20px;
+	border-top:1px solid #d9d9d9;
+	background: #fff;
+}
+.mb-account-tr{
+	height: 98px;
+	border-bottom:1px solid #d9d9d9;
+}
+.mb-account-one{
+	margin-top: 10px;
+	float: left;
+	width: 300px;
+	text-indent: 24px;
+	font-size: 20px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #282828;
+}
+.mb-account-agentName{
+	height: 39px;
+	line-height: 39px;
+}
+.mb-account-agentRole{
+	height: 39px;
+	line-height: 39px;
+	color: #3c8d04;
+}
+.mb-account-out{
+	float: left;
+	margin-top: 20px;
+	height: 58px;
+	width: 140px;
+	border-radius: 5px;
+	line-height: 58px;
+	text-align: center;
+	font-size: 26px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #fff;
+	background: #007dc2;
+}
+.mb-account-nextBtn{
+	float: right;
+	width: 150px;
+	background: url();
+	line-height: 98px;
+}
+

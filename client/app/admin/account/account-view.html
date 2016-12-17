@@ -59,4 +59,26 @@
 		</div>
 	</div>
 </div>
-<div ng-show="true"></div>
+<div class="mobile-content" ng-show="true">
+	<div class="mb-account-head">
+		<div class="mb-account-role">{{adminAccountViewCtrl.user.role=='admin'?'Admin':'subAdmin'}}</div>
+		<!-- <div class="mb-account-name">账号名称</div> -->
+	</div>
+	<div class="mb-account-btns">
+		<div class="mb-account-add" ui-sref="admin-account-add">{{adminAccountViewCtrl.user.role=='admin'?'添加子账号':'添加账号'}}</div>
+		<div class="mb-account-password" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
+		<div class="mb-account-bin" style="border-right:none" ui-sref="admin-account-bin" ng-show="adminAccountViewCtrl.showBinshow">账号回收站</div>
+	</div>
+	<div class="mb-account-title">账号管理</div>
+	<div class="mb-account-table">
+		<div class="mb-account-tr" ng-repeat="agent in adminAccountViewCtrl.agents">
+			<div class="mb-account-one">
+				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name">name</div>
+				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
+			</div>
+			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
+			<div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})">></div>
+		</div>
+	</div>	
+	<pagination style="float:right;margin-right:30px;" ng-if="adminAccountViewCtrl.pagination.numPages > 1" total-items="adminAccountViewCtrl.pagination.totalItems" ng-model="adminAccountViewCtrl.pagination.page" items-per-page="adminAccountViewCtrl.pagination.itemsPerPage" max-size="adminAccountViewCtrl.pagination.maxSize" boundary-links="{{adminAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountViewCtrl.pageChanged()"></pagination>
+</div>

@@ -59,22 +59,26 @@
             'title': '账户管理',
             'link': 'admin-account-view',
             'navCss':"",
-            "state":"admin-account-view"
+            "state":"admin-account-view",
+            "navImage":"mobile-accountGary-nav"
           },{
             'title': '角色管理',
             'link': 'admin-role-view',
             'navCss':"",
-            "state":"admin-role-view"
+            "state":"admin-role-view",
+            "navImage":"mobile-roleGary-nav"
           },{
             'title': '产品管理',
             'link': 'admin-product-view',
             'navCss':"",
-            "state":"admin-product-view"
+            "state":"admin-product-view",
+            "navImage":"mobile-productGary-nav"
           },{
             'title': '事件管理',
             'link': 'admin-event-view({index:"true",state:null})',
             'navCss':"",
-            "state":"admin-event-view"
+            "state":"admin-event-view",
+            "navImage":"mobile-eventGary-nav"
           }];
         }else if(self.user._info&&self.user._info.level == 5){
           Event.index({isRead:false,_info:self.user._info._id},{},function (data){
@@ -89,7 +93,8 @@
             'title': '事件管理',
             'link': 'member-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
             'navCss':"",
-            "state":"member-event-view"
+            "state":"member-event-view",
+            "navImage":"mobile-eventGary-nav"
           }];
         }else{
           Event.index({isRead:false,_info:self.user._info._id},{},function (data){
@@ -104,12 +109,14 @@
             'title': '账户管理',
             'link': 'agent-account-view',
             'navCss':"",
-            "state":"agent-account-view"
+            "state":"agent-account-view",
+            "navImage":"mobile-accountGary-nav"
           },{
             'title': '事件管理',
             'link': 'agent-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
             'navCss':"",
-            "state":"agent-event-view"
+            "state":"agent-event-view",
+            "navImage":"mobile-eventGary-nav"
           }];
         }
         //页面
@@ -127,6 +134,32 @@
 
       if(c){
         c.navCss="navbar-lead-select";
+        switch(navValue){
+          case 'admin-account-view':
+            c.navImage="mobile-accountGreen-nav";
+            break;
+          case 'agent-account-view':
+            c.navImage="mobile-accountGreen-nav";
+            break;
+          case 'member-account-view':
+            c.navImage="mobile-accountGreen-nav";
+            break;
+          case 'admin-role-view':
+            c.navImage="mobile-roleGreen-nav";
+            break;
+          case 'admin-product-view':
+            c.navImage="mobile-productGreen-nav";
+            break;
+          case 'admin-event-view':
+            c.navImage="mobile-eventGreen-nav";
+            break;
+          case 'agent-event-view':
+            c.navImage="mobile-eventGreen-nav";
+            break;
+          case 'member-event-view':
+            c.navImage="mobile-eventGreen-nav";
+            break;
+        };
       }
     };
 
