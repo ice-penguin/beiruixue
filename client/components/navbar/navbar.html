@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" id="navbar-box" ng-controller="NavbarCtrl as navbarCtrl">
+<div class="navbar navbar-default navbar-static-top" id="navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-show="false">
   <div id="navbar-content">
   	<div id="navbar-logo">
   		<img src="assets/images/beiruixue.png">
@@ -12,5 +12,21 @@
       <div id="navbar-news-text">新消息</div>
       <div id="navbar-news-icon" ng-show="navbarCtrl.newsPrompt"></div>
     </div>
+  </div>
+</div>
+
+
+<div id="mobile-navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-show="true">
+  <div id="mobile-navbar-content">
+    <div id="mobile-navbar-lead" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
+      <div id="{{menu.navImage}}"></div>
+      <div ng-bind="menu.title"></div>
+    </div>
+    <!-- <div style="float:right;color:#000;margin: 45px 55px 0 0;font-size:14px;cursor: pointer;" ng-click="navbarCtrl.logout()">登出</div> -->
+   <!--  <div id="navbar-news" ng-if="navbarCtrl.newsState" ui-sref="{{navbarCtrl.newsState}}">
+      <img src="assets/images/shape.png">
+      <div id="navbar-news-text">新消息</div>
+      <div id="navbar-news-icon" ng-show="navbarCtrl.newsPrompt"></div>
+    </div> -->
   </div>
 </div>

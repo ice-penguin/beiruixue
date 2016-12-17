@@ -132,3 +132,53 @@
 	font-size: 20px;
 	color: #4a4a4a;
 }
+
+
+
+/*mobile*/
+.mobileLogin-position{
+	width: 750px;
+}
+.mobileLogin-logo{
+	margin: 50px auto 0;
+	width: 369px;
+	height: 53px;
+	background: url(../../assets/images/mobile/logo.png);
+}
+.mobileLogin-aloginBox{
+	/*border:1px solid red;*/
+	margin: 50px auto 0;
+	width: 650px;
+	height: 160px;
+}
+.mobileLogin-accountInput,
+.mobileLogin-psdInput{
+	width: 648px;
+	margin-top: 10px;
+	height: 70px;
+	line-height: 70px;
+	border-bottom: 1px solid #ccc;
+	text-indent: 70px;
+	font-size: 24px;
+	font-weight: 600;
+	font-family: PingFangSC;
+}
+.mobileLogin-accountInput{
+	background: url(../../assets/images/mobile/account.png) no-repeat 10px 18px;
+}
+.mobileLogin-psdInput{
+	background: url(../../assets/images/mobile/password.png) no-repeat 10px 16px;
+}
+.mobileLogin-loginBtn{
+	margin: 100px auto 0;
+	width: 600px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-radius: 5px;
+	background: #0193E6;
+	color:#fff;
+	font-size: 24px;
+	font-weight: 600;
+	font-family: PingFangSC;
+}

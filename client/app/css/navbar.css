@@ -59,3 +59,27 @@
 	top: 0;
 	right: -7px;
 }
+
+
+
+/*mobile*/
+#mobile-navbar-box{
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 60px;
+	background-color: #fafafa;
+	box-shadow: 0 1px 0 0 #2e67c1;
+	box-shadow: #ccc 0 0 2px 0;
+}
+#mobile-navbar-content{
+	width: 100%;
+}
+#mobile-navbar-lead{
+	float: left;
+	width: 25%;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	color: #000;
+}

@@ -1,6 +1,6 @@
 <!-- <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/login.css"> -->
-<div id="login-body-box">
+<div id="login-body-box" ng-show="loginCtrl.isPC">
   <div id="login-content">
     <!-- top -->
     <div id="login-top">
@@ -42,4 +42,13 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="mobileLogin-position"  ng-hide="loginCtrl.isPC">
+  <div class="mobileLogin-logo"></div>
+  <div class="mobileLogin-aloginBox">
+    <input type="text" class="mobileLogin-accountInput" ng-model="loginCtrl.account">
+    <input type="password" class="mobileLogin-psdInput" ng-model="loginCtrl.pwd">
+  </div>
+  <div class="mobileLogin-loginBtn" ng-click="loginCtrl.login()">登录</div>
 </div>
