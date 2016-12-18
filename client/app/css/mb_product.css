@@ -6,6 +6,7 @@
 }
 .mb_productBox{
 	width: 750px;
+	min-height: 1300px;
 }
 .mb_product_title{
 	font-size: 24px;
