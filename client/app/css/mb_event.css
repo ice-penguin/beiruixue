@@ -1,0 +1,56 @@
+.mb_eventBox{
+	width: 750px;
+	margin-bottom: 100px;
+}
+.mb_event_title{
+	font-size: 24px;
+	color: #000;
+	height: 100px;
+	line-height: 105px;
+	background: url(../../assets/images/mobile/mb_role.png) no-repeat;
+	background-position: 20px 34px;
+	text-indent: 90px;
+	border-bottom:1px solid #d9d9d9 ;
+	margin-bottom: 20px;
+}
+.mb_event_content{
+	border-top:1px solid #d9d9d9 ;
+}
+.mb_event_sign{
+	height: 98px;
+	padding: 20px 23px;
+	font-size:20px;
+	color:#3c8d04 ;
+	border-bottom:1px solid #d9d9d9 ;
+}
+.mb_event_sign_left{
+	float: left;
+	width: 500px;
+}
+.mb_event_sign_right{
+	float: right;
+	width: 200px;
+	text-align: right;
+	height: 20px;
+	font-size: 14px;
+	color: #929292;
+}
+.mb_event_sign_title{
+	width: 250px;
+	height: 28px;
+	font-size: 20px;
+	color: #282828;
+}
+.mb_event_sign_title span{
+	color: #282828;
+}
+.mb_event_sign_content{
+	width: 500px;
+	height: 20px;
+	font-size: 14px;
+	margin-top: 12px;
+	color: #929292;
+}
+.mb_event_sign_content span{
+	color: #929292;
+}
