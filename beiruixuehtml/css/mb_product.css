@@ -17,6 +17,7 @@
 	background-position: 20px 34px;
 	text-indent: 90px;
 	margin-bottom: 20px;
+	position: relative;
 }
 .mb_product_content{
 	border-top:1px solid #d9d9d9 ;
@@ -30,6 +31,7 @@
 .mb_addpr{
 	float: right;
 	margin: 35px;
+	margin-top: 0;
 	cursor: pointer;
 }
 .mb_product_image_cell{
@@ -89,4 +91,35 @@
 	text-align: center;
   	color: #ffffff;
   	cursor: pointer;
+}
+.mb-product-searchbox{
+	position: absolute;
+	right:0;
+	top:40px;
+	width: 450px;
+}
+.mb-product-searchInput{
+	float: left;
+	width: 230px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	border: solid 1px #9b9b9b;
+	text-indent: 9px;
+	color: #000;
+	font-size: 16px;
+	float: left;
+}
+.mb-product-searchBtn{
+	float: left;
+	width: 60px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 8px;
+	background-color: #007cc2;
+	margin-left: 20px;
+	font-size: 16px;
+	text-indent: 0;
+	text-align: center;
+	color: #ffffff;
 }

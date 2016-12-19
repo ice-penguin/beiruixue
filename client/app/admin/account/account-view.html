@@ -69,11 +69,17 @@
 		<div class="mb-account-password" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
 		<div class="mb-account-bin" style="border-right:none" ui-sref="admin-account-bin" ng-show="adminAccountViewCtrl.showBinshow">账号回收站</div>
 	</div>
-	<div class="mb-account-title">账号管理</div>
+	<div class="mb-account-title">
+		账号管理
+		<div class="mb-account-searchbox">
+			<input class="mb-account-searchInput" placeholder="请输入账号或姓名" ng-model="adminAccountViewCtrl.keywords">
+			<div class="mb-account-searchBtn" ng-click="adminAccountViewCtrl.search()">搜索</div>
+		</div>
+	</div>
 	<div class="mb-account-table">
 		<div class="mb-account-tr" ng-repeat="agent in adminAccountViewCtrl.agents">
 			<div class="mb-account-one">
-				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name">name</div>
+				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name+'('+agent.account+')'">name</div>
 				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
 			</div>
 			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
