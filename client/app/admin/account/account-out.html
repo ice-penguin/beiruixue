@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-show="false">
 	<div class="account-addPosition">
 		<div class="account-title">账户管理->发货</div>
 		<div class="account-line"></div>
@@ -26,6 +26,48 @@
 				<div class="account-save" ng-click="adminAccountOutCtrl.save()">确认发货</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="mobile-content" ng-show="true">
+	<div class="mb-account-addTitlePosition">
+		<div class="mb-account-back" ui-sref="admin-account-view"></div>
+		<div class="mb-account-addTitle">发货</div>
+	</div>
+	<div class="mb-input_contents">
+		<div class="mb_role_edit_name">
+			<div class="mb_role_edit_key">
+				账号名
+			</div>
+			<div class="mb_role_edit_value" ng-bind="adminAccountOutCtrl.agent.account">
+				一级代理
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				产品*
+			</div>
+			<div class="mb-account-out-box" type="text" ng-model="adminAccountOutCtrl.agent.name">
+				<div class="mb-account-out-selectBox" ng-bind="adminAccountOutCtrl.showProductName"></div>
+				<div class="mb-account-out-selectBtn" ng-click="adminAccountOutCtrl.showProducts=!adminAccountOutCtrl.showProducts"></div>
+				<div class="mb-account-out-selectChooses" ng-show="adminAccountOutCtrl.showProducts">
+					<div class="mb-account-out-selectChoose" ng-repeat="pr in adminAccountOutCtrl.products" ng-bind="pr.name" ng-click="adminAccountOutCtrl.chooseProduct(pr)">111111</div>
+				</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				发货数量*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminAccountOutCtrl.orderQuantity">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_submit" ng-click="adminAccountOutCtrl.save()">
+			确认发货
 		</div>
 	</div>
 </div>

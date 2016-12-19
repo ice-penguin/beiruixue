@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-show="false">
 	<div class="product-addPosition">
 		<div class="account-title">产品管理->添加产品</div>
 		<div class="account-line"></div>
@@ -48,9 +48,70 @@
 			</div>
 			<div>
 				<div class="account-save" ng-click="adminProductAddCtrl.save()">保存</div>
-				<div class="account-back" ui-sref="admin-account-view">返回</div>
+				<div class="account-back" ui-sref="admin-product-view">返回</div>
 			</div>
 			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="mobile-content" ng-show="true">
+	<div class="mb-account-addTitlePosition">
+		<div class="mb-account-back" ui-sref="admin-product-view"></div>
+		<div class="mb-account-addTitle">添加产品</div>
+	</div>
+	<div class="mb-input_contents" style="margin-top:-10px;;">
+		<div class="mb-product-imgPosition">
+			<img class="mb-product-image" ng-hide="adminProductAddCtrl.product.image">
+			<img class="mb-product-image" ng-show="adminProductAddCtrl.product.image" ng-src="{{adminProductAddCtrl.imageFile+adminProductAddCtrl.product.image}}">
+			<div class="mb-product-word" ngf-select ngf-change="adminProductAddCtrl.upload($files,0)">点击上传</div>
+			<div class="mb-product-btn"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				产品名*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminProductAddCtrl.product.name">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				描述*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminProductAddCtrl.product.description">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				库存*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminProductAddCtrl.product.quantity">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell" ng-show="adminProductAddCtrl.product.state=='1'">
+			<div class="mb_role_edit_key">
+				价格*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminProductAddCtrl.product.price">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				产品类别*
+			</div>
+			<div class="mb-account-out-box" type="text">
+				<div class="mb-account-out-selectBox" ng-bind="adminProductAddCtrl.productCategory"></div>
+				<div class="mb-account-out-selectBtn" ng-click="adminProductAddCtrl.showSelectChooses=!adminProductAddCtrl.showSelectChooses"></div>
+				<div class="mb-account-out-selectChooses" ng-show="adminProductAddCtrl.showSelectChooses">
+					<div class="mb-account-out-selectChoose" ng-click="adminProductAddCtrl.chooseProduct('1')">普通产品</div>
+					<div class="mb-account-out-selectChoose" ng-click="adminProductAddCtrl.chooseProduct('2')">主推产品</div>
+				</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_submit" ng-click="adminProductAddCtrl.save()">
+			保存
 		</div>
 	</div>
 </div>
