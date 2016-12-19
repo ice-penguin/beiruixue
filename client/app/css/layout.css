@@ -12,7 +12,7 @@ div{
 	-moz-box-sizing:border-box; /* Firefox */
 	-webkit-box-sizing:border-box; /* Safari */
 }
-/*@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) { select:focus, textarea:focus, input:focus { font-size: 24px !important; } }*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 1024px) { select:focus, textarea:focus, input:focus { font-size: 32px !important; } }
 a,a:hover{ text-decoration:none;color: #000; }
 body {
 	color: #000; 
