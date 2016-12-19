@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top" id="navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-if="navbarCtrl.isPC">
+<div class="navbar navbar-default navbar-static-top" id="navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-show="navbarCtrl.isPC">
   <div id="navbar-content">
   	<div id="navbar-logo">
   		<img src="assets/images/beiruixue.png">
@@ -16,7 +16,7 @@
 </div>
 
 
-<div id="mobile-navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-if="!navbarCtrl.isPC">
+<div id="mobile-navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-hide="navbarCtrl.isPC">
   <div id="mobile-navbar-content">
     <div id="mobile-navbar-lead" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
       <div id="{{menu.navImage}}" class="mobile-navbar-style"></div>
