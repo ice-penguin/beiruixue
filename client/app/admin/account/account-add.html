@@ -41,30 +41,55 @@
 
 <div class="mobile-content" ng-show="true">
 	<div class="mb-account-addTitlePosition">
-		<div class="mb-account-back">《</div>
+		<div class="mb-account-back" ui-sref="admin-account-view"></div>
 		<div class="mb-account-addTitle">添加账号</div>
 	</div>
 	<div class="mb-input_contents">
-		<div class="mb-input_content">
-			<div class="input_name">创建人</div>
-			<input class="mb-input_value">
+		<div class="mb_role_edit_name">
+			<div class="mb_role_edit_key">
+				创建人
+			</div>
+			<div class="mb_role_edit_value" ng-bind="adminAccountAddCtrl.user.role">
+				一级代理
+			</div>
 		</div>
-		<div class="mb-input_content">
-			<div class="input_name">账号</div>
-			<input class="mb-input_value">
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				账号*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminAccountAddCtrl.accountInfo.account">
+			<div style="clear:both"></div>
 		</div>
-		<div class="mb-input_content">
-			<div class="input_name">姓名</div>
-			<input class="mb-input_value">
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				姓名*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminAccountAddCtrl.accountInfo.name">
+			<div style="clear:both"></div>
 		</div>
-		<div class="mb-input_content">
-			<div class="input_name">密码</div>
-			<input class="mb-input_value">
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				联系号码*
+			</div>
+			<input class="inputBg" type="text" ng-model="adminAccountAddCtrl.accountInfo.tel">
+			<div style="clear:both"></div>
 		</div>
-		<div class="mb-input_content">
-			<div class="input_name">重复密码</div>
-			<input class="mb-input_value">
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				密码*
+			</div>
+			<input class="inputBg" type="password" ng-model="adminAccountAddCtrl.accountInfo.password">
+			<div style="clear:both"></div>
 		</div>
-		<div class="mb-account-saveBtn">确认添加</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				重复密码*
+			</div>
+			<input class="inputBg" type="password" ng-model="adminAccountAddCtrl.accountInfo.rePassword">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_submit" ng-click="adminAccountAddCtrl.create()">
+			确认添加
+		</div>
 	</div>
 </div>

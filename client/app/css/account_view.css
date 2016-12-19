@@ -394,9 +394,38 @@ body{
 	background: #007dc2;
 }
 .mb-account-nextBtn{
+	/*border:1px solid red;*/
 	float: right;
 	width: 150px;
-	background: url();
+	height: 96px;
+	background: url(../../assets/images/mobile/detail.png) no-repeat 100px 37px;
 	line-height: 98px;
+}
+
+.mb-input_contents{
+	background: #fff;
+	padding-bottom: 50px;
+}
+.mb-account-addTitlePosition{
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	background: #0095e5;
+	font-size: 26px;
+	font-family: PingFangSC;
+	font-weight: 600;
+	color: #fff;
+	position: relative;
+}
+.mb-account-back{
+	position: absolute;
+	top:37px;
+	left: 50px;
+	width: 13px;
+	height: 24px;
+	background: url(../../assets/images/mobile/back.png);
+}
+.inputBg{
+	background: #fff;
 }
 

@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="false">
+<div class="content" ng-show="adminAccountViewCtrl.isPC">
 	<div class="account-header">
 		<div class="account-title">账户管理</div>
 		<div class="account-line"></div>
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 </div>
-<div class="mobile-content" ng-show="true">
+<div class="mobile-content" ng-hide="adminAccountViewCtrl.isPC">
 	<div class="mb-account-head">
 		<div class="mb-account-role">{{adminAccountViewCtrl.user.role=='admin'?'Admin':'subAdmin'}}</div>
 		<!-- <div class="mb-account-name">账号名称</div> -->
@@ -77,7 +77,7 @@
 				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
 			</div>
 			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
-			<div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})">></div>
+			<div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})"></div>
 		</div>
 	</div>	
 	<pagination style="float:right;margin-right:30px;" ng-if="adminAccountViewCtrl.pagination.numPages > 1" total-items="adminAccountViewCtrl.pagination.totalItems" ng-model="adminAccountViewCtrl.pagination.page" items-per-page="adminAccountViewCtrl.pagination.itemsPerPage" max-size="adminAccountViewCtrl.pagination.maxSize" boundary-links="{{adminAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountViewCtrl.pageChanged()"></pagination>

@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-show="false">
 	<div class="account-list">
 		<div class="account-search">
 			<input class="account-searchInput" placeholder="请输入账号或姓名" ng-model="adminAccountBinCtrl.keywords">
@@ -43,4 +43,23 @@
 			<pagination style="float:right;margin-right:30px;" ng-if="adminAccountBinCtrl.pagination.numPages > 1" total-items="adminAccountBinCtrl.pagination.totalItems" ng-model="adminAccountBinCtrl.pagination.page" items-per-page="adminAccountBinCtrl.pagination.itemsPerPage" max-size="adminAccountBinCtrl.pagination.maxSize" boundary-links="{{adminAccountBinCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountBinCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountBinCtrl.pageChanged()"></pagination>
 		</div>
 	</div>
+</div>
+
+
+<div class="mobile-content" ng-show="true">
+	<div class="mb-account-addTitlePosition">
+		<div class="mb-account-back" ui-sref="admin-account-view"></div>
+		<div class="mb-account-addTitle">账号回收站</div>
+	</div>
+	<div class="mb-account-table">
+		<div class="mb-account-tr" ng-repeat="agent in adminAccountBinCtrl.agents">
+			<div class="mb-account-one">
+				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name">name</div>
+				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
+			</div>
+			<div class="mb-account-out" style="float:right;margin-right:30px;background:#F5305D;" ng-click="agent.isSelect=true;adminAccountBinCtrl.recoveryAccount();">还原</div>
+			<!-- <div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})"></div> -->
+		</div>
+	</div>	
+	<pagination style="float:right;margin-right:30px;" ng-if="adminAccountBinCtrl.pagination.numPages > 1" total-items="adminAccountBinCtrl.pagination.totalItems" ng-model="adminAccountBinCtrl.pagination.page" items-per-page="adminAccountBinCtrl.pagination.itemsPerPage" max-size="adminAccountBinCtrl.pagination.maxSize" boundary-links="{{adminAccountBinCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountBinCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountBinCtrl.pageChanged()"></pagination>
 </div>

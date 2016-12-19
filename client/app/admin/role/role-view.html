@@ -51,7 +51,7 @@
 		<div class="mb_role_content" ng-repeat="role in adminRoleViewCtrl.roles">
 			<div class="mb_role_sign" ng-bind="role.name" ng-click="adminRoleViewCtrl.mbShowDetail=true;adminRoleViewCtrl.mbShowDList=true;adminRoleViewCtrl.editRole=role;">
 				特级代理
-				<!-- <img src=".."> -->
+				<img src="assets/images/mobile/detail.png">
 			</div>
 		</div>
 	</div>
@@ -61,30 +61,32 @@
 			角色明细
 			<!-- <img src=""> -->
 		</div>
-		<div class="mb_role_edit_name">
-			<div class="mb_role_edit_key">
-				代理级
+		<div style="background:#fff;margin-top:50px;padding-bottom:50px;">
+			<div class="mb_role_edit_name">
+				<div class="mb_role_edit_key">
+					代理级
+				</div>
+				<div class="mb_role_edit_value" ng-bind="adminRoleViewCtrl.editRole.name">
+					一级代理
+				</div>
 			</div>
-			<div class="mb_role_edit_value" ng-bind="adminRoleViewCtrl.editRole.name">
-				一级代理
+			<div class="mb_role_edit_name mb_role_edit_inputcell">
+				<div class="mb_role_edit_key">
+					要求数量*
+				</div>
+				<input type="text" placeholder="数量必须为一个大于零的数" ng-model="adminRoleViewCtrl.editRole.requireQuantity">
+				<div style="clear:both"></div>
 			</div>
-		</div>
-		<div class="mb_role_edit_name mb_role_edit_inputcell">
-			<div class="mb_role_edit_key">
-				要求数量*
+			<div class="mb_role_edit_name mb_role_edit_inputcell">
+				<div class="mb_role_edit_key">
+					代理价格*
+				</div>
+				<input type="text" placeholder="价格必须为一个大于零的数" ng-model="adminRoleViewCtrl.editRole.primeCost">
+				<div style="clear:both"></div>
 			</div>
-			<input type="text" placeholder="数量必须为一个大于零的数" ng-model="adminRoleViewCtrl.editRole.requireQuantity">
-			<div style="clear:both"></div>
-		</div>
-		<div class="mb_role_edit_name mb_role_edit_inputcell">
-			<div class="mb_role_edit_key">
-				代理价格*
+			<div class="mb_role_submit" ng-click="adminRoleViewCtrl.save()">
+				确认修改
 			</div>
-			<input type="text" placeholder="价格必须为一个大于零的数" ng-model="adminRoleViewCtrl.editRole.primeCost">
-			<div style="clear:both"></div>
-		</div>
-		<div class="mb_role_submit" ng-click="adminRoleViewCtrl.save()">
-			确认修改
 		</div>
 	</div>
 </div>

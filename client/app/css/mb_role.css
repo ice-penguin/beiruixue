@@ -23,6 +23,7 @@
 	font-size:20px;
 	color:#3c8d04 ;
 	border-bottom:1px solid #d9d9d9 ;
+	background: url(../../assets/images/mobile/detail.png) no-repeat 700px 37px;
 }
 .mb_role_sign img{
 	float: right;
@@ -63,12 +64,13 @@
 	margin-top: 44px;
 }
 .mb_role_edit_inputcell input{
+	/*border:1px solid red;*/
 	width: 500px;
 	height: 68px;
 	line-height: 68px;
 	font-size: 32px;
 	text-indent: 38px;
-	background: #f3f4f8;
+	background: #fff;
 }
 .mb_role_submit{
 	width: 688px;
