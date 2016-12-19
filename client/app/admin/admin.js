@@ -75,7 +75,7 @@
       })
 
       .state('admin-product-add', {
-        params:{"navValue":"admin-product-add"},
+        params:{"navValue":"admin-product-view"},
         url: '/admin/product/add',
         templateUrl: 'app/admin/product/product-add.html',
         controller: 'AdminProductAddCtrl',
@@ -83,7 +83,7 @@
       })
 
       .state('admin-product-edit', {
-        params:{"navValue":"admin-product-edit"},
+        params:{"navValue":"admin-product-view"},
         url: '/admin/product/edit/:id',
         templateUrl: 'app/admin/product/product-edit.html',
         controller: 'AdminProductEditCtrl',
