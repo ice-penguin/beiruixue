@@ -14,6 +14,11 @@
 
     var init = function(){
       initMenu();
+      scrollTop();
+    };
+
+    var scrollTop = function(){
+      $('html,body').animate({scrollTop: '0px'}, 800);
     };
 
     var system ={}; 
