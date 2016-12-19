@@ -69,7 +69,7 @@
 	<div class="mb-account-btns">
 		<div class="mb-account-add" ui-sref="agent-account-add">{{agentAccountViewCtrl.user.role=='admin'?'添加子账号':'添加账号'}}</div>
 		<div class="mb-account-password" ui-sref="agent-account-changePassword({state:'own'})">密码管理</div>
-		<div class="mb-account-bin" style="border-right:none" ui-sref="agent-account-bin" ng-show="agentAccountViewCtrl.showBinshow">账号回收站</div>
+		<div class="mb-account-personal" style="border-right:none" ui-sref="agent-account-edit({id:agentAccountViewCtrl.user._id})">信息管理</div>
 	</div>
 	<div class="mb-account-title">
 		账号管理

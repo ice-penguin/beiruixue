@@ -19,7 +19,11 @@
 
   <div id="mobile-navbar-box" ng-controller="NavbarCtrl as navbarCtrl" ng-if="!navbarCtrl.isPC">
     <div id="mobile-navbar-content">
-      <div id="mobile-navbar-lead" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
+      <div id="mobile-navbar-lead" ng-show="navbarCtrl.user.role" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
+        <div id="{{menu.navImage}}" class="mobile-navbar-style"></div>
+        <div ng-bind="menu.title" id="mobile-navbar-word"></div>
+      </div>
+      <div id="mobile-navbar-lead" ng-show="navbarCtrl.user._info.level!='5'" style="width:50%" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
         <div id="{{menu.navImage}}" class="mobile-navbar-style"></div>
         <div ng-bind="menu.title" id="mobile-navbar-word"></div>
       </div>
