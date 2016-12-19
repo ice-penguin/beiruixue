@@ -80,7 +80,7 @@
 	<div class="mb-account-table">
 		<div class="mb-account-tr" ng-repeat="agent in adminAccountViewCtrl.agents">
 			<div class="mb-account-one">
-				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name+'('+agent.account+')'">name</div>
+				<div class="mb-account-agentName" ng-bind="agent._info.name?(agent._info.name+'('+agent.account+')'):(agent.name+'('+agent.account+')')">name</div>
 				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
 			</div>
 			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
