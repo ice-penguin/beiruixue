@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="false">
+<div class="content" ng-if="adminAccountAddCtrl.isPC">
 	<div class="account-addPosition">
 		<div class="account-title">账户管理->添加子账号</div>
 		<div class="account-line"></div>
@@ -39,7 +39,7 @@
 	</div>
 </div>
 
-<div class="mobile-content" ng-show="true">
+<div class="mobile-content" ng-if="!adminAccountAddCtrl.isPC">
 	<div class="mb-account-addTitlePosition">
 		<div class="mb-account-back" ui-sref="admin-account-view"></div>
 		<div class="mb-account-addTitle">添加账号</div>

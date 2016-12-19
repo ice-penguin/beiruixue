@@ -54,14 +54,14 @@
 	</div>
 </div>
 
-<div class="mb_productBox" ng-if="!adminProductViewCtrl.isPC">
+<div class="mb_productBox mobile-content" ng-if="!adminProductViewCtrl.isPC">
 	<!-- 列表 -->
 	<div>
 		<div class="mb_product_title">
 			产品管理
 			<div class="mb-product-searchbox">
-				<input class="mb-product-searchInput" placeholder="请输入产品名">
-				<div class="mb-product-searchBtn">搜索</div>
+				<input class="mb-product-searchInput" placeholder="请输入产品名" ng-model="adminProductViewCtrl.keywords">
+				<div class="mb-product-searchBtn" ng-click="adminProductViewCtrl.search()">搜索</div>
 				<img src="assets/images/mobile/mb_addpr.png" class="mb_addpr" ui-sref="admin-product-add">
 			</div>
 			
@@ -70,7 +70,7 @@
 		<div class="mb_product_content" ng-repeat="product in adminProductViewCtrl.products">
 			<div class="mb_product_sign">
 				<div class="mb_product_image_cell">
-					<img ng-show="product.image" ng-src="{{adminProductViewCtrl.imageFile+product.image}}">
+					<img ng-src="{{adminProductViewCtrl.imageFile+product.image}}" ng-show="product.image">
 				</div>
 				<div class="hidden-text mb_product_info_cell">
 					<div class="mb_product_info_name" ng-bind="product.name">
@@ -80,13 +80,13 @@
 						描述
 					</div>
 				</div>
-				<div >
+				<!-- <div >
 					下架
-				</div>
-				<div class="mb_product_info_active" ng-bind="product.isActive?'上架中':'上架中'">
+				</div> -->
+				<div class="mb_product_info_active" ng-bind="product.isActive?'上架中':'未上架'">
 					上架中
 				</div>
-				<div ng-class="{{product.isActive?'mb_product_info_active_down':'mb_product_info_active_up'}}" ng-bind="product.isActive?'下架':'上架'">
+				<div class="{{product.isActive?'mb_product_info_active_down':'mb_product_info_active_up'}}" ng-bind="product.isActive?'下架':'上架'" ng-click="adminProductViewCtrl.changeState(product)">
 					下架
 				</div>
 				<div class="mb-product-nextBtn" ui-sref="admin-product-edit({id:product._id})"></div>

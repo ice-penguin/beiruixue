@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="false">
+<div class="content" ng-if="adminAccountBinCtrl.isPC">
 	<div class="account-list">
 		<div class="account-search">
 			<input class="account-searchInput" placeholder="请输入账号或姓名" ng-model="adminAccountBinCtrl.keywords">
@@ -46,7 +46,7 @@
 </div>
 
 
-<div class="mobile-content" ng-show="true">
+<div class="mobile-content" ng-if="!adminAccountBinCtrl.isPC">
 	<div class="mb-account-addTitlePosition">
 		<div class="mb-account-back" ui-sref="admin-account-view"></div>
 		<div class="mb-account-addTitle">账号回收站</div>

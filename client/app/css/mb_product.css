@@ -35,6 +35,10 @@
 	background-color: #d8d8d8;
 	overflow: hidden;
 }
+.mb_product_image_cell img{
+	width: 60px;
+	height: 60px;
+}
 .mb_product_image_cell{
 	width: 60px;
 	height: 60px;
@@ -75,6 +79,7 @@
   	color: #ffffff;
 }
 .mb_product_info_active_down{
+	/*border:1px solid red;*/
 	float: left;
 	width: 175px;
 	height: 58px;

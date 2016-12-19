@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="false">
+<div class="content" ng-if="adminProductEditCtrl.isPC">
 	<div class="product-addPosition">
 		<div class="account-title">产品管理->编辑产品</div>
 		<div class="account-line"></div>
@@ -56,7 +56,7 @@
 </div>
 
 
-<div class="mobile-content" ng-show="true">
+<div class="mobile-content" ng-if="!adminProductEditCtrl.isPC">
 	<div class="mb-account-addTitlePosition">
 		<div class="mb-account-back" ui-sref="admin-product-view"></div>
 		<div class="mb-account-addTitle">添加产品</div>
