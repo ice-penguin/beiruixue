@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-if="adminEventViewCtrl.isPC">
 	<div class="role-content" style="height:auto;padding-bottom:70px;">
 		<div class="account-title">事件管理</div>
 		<div class="account-line"></div>
@@ -25,6 +25,31 @@
 				<div class="table_content event-three"><span style="color:#f86701" ng-bind="ev.content">特级代理</span></div>
 				<div class="table_content event-four"><span style="color:#2e68c0" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">特级代理</span></div>
 				<div class="table_content event-five"><span ng-bind="ev.isRead?'已读':'未读'">特级代理</span></div>
+			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="adminEventViewCtrl.pagination.numPages > 1" total-items="adminEventViewCtrl.pagination.totalItems" ng-model="adminEventViewCtrl.pagination.page" items-per-page="adminEventViewCtrl.pagination.itemsPerPage" max-size="adminEventViewCtrl.pagination.maxSize" boundary-links="{{adminEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminEventViewCtrl.pageChanged()"></pagination>
+		</div>
+	</div>
+</div>
+
+<div class="mb_eventBox" ng-if="!adminEventViewCtrl.isPC">
+	<!-- 列表 -->
+	<div>
+		<div class="mb_event_title">
+			事件管理
+		</div>
+		<div class="mb_event_content">
+			<div class="mb_event_sign" ng-repeat="ev in adminEventViewCtrl.events">
+				<div class="mb_event_sign_left">
+					<div class="hidden-text mb_event_sign_title" ng-bind="ev._info.name">
+						账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称
+					</div>
+					<div class="hidden-text mb_event_sign_content" ng-bind="ev.content">
+						具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件
+					</div>
+				</div>
+				<div class="mb_event_sign_right" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">
+					2016-01-31
+				</div>
 			</div>
 			<pagination style="float:right;margin-right:30px;" ng-if="adminEventViewCtrl.pagination.numPages > 1" total-items="adminEventViewCtrl.pagination.totalItems" ng-model="adminEventViewCtrl.pagination.page" items-per-page="adminEventViewCtrl.pagination.itemsPerPage" max-size="adminEventViewCtrl.pagination.maxSize" boundary-links="{{adminEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminEventViewCtrl.pageChanged()"></pagination>
 		</div>

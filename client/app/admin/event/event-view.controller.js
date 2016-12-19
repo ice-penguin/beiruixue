@@ -20,6 +20,20 @@ angular.module('beiruixueApp')
       totalItems: null
     };
 
+    var system ={}; 
+    var p = navigator.platform;   
+    system.win = p.indexOf("Win") == 0; 
+    system.mac = p.indexOf("Mac") == 0; 
+    system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);   
+    if(system.win||system.mac||system.xll){//如果是电脑跳转到百度 
+        // window.location.href="http://www.baidu.com/"; 
+        self.isPC = true;
+    }else{  //如果是手机,跳转到谷歌
+        // window.location.href="http://www.google.cn/"; 
+        self.isPC = false;
+        
+    }
+
     var doLocation=function(){
         $location
         .search('state', state)
@@ -48,6 +62,18 @@ angular.module('beiruixueApp')
 			var totalItems = data.count;
             self.pagination.totalItems = totalItems;
             self.pagination.numPages = totalItems / itemsPerPage;
+
+            // 如果是手机端登录直接设为已读
+            if(state && !self.isPC){
+            	var eventsIds = [];
+				_.each(self.events,function (ev){
+						eventsIds.push(ev._id);
+				});
+				Event.readAll({},{eventsIds:eventsIds},function (data){
+				},function (){
+
+				});
+            }
 		},function (){
 
 		});

@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-if="adminProductViewCtrl.isPC">
 	<div class="role-content" style="height:auto;padding-bottom:50px;">
 		<div class="account-title">产品管理</div>
 		<div class="account-line"></div>
@@ -32,7 +32,7 @@
 				<div class="table_content2 product-two"><span ng-bind="product.name">特级代理</span></div>
 				<div class="table_content2 product-three"><span ng-bind="product.description">特级代理</span></div>
 				<div class="table_content2 product-four"><span style="color:#f86701" ng-bind="product.quantity || '暂无库存'">库存</span></div>
-				<div class="table_content2 product-five"><img class="product-productImg" ng-src="{{adminProductViewCtrl.imageFile+product.image}}"></div>
+				<div class="table_content2 product-five"><img class="product-productImg" ng-src="{{adminProductViewCtrl.imageFile+product.image}}" ng-show="product.image"></div>
 				<div class="table_content2 product-six"><span ng-bind="product.state == 1 ? '普通产品':'主推产品'">普通产品</span></div>
 				<div class="table_content2 product-seven">
 					<div class="product-active" ng-show="product.isActive"></div>
@@ -48,6 +48,49 @@
 			<div class="table_contents2">
 				<div class="product-addNewImg" ui-sref="admin-product-add"></div>
 				<div class="product-addNewWord">添加新商品</div>
+			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="adminProductViewCtrl.pagination.numPages > 1" total-items="adminProductViewCtrl.pagination.totalItems" ng-model="adminProductViewCtrl.pagination.page" items-per-page="adminProductViewCtrl.pagination.itemsPerPage" max-size="adminProductViewCtrl.pagination.maxSize" boundary-links="{{adminProductViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminProductViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminProductViewCtrl.pageChanged()"></pagination>
+		</div>
+	</div>
+</div>
+
+<div class="mb_productBox" ng-if="!adminProductViewCtrl.isPC">
+	<!-- 列表 -->
+	<div>
+		<div class="mb_product_title">
+			产品管理
+			<div class="mb-product-searchbox">
+				<input class="mb-product-searchInput" placeholder="请输入产品名">
+				<div class="mb-product-searchBtn">搜索</div>
+				<img src="assets/images/mobile/mb_addpr.png" class="mb_addpr" ui-sref="admin-product-add">
+			</div>
+			
+			<!-- 右侧栏加入搜索框 -->
+		</div>
+		<div class="mb_product_content" ng-repeat="product in adminProductViewCtrl.products">
+			<div class="mb_product_sign">
+				<div class="mb_product_image_cell">
+					<img ng-show="product.image" ng-src="{{adminProductViewCtrl.imageFile+product.image}}">
+				</div>
+				<div class="hidden-text mb_product_info_cell">
+					<div class="mb_product_info_name" ng-bind="product.name">
+						名字
+					</div>
+					<div class="mb_product_info_des" ng-bind="product.description">
+						描述
+					</div>
+				</div>
+				<div >
+					下架
+				</div>
+				<div class="mb_product_info_active" ng-bind="product.isActive?'上架中':'上架中'">
+					上架中
+				</div>
+				<div ng-class="{{product.isActive?'mb_product_info_active_down':'mb_product_info_active_up'}}" ng-bind="product.isActive?'下架':'上架'">
+					下架
+				</div>
+				<div class="mb-product-nextBtn" ui-sref="admin-product-edit({id:product._id})"></div>
+				<div style="clear:both"></div>
 			</div>
 			<pagination style="float:right;margin-right:30px;" ng-if="adminProductViewCtrl.pagination.numPages > 1" total-items="adminProductViewCtrl.pagination.totalItems" ng-model="adminProductViewCtrl.pagination.page" items-per-page="adminProductViewCtrl.pagination.itemsPerPage" max-size="adminProductViewCtrl.pagination.maxSize" boundary-links="{{adminProductViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminProductViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminProductViewCtrl.pageChanged()"></pagination>
 		</div>

@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="false">
+<div class="content" ng-if="adminRoleViewCtrl.isPC">
 	<div class="role-content">
 		<div class="account-title">账户管理->编辑</div>
 		<div class="account-line"></div>
@@ -42,7 +42,7 @@
 	</div>
 </div>
 
-<div class="mb_roleBox" ng-show="true">
+<div class="mb_roleBox" ng-if="!adminRoleViewCtrl.isPC">
 	<!-- 列表 -->
 	<div ng-hide="adminRoleViewCtrl.mbShowDList">
 		<div class="mb_role_title">

@@ -5,6 +5,21 @@ angular.module('beiruixueApp')
     function ($scope, $location, $state,$stateParams,$cookieStore,Role) {
     	var self = this;
 
+        var system ={}; 
+        var p = navigator.platform;   
+        system.win = p.indexOf("Win") == 0; 
+        system.mac = p.indexOf("Mac") == 0; 
+        system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);   
+        if(system.win||system.mac||system.xll){//如果是电脑跳转到百度 
+            // window.location.href="http://www.baidu.com/"; 
+            self.isPC = true;
+        }else{  //如果是手机,跳转到谷歌
+            // window.location.href="http://www.google.cn/"; 
+            self.isPC = false;
+            
+        }
+
+        
     	var init = function(){
     		loadRoles();
     	};

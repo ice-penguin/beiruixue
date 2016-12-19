@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content" ng-show="adminAccountViewCtrl.isPC">
+<div class="content" ng-if="adminAccountViewCtrl.isPC">
 	<div class="account-header">
 		<div class="account-title">账户管理</div>
 		<div class="account-line"></div>
@@ -59,7 +59,8 @@
 		</div>
 	</div>
 </div>
-<div class="mobile-content" ng-hide="adminAccountViewCtrl.isPC">
+
+<div class="mobile-content" ng-if="!adminAccountViewCtrl.isPC">
 	<div class="mb-account-head">
 		<div class="mb-account-role">{{adminAccountViewCtrl.user.role=='admin'?'Admin':'subAdmin'}}</div>
 		<!-- <div class="mb-account-name">账号名称</div> -->

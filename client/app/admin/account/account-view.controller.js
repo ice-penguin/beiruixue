@@ -26,7 +26,7 @@ angular.module('beiruixueApp')
     system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);   
     if(system.win||system.mac||system.xll){//如果是电脑跳转到百度 
         // window.location.href="http://www.baidu.com/"; 
-        self.isPC = false;
+        self.isPC = true;
     }else{  //如果是手机,跳转到谷歌
         // window.location.href="http://www.google.cn/"; 
         self.isPC = false;

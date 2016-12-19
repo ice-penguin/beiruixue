@@ -1,12 +1,6 @@
-.hidden{
-   white-space:nowrap;
-   white-space:nowrap;
-   text-overflow:ellipsis;
-   overflow:hidden;
-}
 .mb_productBox{
 	width: 750px;
-	min-height: 1300px;
+	margin-bottom: 100px;
 }
 .mb_product_title{
 	font-size: 24px;
@@ -17,6 +11,7 @@
 	background-position: 20px 34px;
 	text-indent: 90px;
 	margin-bottom: 20px;
+	position: relative;
 }
 .mb_product_content{
 	border-top:1px solid #d9d9d9 ;
@@ -30,6 +25,7 @@
 .mb_addpr{
 	float: right;
 	margin: 35px;
+	margin-top: 0;
 	cursor: pointer;
 }
 .mb_product_image_cell{
@@ -46,7 +42,7 @@
 }
 .mb_product_info_cell{
 	width: 98px;
-	margin-left: 10px;
+	margin:5px 0 0 10px;
 	float: left;
 }
 .mb_product_info_name{
@@ -58,4 +54,74 @@
 	font-size: 14px;
 	height: 20px;
 	color: #929292;
+}
+.mb_product_info_active{
+	float: left;
+	margin: 15px 18px 0 127px;
+	width: 60px;
+	height: 28px;
+	font-size: 20px;
+	color: #929292;
+}
+.mb_product_info_active_up{
+	float: left;
+	width: 175px;
+	height: 58px;
+	line-height: 58px;
+	border-radius: 8px;
+	background-color: #f6a623;
+	font-size: 30px;
+	text-align: center;
+  	color: #ffffff;
+}
+.mb_product_info_active_down{
+	float: left;
+	width: 175px;
+	height: 58px;
+	line-height: 58px;
+	border-radius: 8px;
+	background-color: #007cc2;
+	font-size: 30px;
+	text-align: center;
+  	color: #ffffff;
+  	cursor: pointer;
+}
+.mb-product-searchbox{
+	position: absolute;
+	right:0;
+	top:40px;
+	width: 450px;
+}
+.mb-product-searchInput{
+	float: left;
+	width: 230px;
+	height: 30px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	border: solid 1px #9b9b9b;
+	text-indent: 9px;
+	color: #000;
+	font-size: 16px;
+	float: left;
+}
+.mb-product-searchBtn{
+	float: left;
+	width: 60px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 8px;
+	background-color: #007cc2;
+	margin-left: 20px;
+	font-size: 16px;
+	text-indent: 0;
+	text-align: center;
+	color: #ffffff;
+}
+.mb-product-nextBtn{
+	/*border:1px solid red;*/
+	float: right;
+	width: 150px;
+	height: 96px;
+	background: url(../../assets/images/mobile/detail.png) no-repeat 100px 20px;
+	line-height: 98px;
 }
