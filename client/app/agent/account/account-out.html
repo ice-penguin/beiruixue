@@ -1,6 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="content">
-	<div class="account-addPosition">
+	<div class="account-addPosition" ng-if="agentAccountOutCtrl.isPC">
 		<div class="account-title">账户管理->发货</div>
 		<div class="account-line"></div>
 		<div class="account-inputs">
@@ -26,6 +26,47 @@
 				<div class="account-save" ng-click="agentAccountOutCtrl.save()">确认发货</div>
 				<div class="account-back" ui-sref="admin-account-view">返回</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="mobile-content" ng-if="!agentAccountOutCtrl.isPC">
+	<div class="mb-account-addTitlePosition">
+		<div class="mb-account-back" ui-sref="admin-account-view"></div>
+		<div class="mb-account-addTitle">发货</div>
+	</div>
+	<div class="mb-input_contents">
+		<div class="mb_role_edit_name">
+			<div class="mb_role_edit_key">
+				账号名
+			</div>
+			<div class="mb_role_edit_value" ng-bind="agentAccountOutCtrl.agent.account">
+				一级代理
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				产品*
+			</div>
+			<div class="mb-account-out-box" type="text" ng-model="agentAccountOutCtrl.agent.name">
+				<div class="mb-account-out-selectBox" ng-bind="agentAccountOutCtrl.showProductName"></div>
+				<div class="mb-account-out-selectBtn" ng-click="agentAccountOutCtrl.showProducts=!agentAccountOutCtrl.showProducts"></div>
+				<div class="mb-account-out-selectChooses" ng-show="agentAccountOutCtrl.showProducts">
+					<div class="mb-account-out-selectChoose" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">111111</div>
+				</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				发货数量*
+			</div>
+			<input class="inputBg" type="text" ng-model="agentAccountOutCtrl.orderQuantity">
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_submit" ng-click="agentAccountOutCtrl.save()">
+			确认发货
 		</div>
 	</div>
 </div>

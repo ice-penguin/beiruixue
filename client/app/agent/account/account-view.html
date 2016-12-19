@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-if="agentAccountViewCtrl.isPC">
 	<div class="account-header">
 		<div class="account-title">账户管理</div>
 		<div class="account-line"></div>
@@ -59,3 +59,35 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="mobile-content" ng-if="!agentAccountViewCtrl.isPC">
+	<div class="mb-account-head">
+		<div class="mb-account-role" ng-bind="agentAccountViewCtrl.user._info.name"></div>
+		<!-- <div class="mb-account-name">账号名称</div> -->
+	</div>
+	<div class="mb-account-btns">
+		<div class="mb-account-add" ui-sref="admin-account-add">{{agentAccountViewCtrl.user.role=='admin'?'添加子账号':'添加账号'}}</div>
+		<div class="mb-account-password" ui-sref="admin-account-changePassword({state:'own'})">密码管理</div>
+		<div class="mb-account-bin" style="border-right:none" ui-sref="admin-account-bin" ng-show="agentAccountViewCtrl.showBinshow">账号回收站</div>
+	</div>
+	<div class="mb-account-title">
+		账号管理
+		<div class="mb-account-searchbox">
+			<input class="mb-account-searchInput" placeholder="请输入账号或姓名" ng-model="agentAccountViewCtrl.keywords">
+			<div class="mb-account-searchBtn" ng-click="agentAccountViewCtrl.search()">搜索</div>
+		</div>
+	</div>
+	<div class="mb-account-table">
+		<div class="mb-account-tr" ng-repeat="agent in agentAccountViewCtrl.agents">
+			<div class="mb-account-one">
+				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name+'('+agent.account+')'">name</div>
+				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
+			</div>
+			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
+			<div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})"></div>
+		</div>
+	</div>	
+	<pagination style="float:right;margin-right:30px;" ng-if="agentAccountViewCtrl.pagination.numPages > 1" total-items="agentAccountViewCtrl.pagination.totalItems" ng-model="agentAccountViewCtrl.pagination.page" items-per-page="agentAccountViewCtrl.pagination.itemsPerPage" max-size="agentAccountViewCtrl.pagination.maxSize" boundary-links="{{agentAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="agentAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="agentAccountViewCtrl.pageChanged()"></pagination>
+</div>
+

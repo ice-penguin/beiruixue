@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="content">
+<div class="content" ng-if="memberEventViewCtrl.isPC">
 	<div class="role-content" style="height:auto;padding-bottom:70px;">
 		<div class="account-title">事件管理</div>
 		<div class="account-line"></div>
@@ -30,4 +30,31 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="mb_eventBox mobile-content" ng-if="!memberEventViewCtrl.isPC">
+	<!-- 列表 -->
+	<div>
+		<div class="mb_event_title">
+			事件管理
+		</div>
+		<div class="mb_event_content">
+			<div class="mb_event_sign" ng-repeat="ev in memberEventViewCtrl.events">
+				<div class="mb_event_sign_left">
+					<div class="hidden-text mb_event_sign_title" ng-bind="ev._info.name">
+						账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称
+					</div>
+					<div class="hidden-text mb_event_sign_content" ng-bind="ev.content">
+						具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件
+					</div>
+				</div>
+				<div class="mb_event_sign_right" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">
+					2016-01-31
+				</div>
+			</div>
+			<pagination style="float:right;margin-right:30px;" ng-if="memberEventViewCtrl.pagination.numPages > 1" total-items="memberEventViewCtrl.pagination.totalItems" ng-model="memberEventViewCtrl.pagination.page" items-per-page="memberEventViewCtrl.pagination.itemsPerPage" max-size="memberEventViewCtrl.pagination.maxSize" boundary-links="{{memberEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="memberEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="memberEventViewCtrl.pageChanged()"></pagination>
+		</div>
+	</div>
+</div>
+
 
