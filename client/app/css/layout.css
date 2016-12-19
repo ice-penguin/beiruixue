@@ -6,6 +6,7 @@ body,div,ul,li,ol,p,input{
 input{
 	color: #000
 }
+input {outline:none;}
 div{
 	box-sizing:border-box;
 	-moz-box-sizing:border-box; /* Firefox */
