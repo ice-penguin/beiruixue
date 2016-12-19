@@ -48,8 +48,10 @@
 	text-align: left;
 	float: left;
 	width: 150px;
+	height: 74px;
 }
 .mb_role_edit_value{
+	height: 74px;
 	color: #3c8d04;
 	text-align: left;
 	float: left;
