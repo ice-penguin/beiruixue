@@ -12,6 +12,10 @@ var validationError = function(res, err) {
   return res.json(500, err.toString());
 };
 
+var handleError = function (res, err) {
+  return res.send(500, err);
+};
+
 /**
  * Get list of users
  * restriction: 'admin'

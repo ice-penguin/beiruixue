@@ -64,5 +64,17 @@ angular.module('beiruixueApp')
 		});
 	};
 
+	self.destory=function(){
+		if(!confirm("确认删除？")){
+            return;
+        }
+        User.destroy({controller:id},{},function (){
+            alert("删除成功");
+            $state.go('agent-account-view');
+        },function (){
+
+        });
+	};
+
 	init();
 }]);

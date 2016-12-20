@@ -93,5 +93,17 @@ angular.module('beiruixueApp')
     	});
     };
 
+    self.destory=function(){
+        if(!confirm("确认删除？")){
+            return;
+        }
+        Product.destroy({id:id},function (){
+            alert("删除成功");
+            $state.go('admin-product-view');
+        },function (){
+
+        });
+    };
+
     init();
 }]);

@@ -83,9 +83,14 @@
 				<div class="mb-account-agentName" ng-bind="agent._info.name?(agent._info.name+'('+agent.account+')'):(agent.name+'('+agent.account+')')">name</div>
 				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
 			</div>
+			<div class="mb-account-out" ui-sref="admin-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" style="margin-right:10px;">动态</div>
 			<div class="mb-account-out" ui-sref="admin-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
 			<div class="mb-account-nextBtn" ui-sref="admin-account-edit({id:agent._id})"></div>
 		</div>
 	</div>	
 	<pagination style="float:right;margin-right:30px;" ng-if="adminAccountViewCtrl.pagination.numPages > 1" total-items="adminAccountViewCtrl.pagination.totalItems" ng-model="adminAccountViewCtrl.pagination.page" items-per-page="adminAccountViewCtrl.pagination.itemsPerPage" max-size="adminAccountViewCtrl.pagination.maxSize" boundary-links="{{adminAccountViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminAccountViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminAccountViewCtrl.pageChanged()"></pagination>
+
+	<div class="mb_role_submit" ng-click="adminAccountViewCtrl.logout()" style="background:red;margin-top:80px;">
+		退出登录
+	</div>
 </div>
