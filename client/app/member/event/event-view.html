@@ -53,6 +53,10 @@
 				</div>
 			</div>
 			<pagination style="float:right;margin-right:30px;" ng-if="memberEventViewCtrl.pagination.numPages > 1" total-items="memberEventViewCtrl.pagination.totalItems" ng-model="memberEventViewCtrl.pagination.page" items-per-page="memberEventViewCtrl.pagination.itemsPerPage" max-size="memberEventViewCtrl.pagination.maxSize" boundary-links="{{memberEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="memberEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="memberEventViewCtrl.pageChanged()"></pagination>
+
+			<div class="mb_role_submit" ng-click="agentAccountViewCtrl.logout()" style="background:red;margin-top:80px;">
+				退出登录
+			</div>
 		</div>
 	</div>
 </div>

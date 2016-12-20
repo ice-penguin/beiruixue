@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminAccountViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','User',
-    function ($scope, $location, $state,$stateParams,$cookieStore,User) {
+  .controller('AdminAccountViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','User','Auth' ,
+    function ($scope, $location, $state,$stateParams,$cookieStore,User,Auth) {
 	var self=this;
 
 	self.keywords = $stateParams.kw; 
@@ -137,6 +137,8 @@ angular.module('beiruixueApp')
     self.pageChanged=function(){
         doLocation();
     };
+
+    self.logout=Auth.logout;
 
 	init();
 }]);

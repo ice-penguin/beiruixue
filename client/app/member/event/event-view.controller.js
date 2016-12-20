@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('MemberEventViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Event','User',
-    function ($scope, $location, $state,$stateParams,$cookieStore,Event,User) {
+  .controller('MemberEventViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Event','User','Auth',
+    function ($scope, $location, $state,$stateParams,$cookieStore,Event,User,Auth) {
 
     var self = this;
 
@@ -116,6 +116,8 @@ angular.module('beiruixueApp')
     self.pageChanged=function(){
         doLocation();
     };
+
+    self.logout=Auth.logout;
 
 	init();
 }]);
