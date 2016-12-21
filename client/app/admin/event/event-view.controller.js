@@ -64,7 +64,7 @@ angular.module('beiruixueApp')
             self.pagination.numPages = totalItems / itemsPerPage;
 
             // 如果是手机端登录直接设为已读
-            if(state && !self.isPC){
+            if(!self.isPC){
             	var eventsIds = [];
 				_.each(self.events,function (ev){
 						eventsIds.push(ev._id);
