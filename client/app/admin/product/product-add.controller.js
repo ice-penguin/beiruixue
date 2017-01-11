@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminProductAddCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Product','Upload',
-    function ($scope, $location, $state,$stateParams,$cookieStore,Product,Upload) {
+  .controller('AdminProductAddCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Product','Upload','Compress_ready',
+    function ($scope, $location, $state,$stateParams,$cookieStore,Product,Upload,Compress_ready) {
     var self=this;
 
     self.product={
@@ -35,27 +35,47 @@ angular.module('beiruixueApp')
     //上传
     self.upload=function(file){
         console.log(file,file.length);
+        var index = 0;
         if(file.length>0){
-            console.log('3333');
             var file=file[0];
-            var now = new Date().getTime();
-            var nowStr = now.toString();
-            var rand = (Math.floor(Math.random() * (MAX - MIN)) + MIN).toString();
-            var randStr = rand.toString();
-            var filename = nowStr + '_' + randStr + '_' + file.name.replace(/[^0-9a-z\.]+/gi, '');
-            console.log('hhhh');
-            Upload.upload({
-                method: 'POST',
-                url: 'api/upload',
-                data: {file: file, 'filename': filename}
-            }).then(function (resp) {
-                console.log(resp.data);
-                self.product.image=filename;
-            }, function (resp) {
-                alert("上传失败");
-            }, function (evt) {
-                // self.loaded = parseInt(100.0 * evt.loaded / evt.total);
-            });
+
+            var doCompress=function(){
+                Compress_ready.resizeFile(file).then(function(blob_data) {
+                    if(blob_data.size==0){
+                        //尝试次数为1次，则再尝试压缩，否则报错
+                        if(index==0){
+                            index++;
+                            return doCompress();
+                        }else{
+                            return alert("压缩图片失败");
+                        }
+                    }
+
+                    var now = new Date().getTime();
+                    var nowStr = now.toString();
+                    var rand = (Math.floor(Math.random() * (MAX - MIN)) + MIN).toString();
+                    var randStr = rand.toString();
+                    var filename = nowStr + '_' + randStr + '_' + file.name.replace(/[^0-9a-z\.]+/gi, '');
+                    Upload.upload({
+                        method: 'POST',
+                        url: 'api/upload',
+                        data: {file: file, 'filename': filename}
+                    }).then(function (resp) {
+                        console.log(resp.data);
+                        self.product.image=filename;
+                    }, function (resp) {
+                        alert("上传失败");
+                    }, function (evt) {
+                        // self.loaded = parseInt(100.0 * evt.loaded / evt.total);
+                    });
+
+
+                }, function(err_reason) {
+                  console.log(err_reason);
+                });
+            }
+
+            doCompress();
        };
     };
 
