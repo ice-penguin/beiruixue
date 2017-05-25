@@ -23,11 +23,11 @@
 				<div class="table_content event-one"><div class="account-selectAll" ng-click="ev.isSelect=!ev.isSelect;adminEventViewCtrl.isSelectAll=false"><span ng-show="ev.isSelect">√</span></div></div>
 				<div class="table_content event-two"><span ng-bind="ev._info.name">18806712362</span></div>
 				<div class="table_content event-three"><span style="color:#f86701" ng-bind="ev.content">特级代理</span></div>
-				<div class="table_content event-four"><span style="color:#2e68c0" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">特级代理</span></div>
+				<div class="table_content event-four"><span style="color:#2e68c0" ng-bind="ev.createDate | date:'yyyy-MM-dd/hh:mm a'">特级代理</span></div>
 				<div class="table_content event-five"><span ng-bind="ev.isRead?'已读':'未读'">特级代理</span></div>
 			</div>
 			<pagination style="float:right;margin-right:30px;" ng-if="adminEventViewCtrl.pagination.numPages > 1" total-items="adminEventViewCtrl.pagination.totalItems" ng-model="adminEventViewCtrl.pagination.page" items-per-page="adminEventViewCtrl.pagination.itemsPerPage" max-size="adminEventViewCtrl.pagination.maxSize" boundary-links="{{adminEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminEventViewCtrl.pageChanged()"></pagination>
-		</div>
+		</div> 
 	</div>
 </div>
 
