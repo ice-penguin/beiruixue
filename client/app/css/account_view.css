@@ -364,7 +364,8 @@ body{
 	background: #fff;
 }
 .mb-account-tr{
-	height: 98px;
+	/*height: 98px;*/
+	height: 196px;
 	border-bottom:1px solid #d9d9d9;
 }
 .mb-account-one{

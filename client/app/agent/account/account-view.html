@@ -85,6 +85,8 @@
 			<div class="mb-account-one">
 				<div class="mb-account-agentName" ng-bind="agent._info.name?agent._info.name:agent.name+'('+agent.account+')'">name</div>
 				<div class="mb-account-agentRole" ng-bind="agent.level">role</div>
+				<div class="mb-account-agentName" ng-bind="'销售收益:'+(agent._info.saleIncome?agent._info.saleIncome:'无')">role</div>
+				<div class="mb-account-agentName" ng-bind="'返利收益:'+(agent._info.income?agent._info.income:'无')">role</div>
 			</div>
 			<div class="mb-account-out" ui-sref="agent-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" style="margin-right:10px;">动态</div>
 			<div class="mb-account-out" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
