@@ -25,6 +25,7 @@ var updateInPerson=function (condition){
 	switch(product.state){
 		case '1':
 			dealArr=inPerson.otherProducts;
+			updateIncomeByNormal(condition);
 			break;
 		case '2':
 			isUpdateIncome=true;
@@ -84,6 +85,22 @@ var updateInPerson=function (condition){
 		}
 	}
 };
+
+//单品返点10%
+var updateIncomeByNormal = function (condition){
+	var outPerson=condition.outPerson,
+		orderQuantity=condition.orderQuantity,
+		product=condition.product;
+	if(outPerson){
+		Role.findById(outPerson._role,function (err, outRole){
+			if(err||!outRole){return;}
+			var amount=product.price*orderQuantity*config.ratePrecentNormal;
+			outPerson.income+=amount;
+			outPerson.save();
+		});
+	}
+	
+}
 
 var updateIncome=function (condition){
 	Role.findOne({level:5},function (err,r){
@@ -249,7 +266,8 @@ exports.index=function (req, res){
     Event.find(condition,{},{
     	skip: (page - 1) * itemsPerPage,
 		limit: itemsPerPage,
-		populate:'_info _product belong'
+		populate:'_info _product belong',
+		sort:{createDate:-1}
     })
     .exec(function (err, events){
     	if(err){return handleError(res,err);}

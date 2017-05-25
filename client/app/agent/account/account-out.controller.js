@@ -63,7 +63,7 @@ angular.module('beiruixueApp')
 		Event.shipment({},body,function (){
 			$state.go('agent-account-view');
 		},function (data){
-			alert(data);
+			alert(data.data);
 		});
 	};
 
