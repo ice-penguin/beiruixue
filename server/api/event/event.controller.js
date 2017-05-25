@@ -9,9 +9,6 @@ var config = require('../../tool/config');
 var _ = require('lodash');
 
 
-
-
-
 var handleError= function (res, err) {
   return res.send(500, err);
 };
@@ -89,46 +86,52 @@ var updateInPerson=function (condition){
 };
 
 var updateIncome=function (condition){
-	var inPerson=condition.inPerson,
-		outPerson=condition.outPerson,
-		orderQuantity=condition.orderQuantity;
-	Role.findById(inPerson._role,function (err, inRole){
-		if(err||!inRole){inPerson.save(); return;}
-		if(inRole.level==5){
-			inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
-		}else{
-			var amount=orderQuantity*(config.tetailPrice-inRole.primeCost);
-			inPerson.saleIncome+=amount;
+	Role.findOne({level:5},function (err,r){
+		if(r){
+			config.tetailPrice = r.primeCost;
 		}
-		inPerson.save();
-		if(outPerson){
-			Role.findById(outPerson._role,function (err, outRole){
-				if(err||!outRole){return;}
-				if(outRole.level<inRole.level){
-					var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
-				}else{
-					var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
-				}
-				outPerson.income+=amount;
-				outPerson.save();
-			});
-		}else{
-			User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
-				if(err||!user){return;}
-				if(!user._creator){return;}
-				Role.findById(user._creator._role,function (err, outRole){
+		var inPerson=condition.inPerson,
+			outPerson=condition.outPerson,
+			orderQuantity=condition.orderQuantity;
+		Role.findById(inPerson._role,function (err, inRole){
+			if(err||!inRole){inPerson.save(); return;}
+			if(inRole.level==5){
+				inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
+			}else{
+				var amount=orderQuantity*(config.tetailPrice-inRole.primeCost);
+				inPerson.saleIncome+=amount;
+			}
+			inPerson.save();
+			if(outPerson){
+				Role.findById(outPerson._role,function (err, outRole){
 					if(err||!outRole){return;}
 					if(outRole.level<inRole.level){
 						var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
 					}else{
 						var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
 					}
-					user._creator.income+=amount;
-					user._creator.save();
+					outPerson.income+=amount;
+					outPerson.save();
 				});
-			});
-		}
-	});
+			}else{
+				User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
+					if(err||!user){return;}
+					if(!user._creator){return;}
+					Role.findById(user._creator._role,function (err, outRole){
+						if(err||!outRole){return;}
+						if(outRole.level<inRole.level){
+							var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
+						}else{
+							var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
+						}
+						user._creator.income+=amount;
+						user._creator.save();
+					});
+				});
+			}
+		});
+	})
+	
 };
 
 

@@ -57,11 +57,19 @@ exports.index = function(req, res) {
     })
     .exec(function (err, users) {
       if (err){return validationError(err);}
-      res.json(200, {
-        users:users,
-        count:count,
-        page:page
-      });
+      
+      User.populate(users,{
+        path:"_creator._info",
+        model:"Info"
+      },function(err,users){
+        if (err){return validationError(err);}
+        res.json(200, {
+          users:users,
+          count:count,
+          page:page
+        });
+      })
+      
     });
   };
 
@@ -129,7 +137,8 @@ exports.create = function (req, res) {
   var account = req.body.account,
       password = req.body.password,
       name = req.body.name,
-      tel = req.body.tel;
+      tel = req.body.tel,
+      enterDate = req.body.enterDate;//毫秒值
 
   if(!account){
     return res.json(400,"缺少创建参数：account");
@@ -155,6 +164,12 @@ exports.create = function (req, res) {
     isDelete:false,
     createDate:new Date()
   };
+
+  if(!isNaN(enterDate)){
+    infoObj.enterDate = new Date(parseInt(enterDate));
+  }else{
+    infoObj.enterDate = infoObj.createDate;
+  }
 
   Role.findOne({level:5},function (err,role){
     if(err){

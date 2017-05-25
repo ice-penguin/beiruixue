@@ -20,10 +20,26 @@ angular.module('beiruixueApp')
         
     }
 
+    //格式化时间,已/为标准
+    var dealDateString = function(dateString){
+      var strArr = dateString.split('/');
+      if(strArr.length!=3 || isNaN(strArr[0]) || isNaN(strArr[1]) || isNaN(strArr[2]) ){
+        return alert("时间格式不正确");
+      }
+      var date = new Date();
+      date.setYear(strArr[0]);
+      date.setMonth(parseInt(strArr[1])-1);
+      date.setDate(strArr[2]);
+      return date;
+    };
+
     var loadAgent=function (){
     	User.show({id:id},{},function (data){
     		self.agent=data.user;
-    		console.log(data);
+    		if(self.agent._info.enterDate){
+				self.agent._info.enterDate = new Date(self.agent._info.enterDate);
+    			self.agent._info.enterDateString = self.agent._info.enterDate.getFullYear()+'/'+(self.agent._info.enterDate.getMonth()+1)+'/'+self.agent._info.enterDate.getDate();
+    		}
 			self.agent.name=self.agent._info.name;
 			self.agent.tel=self.agent._info.tel;
     		switch(self.agent._info.level.toString()){
@@ -57,6 +73,14 @@ angular.module('beiruixueApp')
 			name:self.agent.name,
 			tel:self.agent.tel
 		};
+		if(self.agent._info.enterDateString){
+            obj.enterDate = dealDateString(self.agent._info.enterDateString);
+            if(!obj.enterDate){
+                return;
+            }else{
+                obj.enterDate = obj.enterDate.getTime()
+            }
+        }
 		Info.update({id:self.agent._info._id},obj,function (){
 			$state.go('agent-account-view');
 		},function (data){

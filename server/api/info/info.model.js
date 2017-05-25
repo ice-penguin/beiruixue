@@ -26,6 +26,7 @@ var InfoSchema = new Schema({
 		ref: 'Role'
 	},
 	level:String,
+	enterDate:Date,//加盟时间
 	createDate:Date
 });
 

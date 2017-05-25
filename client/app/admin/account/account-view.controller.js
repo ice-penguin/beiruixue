@@ -87,6 +87,12 @@ angular.module('beiruixueApp')
 							break;
 					};
 				}
+
+				if(agent._creator && agent._creator._info){
+					agent.creatorName = agent._creator._info.name;
+				}else{
+					agent.creatorName = "";
+				}
 			});
 		},function (){
 

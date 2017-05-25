@@ -11,6 +11,7 @@ angular.module('beiruixueApp')
     	tel:null,
     	password:null,
     	rePassword:null,
+        enterDateString:null
     };
 
     var system ={}; 
@@ -26,6 +27,19 @@ angular.module('beiruixueApp')
         self.isPC = false;
         
     }
+
+    //格式化时间,已/为标准
+    var dealDateString = function(dateString){
+      var strArr = dateString.split('/');
+      if(strArr.length!=3 || isNaN(strArr[0]) || isNaN(strArr[1]) || isNaN(strArr[2]) ){
+        return alert("时间格式不正确");
+      }
+      var date = new Date();
+      date.setYear(strArr[0]);
+      date.setMonth(parseInt(strArr[1])-1);
+      date.setDate(strArr[2]);
+      return date;
+    };
 
     var loadMe=function (){
     	User.get({},{},function (data){
@@ -46,6 +60,14 @@ angular.module('beiruixueApp')
     	if(self.accountInfo.password != self.accountInfo.rePassword){
     		return alert("两次密码输入不同");
     	}
+        if(self.accountInfo.enterDateString){
+            self.accountInfo.enterDate = dealDateString(self.accountInfo.enterDateString);
+            if(!self.accountInfo.enterDate){
+                return;
+            }else{
+                self.accountInfo.enterDate = self.accountInfo.enterDate.getTime()
+            }
+        }
     	if(self.user.role=='admin'){
     		User.createSubAdmin({},self.accountInfo,function (data){
 	    		alert("创建成功！\n账号："+self.accountInfo.account+"\n密码："+self.accountInfo.password);

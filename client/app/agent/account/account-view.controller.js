@@ -80,6 +80,11 @@ angular.module('beiruixueApp')
 						agent.level='特级代理';
 						break;
 				};
+				if(agent._creator && agent._creator._info){
+					agent.creatorName = agent._creator._info.name;
+				}else{
+					agent.creatorName = "";
+				}
 			});
 		},function (){
 
