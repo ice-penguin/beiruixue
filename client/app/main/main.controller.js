@@ -14,7 +14,8 @@
           	$state.go('admin-account-view');
         } else if (Auth.isMember()) {
         	console.log("会员");
-          	$state.go('member-event-view');
+          	// $state.go('member-event-view');
+            $state.go('agent-account-view'); 
         } else if (Auth.isAgent()) {
         	console.log("代理");
           	$state.go('agent-account-view');

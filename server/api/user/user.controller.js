@@ -53,7 +53,8 @@ exports.index = function(req, res) {
     User.find(condition, '-salt -hashedPassword',{
       skip: (page - 1) * itemsPerPage,
       limit: itemsPerPage,
-      populate:'_info _creator'
+      populate:'_info _creator',
+      sort:{createDate:-1}
     })
     .exec(function (err, users) {
       if (err){return validationError(err);}

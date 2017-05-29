@@ -23,7 +23,8 @@
         <div id="{{menu.navImage}}" class="mobile-navbar-style"></div>
         <div ng-bind="menu.title" id="mobile-navbar-word"></div>
       </div>
-      <div id="mobile-navbar-lead" ng-show="navbarCtrl.user._info.level!='5'" style="width:50%" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
+      <!-- <div id="mobile-navbar-lead" ng-show="navbarCtrl.user._info.level!='5'" style="width:50%" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}"> -->
+      <div id="mobile-navbar-lead" style="width:50%" ng-repeat="menu in navbarCtrl.menus" ui-sref="{{menu.link}}">
         <div id="{{menu.navImage}}" class="mobile-navbar-style"></div>
         <div ng-bind="menu.title" id="mobile-navbar-word"></div>
       </div>

@@ -22,6 +22,7 @@ var updateInPerson=function (condition){
 	var dealArr;
 	var isUpdateRole=false;
 	var isUpdateIncome=false;
+	var isFrist=false;//是否是第一次进货
 	switch(product.state){
 		case '1':
 			dealArr=inPerson.otherProducts;
@@ -30,6 +31,9 @@ var updateInPerson=function (condition){
 		case '2':
 			isUpdateIncome=true;
 			dealArr=inPerson.mainProducts;
+			if(!inPerson.orderQuantity){
+				isFrist=true;//为第一次进货
+			}
 			inPerson.orderQuantity+=orderQuantity;
 			// 累计升级
 			// if(inPerson.level==5&&orderQuantity>=10){
@@ -75,10 +79,16 @@ var updateInPerson=function (condition){
 					inPerson.level=role.level;
 				}
 			});
-			updateIncome(condition);
+			//先让进货人升级到对应的等级
+			inPerson.save(function(err){
+				updatePushIcome(condition,isFrist);
+				updateIncome(condition);
+			});
+			
 		});
 	}else{
 		if(isUpdateIncome){
+			updatePushIcome(condition,isFrist);
 			updateIncome(condition);
 		}else{
 			inPerson.save();
@@ -102,54 +112,137 @@ var updateIncomeByNormal = function (condition){
 	
 }
 
-var updateIncome=function (condition){
-	Role.findOne({level:5},function (err,r){
-		if(r){
-			config.tetailPrice = r.primeCost;
-		}
-		var inPerson=condition.inPerson,
-			outPerson=condition.outPerson,
-			orderQuantity=condition.orderQuantity;
-		Role.findById(inPerson._role,function (err, inRole){
-			if(err||!inRole){inPerson.save(); return;}
-			if(inRole.level==5){
-				inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
-			}else{
-				var amount=orderQuantity*(config.tetailPrice-inRole.primeCost);
-				inPerson.saleIncome+=amount;
+//更新推荐人的返利,只进行推荐人相关计算
+//推荐人是会员，且收货人是第一次收货，则获得2000返利
+//推荐人有返利收益（如果推荐人跟发货人是同一个人，则不再计算推荐人收益）
+var updatePushIcome = function(condition,isFrist){
+	var inPerson=condition.inPerson,
+		outPerson=condition.outPerson,
+		orderQuantity=condition.orderQuantity;
+	//找到收获人的角色
+	Role.findById(inPerson._role,function (err, inRole){
+		if(err||!inRole){return;}
+		//找到推荐人,先找到进货人账户信息，找到推荐人账户和info
+		User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
+			if(err||!user){return;}
+			//没有推荐人直接返回
+			if(!user._creator){return;}
+			//如果发货人存在，且推荐人跟发货人是同一个人，则不再计算推荐人收益
+			if(outPerson && user._creator._info == outPerson._id){
+				return;
 			}
-			inPerson.save();
-			if(outPerson){
-				Role.findById(outPerson._role,function (err, outRole){
-					if(err||!outRole){return;}
-					if(outRole.level<inRole.level){
-						var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
-					}else{
-						var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
+
+			Info.findById(user._creator._info,'',{populate:'_role'},function (err,pushPerson){
+				if(err||!pushPerson){return;}
+				var pushRole = pushPerson._role;
+				if(!pushRole){return;}
+				//开始计算
+				//如果推荐人是会员，且进货人是第一次进货，推荐人拿到2000返点
+				//推荐人是否是会员
+				if(pushRole.level == 5){
+					//进货人是第一次进货
+					if(isFrist){
+						pushPerson.income += config.rateNum;
+						pushPerson.save();
 					}
-					outPerson.income+=amount;
-					outPerson.save();
-				});
-			}else{
-				User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
-					if(err||!user){return;}
-					if(!user._creator){return;}
-					Role.findById(user._creator._role,function (err, outRole){
-						if(err||!outRole){return;}
-						if(outRole.level<inRole.level){
-							var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
-						}else{
-							var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
-						}
-						user._creator.income+=amount;
-						user._creator.save();
-					});
-				});
-			}
+				}else{
+					//推荐人不是会员，按返利点点返点
+					pushPerson.income+=pushRole.primeCost*orderQuantity*config.ratePrecent;
+					pushPerson.save();
+				}
+			});
 		});
-	})
+		
+	});
+};
+
+//最新新版计算方式，outPerson不存在为admin发货，只计算发货人与收货人的收益
+//outPerson,inPerson都是info模型
+//outPerson不存在只可能为admin为发货人
+var updateIncome=function (condition){
+	var inPerson=condition.inPerson,
+		outPerson=condition.outPerson,
+		orderQuantity=condition.orderQuantity;
+	//找到收货人，找到发货人，找到收货人的推荐人（创建人）
+	//发货人是销售收入
+
+	//更新发货人的销售收益
+	Role.findById(inPerson._role,function (err, inRole){
+		if(err||!inRole){return;}
+		//如果进货人是会员，那么产生预期销售收益
+		if(inRole.level==5){
+			inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
+		}
+		inPerson.save();
+		if(outPerson){
+			//找到发货人的角色对应的发货价
+			Role.findById(outPerson._role,function (err, outRole){
+				if(err||!outRole){return;}
+				//计算发货人的收益,如果进货人等级在此次大于等于发货人，那么发货人得到的是返利，否则是销售收益
+				if(outRole.level<=inRole.level){
+					//发货人返利收益
+					outPerson.income+=inRole.primeCost*orderQuantity*config.ratePrecent;
+				}else{
+					//发货人销售收益
+					outPerson.saleIncome+=orderQuantity*(inRole.primeCost-outRole.primeCost)
+				}
+				outPerson.save();
+			});
+		}
+	});
+
 	
 };
+
+//更新销售收益,老版计算方式
+// var updateIncome=function (condition){
+// 	Role.findOne({level:5},function (err,r){
+// 		if(r){
+// 			config.tetailPrice = r.primeCost;
+// 		}
+// 		var inPerson=condition.inPerson,
+// 			outPerson=condition.outPerson,
+// 			orderQuantity=condition.orderQuantity;
+// 		Role.findById(inPerson._role,function (err, inRole){
+// 			if(err||!inRole){inPerson.save(); return;}
+// 			if(inRole.level==5){
+// 				inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
+// 			}else{
+// 				var amount=orderQuantity*(config.tetailPrice-inRole.primeCost);
+// 				inPerson.saleIncome+=amount;
+// 			}
+// 			inPerson.save();
+// 			if(outPerson){
+// 				Role.findById(outPerson._role,function (err, outRole){
+// 					if(err||!outRole){return;}
+// 					if(outRole.level<inRole.level){
+// 						var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
+// 					}else{
+// 						var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
+// 					}
+// 					outPerson.income+=amount;
+// 					outPerson.save();
+// 				});
+// 			}else{
+// 				User.findOne({_info:inPerson._id},'',{populate:'_creator'},function (err, user){
+// 					if(err||!user){return;}
+// 					if(!user._creator){return;}
+// 					Role.findById(user._creator._role,function (err, outRole){
+// 						if(err||!outRole){return;}
+// 						if(outRole.level<inRole.level){
+// 							var amount=(inRole.primeCost-outRole.primeCost)*orderQuantity;
+// 						}else{
+// 							var amount=(inPerson.primeCost*orderQuantity)*config.ratePrecent;
+// 						}
+// 						user._creator.income+=amount;
+// 						user._creator.save();
+// 					});
+// 				});
+// 			}
+// 		});
+// 	})
+	
+// };
 
 
 

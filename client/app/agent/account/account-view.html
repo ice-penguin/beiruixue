@@ -53,7 +53,7 @@
 						<!-- <div class="account-changePassword" ui-sref="agent-account-changePassword({id:agent._id,state:'other'})">修改密码</div> -->
 						<!-- <div class="account-changeUpdate" ui-sref="agent-account-edit({id:agent._id})">查看</div> -->
 						<div class="account-changeOutput" ui-sref="agent-event-view({_info:agent._info._id})" >动态</div>
-						<div class="account-changeOutput" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
+						<div class="account-changeOutput" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'||agentAccountViewCtrl.user._info.level=='5'">发货</div>
 					</div>
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 				<div class="mb-account-agentName" ng-bind="'返利收益:'+(agent._info.income?agent._info.income:'无')">role</div>
 			</div>
 			<div class="mb-account-out" ui-sref="agent-event-view{{agent.level=='子账号'?'({belong:agent._id})':'({_info:agent._info._id})'}}" style="margin-right:10px;">动态</div>
-			<div class="mb-account-out" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'">发货</div>
+			<div class="mb-account-out" ui-sref="agent-account-out({id:agent._id})" ng-hide="agent.level=='子账号'||agentAccountViewCtrl.user._info.level=='5'">发货</div>
 			<div class="mb-account-nextBtn" ui-sref="agent-account-edit({id:agent._id})"></div>
 		</div>
 	</div>	
