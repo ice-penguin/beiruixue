@@ -82,14 +82,14 @@ var updateInPerson=function (condition){
 			//先让进货人升级到对应的等级
 			inPerson.save(function(err){
 				updatePushIcome(condition,isFrist);
-				updateIncome(condition);
+				updateIncome(condition,isFrist);
 			});
 			
 		});
 	}else{
 		if(isUpdateIncome){
 			updatePushIcome(condition,isFrist);
-			updateIncome(condition);
+			updateIncome(condition,isFrist);
 		}else{
 			inPerson.save();
 		}
@@ -147,7 +147,7 @@ var updatePushIcome = function(condition,isFrist){
 					}
 				}else{
 					//推荐人不是会员，按返利点点返点
-					pushPerson.income+=pushRole.primeCost*orderQuantity*config.ratePrecent;
+					pushPerson.income+=inRole.primeCost*orderQuantity*config.ratePrecent;
 					pushPerson.save();
 				}
 			});
@@ -159,7 +159,8 @@ var updatePushIcome = function(condition,isFrist){
 //最新新版计算方式，outPerson不存在为admin发货，只计算发货人与收货人的收益
 //outPerson,inPerson都是info模型
 //outPerson不存在只可能为admin为发货人
-var updateIncome=function (condition){
+//且会员的第一套产品只用不产生销售收益
+var updateIncome=function (condition,isFrist){
 	var inPerson=condition.inPerson,
 		outPerson=condition.outPerson,
 		orderQuantity=condition.orderQuantity;
@@ -171,7 +172,12 @@ var updateIncome=function (condition){
 		if(err||!inRole){return;}
 		//如果进货人是会员，那么产生预期销售收益
 		if(inRole.level==5){
-			inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
+			if(isFrist){
+				inPerson.saleIncome+=config.memberExceptIncome*(orderQuantity-1);
+			}else{
+				inPerson.saleIncome+=config.memberExceptIncome*orderQuantity;
+			}
+			
 		}
 		inPerson.save();
 		if(outPerson){
@@ -179,7 +185,7 @@ var updateIncome=function (condition){
 			Role.findById(outPerson._role,function (err, outRole){
 				if(err||!outRole){return;}
 				//计算发货人的收益,如果进货人等级在此次大于等于发货人，那么发货人得到的是返利，否则是销售收益
-				if(outRole.level<=inRole.level){
+				if(outRole.level>=inRole.level){
 					//发货人返利收益
 					outPerson.income+=inRole.primeCost*orderQuantity*config.ratePrecent;
 				}else{

@@ -48,6 +48,15 @@
         controllerAs: 'agentAccountOutCtrl'
       })
 
+      // 角色管理
+      .state('agent-role-view', {
+        params:{"navValue":"agent-role-view"},
+        url: '/agent/role/view',
+        templateUrl: 'app/agent/role/role-view.html',
+        controller: 'AgentRoleViewCtrl',
+        controllerAs: 'agentRoleViewCtrl'
+      })
+
 
       // 事件管理
       .state('agent-event-view', {

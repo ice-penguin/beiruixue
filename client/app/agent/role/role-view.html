@@ -1,0 +1,92 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content" ng-if="agentRoleViewCtrl.isPC">
+	<div class="role-content">
+		<div class="account-title">账户管理->编辑</div>
+		<div class="account-line"></div>
+		<div class="role-table">
+			<div class="table_captions">
+				<div class="table_caption role-one">名称</div>
+				<div class="table_caption role-two">要求数量</div>
+				<div class="table_caption role-three">代理价格</div>
+			</div>
+			<div class="table_contents" ng-repeat="role in agentRoleViewCtrl.roles">
+				<div class="table_content role-one"><span style="color:#3c8d04" ng-bind="role.name">特级代理</span></div>
+				<div class="table_content role-two">
+					<div ng-hide="role.showEditQuantity">
+						<span style="float:left;color:#2e68c0" ng-bind="role.requireQuantity">300</span>
+						<!-- <div class="role-editImg" ng-click="role.showEditQuantity=true"></div> -->
+					</div>
+					<div ng-show="role.showEditQuantity">
+						<input type="text" class="role-quantityInput" ng-model="role.editQuantity">
+						<div class="role-btns">
+							<div class="role-saveBtn" ng-click="agentRoleViewCtrl.submitQuantity(role)">确认</div>
+							<div class="role-cancelBtn" ng-click="role.showEditQuantity=false">取消</div>
+						</div>
+					</div>
+				</div>
+				<div class="table_content role-three">
+					<div ng-hide="role.showEditPrice">
+						<span style="float:left;color:#f86701" ng-bind="role.primeCost">2600</span>
+						<!-- <div class="role-editImg" ng-click="role.showEditPrice=true"></div> -->
+					</div>
+					<div ng-show="role.showEditPrice">
+						<input type="text" class="role-quantityInput" ng-model="role.editPrice">
+						<div class="role-btns">
+							<div class="role-saveBtn" ng-click="agentRoleViewCtrl.submitPrice(role)">确认</div>
+							<div class="role-cancelBtn" ng-click="role.showEditPrice=false">取消</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="mb_roleBox" ng-if="!agentRoleViewCtrl.isPC">
+	<!-- 列表 -->
+	<div ng-hide="agentRoleViewCtrl.mbShowDList">
+		<div class="mb_role_title">
+			角色管理
+		</div>
+		<div class="mb_role_content" ng-repeat="role in agentRoleViewCtrl.roles">
+			<div class="mb_role_sign" ng-bind="role.name" ng-click="agentRoleViewCtrl.mbShowDetail=true;agentRoleViewCtrl.mbShowDList=true;agentRoleViewCtrl.editRole=role;">
+				特级代理
+				<img src="assets/images/mobile/detail.png">
+			</div>
+		</div>
+	</div>
+	<!-- 编辑 -->
+	<div ng-show="agentRoleViewCtrl.mbShowDetail">
+		<div class="mb_role_edit_title">
+			角色明细
+			<!-- <img src=""> -->
+		</div>
+		<div style="background:#fff;margin-top:50px;padding-bottom:50px;">
+			<div class="mb_role_edit_name">
+				<div class="mb_role_edit_key">
+					代理级
+				</div>
+				<div class="mb_role_edit_value" ng-bind="agentRoleViewCtrl.editRole.name">
+					一级代理
+				</div>
+			</div>
+			<div class="mb_role_edit_name mb_role_edit_inputcell">
+				<div class="mb_role_edit_key">
+					要求数量*
+				</div>
+				<input type="text" placeholder="数量必须为一个大于零的数" ng-model="agentRoleViewCtrl.editRole.requireQuantity">
+				<div style="clear:both"></div>
+			</div>
+			<div class="mb_role_edit_name mb_role_edit_inputcell">
+				<div class="mb_role_edit_key">
+					代理价格*
+				</div>
+				<input type="text" placeholder="价格必须为一个大于零的数" ng-model="agentRoleViewCtrl.editRole.primeCost">
+				<div style="clear:both"></div>
+			</div>
+			<div class="mb_role_submit" ng-click="agentRoleViewCtrl.save()">
+				确认修改
+			</div>
+		</div>
+	</div>
+</div>

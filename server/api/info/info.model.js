@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var InfoSchema = new Schema({
 	name:String,
-	tel:Number,
+	tel:String,
 	saleIncome:Number,//销售
 	income:Number,//返利,或差价
 	orderQuantity:Number,//主推产品累计

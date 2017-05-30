@@ -73,14 +73,14 @@ angular.module('beiruixueApp')
 	    		alert("创建成功！\n账号："+self.accountInfo.account+"\n密码："+self.accountInfo.password);
 	    		$state.go("admin-account-view");
 	    	},function(data){
-	    		alert(data);
+	    		alert(data.data);
 	    	});
     	}else{
     		User.createMember({},self.accountInfo,function (data){
 	    		alert("创建成功！\n账号："+self.accountInfo.account+"\n密码："+self.accountInfo.password);
 	    		$state.go("admin-account-view");
 	    	},function(data){
-	    		alert(data);
+	    		alert(data.data);
 	    	});
     	}
     	

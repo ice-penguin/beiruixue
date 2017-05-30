@@ -93,13 +93,19 @@
           },function (){
 
           });
-          self.newsState="agent-event-view({state:'false',index:null})";
+          self.newsState="agent-event-view({state:'false',_info:navbarCtrl.user._info._id})";
           self.menus=[{
             'title': '账户管理',
             'link': 'agent-account-view',
             'navCss':"",
             "state":"agent-account-view",
             "navImage":"mobile-accountGary-nav"
+          },{
+            'title': '角色管理',
+            'link': 'agent-role-view',
+            'navCss':"",
+            "state":"agent-role-view",
+            "navImage":"mobile-roleGary-nav"
           },{
             'title': '事件管理',
             'link': 'agent-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
