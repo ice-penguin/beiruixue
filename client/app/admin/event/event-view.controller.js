@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('beiruixueApp')
-  .controller('AdminEventViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Event',
-    function ($scope, $location, $state,$stateParams,$cookieStore,Event) {
+  .controller('AdminEventViewCtrl', ['$scope', '$location', '$state','$stateParams','$cookieStore','Event','User',
+    function ($scope, $location, $state,$stateParams,$cookieStore,Event,User) {
 
     var self = this;
 
@@ -11,6 +11,8 @@ angular.module('beiruixueApp')
     var state=$stateParams.state;
     self.belong=$stateParams.belong;
     self._info=$stateParams._info;
+    self.eventAndNote=true;
+    self.eventBold="font-weight:600";
 
 	self.pagination = {
       page: page,
@@ -41,6 +43,16 @@ angular.module('beiruixueApp')
         .search('itemsPerPage', self.pagination.itemsPerPage);
     };
 
+    var getMe=function (){
+    	User.get({},{},function (data){
+    		self.role=data.role;
+    		// console.log(self.role);
+			loadEvent();
+    	},function (){
+
+    	});
+    };
+
 	var loadEvent=function (){
 		var query={
 			page:self.pagination.page,
@@ -58,7 +70,11 @@ angular.module('beiruixueApp')
 		}
 		Event.index(query,function (data){
 			self.events = data.events;
-
+			for(var i=0;i<self.events.length;i++){
+				if(self.events[i].isNote){
+					self.events[i]._info.name='admin';
+				}
+			}
 			var totalItems = data.count;
             self.pagination.totalItems = totalItems;
             self.pagination.numPages = totalItems / itemsPerPage;
@@ -81,7 +97,19 @@ angular.module('beiruixueApp')
 
 	var init=function (){
 		self.isSelectAll = false;
-		loadEvent();
+		getMe();
+	};
+
+	self.changeTitle=function (state){
+		if(state=='event'){
+			self.eventAndNote=true;
+   			self.eventBold="font-weight:600";
+   			self.noteBold="";
+		}else{
+			self.eventAndNote=false;
+   			self.eventBold="";
+   			self.noteBold="font-weight:600";
+		}
 	};
 
 	self.selectAllChange = function (state){
@@ -109,6 +137,18 @@ angular.module('beiruixueApp')
 		Event.readAll({},{eventsIds:eventsIds},function (data){
 			alert("操作成功");
 			init();
+		},function (){
+
+		});
+	};
+
+	self.publicNote=function (){
+		Event.create({},{noteContent:self.noteContent},function (){
+			self.noteContent='';
+			self.eventAndNote=true;
+   			self.eventBold="font-weight:600";
+   			self.noteBold="";
+   			alert('发布成功!');
 		},function (){
 
 		});

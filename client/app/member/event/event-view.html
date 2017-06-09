@@ -21,7 +21,7 @@
 			</div>
 			<div class="table_contents" ng-repeat="ev in memberEventViewCtrl.events">
 				<div class="table_content event-one"><div class="account-selectAll" ng-click="ev.isSelect=!ev.isSelect;memberEventViewCtrl.isSelectAll=false"><span ng-show="ev.isSelect">√</span></div></div>
-				<div class="table_content event-two"><span ng-bind="ev._info.name">18806712362</span></div>
+				<div class="table_content event-two"><span ng-bind="ev._info.name?ev._info.name:'admin'">18806712362</span></div>
 				<div class="table_content event-three"><span style="color:#f86701" ng-bind="ev.content">特级代理</span></div>
 				<div class="table_content event-four"><span style="color:#2e68c0" ng-bind="ev.createDate | date:'yyyy-MM-dd/hh:mm a'">特级代理</span></div>
 				<div class="table_content event-five"><span ng-bind="ev.isRead?'已读':'未读'">特级代理</span></div>

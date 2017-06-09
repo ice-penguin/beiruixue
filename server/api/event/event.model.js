@@ -21,6 +21,7 @@ var EventSchema = new Schema({
 	    type:String,
 	    ref:'User'
 	 },//属于哪个subAdmin
+	 isNote:String,//为1
 	createDate:Date
 });
 

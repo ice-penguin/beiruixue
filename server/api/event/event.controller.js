@@ -337,6 +337,23 @@ exports.shipment=function (req, res){
 	});
 };
 
+exports.create=function (req, res){
+	var noteContent=req.body.noteContent,
+		adminId=req.user._id;
+	if(!noteContent){
+		return res,json(400,'noteContent');
+	}
+	var obj={
+		content:noteContent,
+		hasRead:[],
+		isNote:'1',
+		createDate:new Date()
+	}
+	Event.create(obj,function (err, event){
+		if(err){return handleError(res,err);}
+		return res.json(200,{event:event});
+	});
+};
 
 exports.index=function (req, res){
 	var page = req.query.page || 1,
@@ -344,18 +361,25 @@ exports.index=function (req, res){
     	_info = req.query._info,
     	belong = req.query.belong,
     	readId = (req.user._id).toString(),
-    	isRead=req.query.isRead;
+    	isRead=req.query.isRead,
+    	role=req.user.role;
     var condition={};
+    var condition2={};
     var count;
     // console.log(_info,'aaaa');
     if(isRead){
     	condition=_.merge(condition,{hasRead:{$nin:[readId]}});
+    	condition2=_.merge(condition2,{hasRead:{$nin:[readId]}});
     }
     if(_info){
     	condition=_.merge(condition,{_info:_info});
     }
     if(belong){
     	condition=_.merge(condition,{belong:belong});
+    }
+    if(role!='admin'||role!='subadmin'){
+    	condition2=_.merge(condition2,{isNote:'1'});
+    	condition={$or:[condition,condition2]};
     }
     console.log(condition,'aaaa');
     Event.find(condition).count(function (err, c){

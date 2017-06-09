@@ -18,6 +18,12 @@
         index:{
           method:'GET'
         },
+        create:{
+          method:'POST',
+          params:{
+            id:'note'
+          }
+        },
         read:{
           method:'PUT'
         },
