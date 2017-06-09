@@ -44,11 +44,11 @@ exports.index = function(req, res) {
   };
 
   var doQuery=function (){
-    console.log(condition);
+    // console.log(condition);
     User.find(condition).count(function (err, c) {
       if (err){return validationError(err);}
       count=c;
-      console.log(count);
+      // console.log(count);
     });
     User.find(condition, '-salt -hashedPassword',{
       skip: (page - 1) * itemsPerPage,
@@ -119,7 +119,7 @@ exports.createSubAdmin = function (req,res){
     createDate:new Date()
   };
 
-  console.log(subAdminObj);
+  // console.log(subAdminObj);
   User.create(subAdminObj,function (err,user){
     if(err){
       return validationError(res,err);
@@ -271,7 +271,7 @@ exports.recovery = function(req, res) {
 
 exports.destroyAll = function(req, res) {
   var userIds=req.body.userIds;
-  console.log(userIds);
+  // console.log(userIds);
   User.find({_id:{$in:userIds}}, function(err, users) {
     if (err){return validationError(res,err);}
     _.each(users,function (user){
@@ -302,7 +302,7 @@ exports.changePassword = function(req, res) {
   var userId = req.params.id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
-  console.log(userId,req.user._id);
+  // console.log(userId,req.user._id);
   User.findById(userId, function (err, user) {
     if(err){return validationError(res,err);}
     if(!user){return res.json(404,'找不到user!');}

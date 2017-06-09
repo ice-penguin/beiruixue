@@ -70,11 +70,6 @@ angular.module('beiruixueApp')
 		}
 		Event.index(query,function (data){
 			self.events = data.events;
-			for(var i=0;i<self.events.length;i++){
-				if(self.events[i].isNote){
-					self.events[i]._info.name='admin';
-				}
-			}
 			var totalItems = data.count;
             self.pagination.totalItems = totalItems;
             self.pagination.numPages = totalItems / itemsPerPage;

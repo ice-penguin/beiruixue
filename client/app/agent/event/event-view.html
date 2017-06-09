@@ -42,7 +42,7 @@
 		<div class="mb_event_content">
 			<div class="mb_event_sign" ng-repeat="ev in agentEventViewCtrl.events">
 				<div class="mb_event_sign_left">
-					<div class="hidden-text mb_event_sign_title" ng-bind="ev._info.name">
+					<div class="hidden-text mb_event_sign_title" ng-bind="ev._info.name?ev._info.name:'admin'">
 						账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称
 					</div>
 					<div class="hidden-text mb_event_sign_content" ng-bind="ev.content">

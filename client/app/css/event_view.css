@@ -58,3 +58,9 @@
 	line-height: 36px;
 	cursor: pointer;
 }
+.ellipsis{
+	overflow:hidden; 
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	/*作用：将超出部分隐藏为省略号，仅限一行*/
+}

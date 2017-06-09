@@ -79,7 +79,7 @@ exports.index=function (req, res){
 	}else if(isActive=='false'){
 		condition=_.merge(condition,{isActive:false});
 	}
-	console.log(condition);
+	// console.log(condition);
 	Product.find(condition).count(function (err, c){
 		if (err) {return handleError(res, err);}
 		count = c;

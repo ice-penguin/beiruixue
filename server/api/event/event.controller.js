@@ -47,7 +47,7 @@ var updateInPerson=function (condition){
 			}
 			break;
 	}
-	console.log(isUpdateIncome);
+	// console.log(isUpdateIncome);
 	var pr=_.find(dealArr,{name:product.name});
 	if(pr){
 		pr.orderQuantity+=orderQuantity;
@@ -341,7 +341,7 @@ exports.create=function (req, res){
 	var noteContent=req.body.noteContent,
 		adminId=req.user._id;
 	if(!noteContent){
-		return res,json(400,'noteContent');
+		return res,json(400,'缺少创建参数：noteContent');
 	}
 	var obj={
 		content:noteContent,
@@ -381,7 +381,7 @@ exports.index=function (req, res){
     	condition2=_.merge(condition2,{isNote:'1'});
     	condition={$or:[condition,condition2]};
     }
-    console.log(condition,'aaaa');
+    // console.log(condition,'aaaa');
     Event.find(condition).count(function (err, c){
     	if(err){return handleError(res,err);}
     	count=c;
