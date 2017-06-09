@@ -94,6 +94,12 @@ angular.module('beiruixueApp')
     };
 
     self.save=function (){
+        if(!self.product.name){
+            return alert('产品名必填!');
+        }
+        if(!self.product.description){
+            return alert('产品描述必填!');
+        }
     	if(!self.productCategory){
     		return alert('产品类别必填!');
     	}
