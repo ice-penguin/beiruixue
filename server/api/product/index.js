@@ -8,9 +8,9 @@ var auth = require('../../auth/auth.service');
 var router = express.Router();
 
 router.post('/', auth.hasRole(['admin','subAdmin']), controller.create);
-router.get('/', auth.hasRole(['admin','subAdmin','4','3','2','1']), controller.index);
+router.get('/', auth.hasRole(['admin','subAdmin','5','4','3','2','1']), controller.index);
 router.put('/destroyAll', auth.hasRole(['admin','subAdmin']), controller.destroyAll);
-router.get('/:id', auth.hasRole(['admin','subAdmin']), controller.show);
+router.get('/:id', auth.hasRole(['admin','subAdmin','5','4','3','2','1']), controller.show);
 router.put('/:id', auth.hasRole(['admin','subAdmin']), controller.update);
 router.put('/changeState/:id', auth.hasRole(['admin','subAdmin']), controller.changeState);
 router.delete('/:id', auth.hasRole(['admin','subAdmin']), controller.destroy);

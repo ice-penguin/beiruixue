@@ -107,6 +107,12 @@
             "state":"agent-role-view",
             "navImage":"mobile-roleGary-nav"
           },{
+            'title': '产品管理',
+            'link': 'agent-product-view',
+            'navCss':"",
+            "state":"agent-product-view",
+            "navImage":"mobile-productGary-nav"
+          },{
             'title': '事件管理',
             'link': 'agent-event-view({index:null,state:null,_info:navbarCtrl.user._info._id})',
             'navCss':"",
@@ -228,7 +234,13 @@
           case 'admin-role-view':
             c.navImage="mobile-roleGreen-nav";
             break;
+          case 'agent-role-view':
+            c.navImage="mobile-roleGreen-nav";
+            break;
           case 'admin-product-view':
+            c.navImage="mobile-productGreen-nav";
+            break;
+          case 'agent-product-view':
             c.navImage="mobile-productGreen-nav";
             break;
           case 'admin-event-view':

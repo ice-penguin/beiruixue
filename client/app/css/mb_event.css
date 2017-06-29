@@ -14,10 +14,10 @@
 	margin-bottom: 20px;
 }
 .mb_event_content{
-	border-top:1px solid #d9d9d9 ;
+	/*border-top:1px solid #d9d9d9 ;*/
 }
 .mb_event_sign{
-	height: 98px;
+	/*height: 98px;*/
 	padding: 20px 23px;
 	font-size:20px;
 	color:#3c8d04 ;
@@ -46,7 +46,7 @@
 }
 .mb_event_sign_content{
 	width: 500px;
-	height: 20px;
+	/*height: 20px;*/
 	font-size: 14px;
 	margin-top: 12px;
 	color: #929292;

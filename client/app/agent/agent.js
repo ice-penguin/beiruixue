@@ -57,6 +57,22 @@
         controllerAs: 'agentRoleViewCtrl'
       })
 
+      // 产品管理
+      .state('agent-product-view', {
+        params:{"navValue":"agent-product-view"},
+        url: '/agent/product/view?itemsPerPage&page&kw',
+        templateUrl: 'app/agent/product/product-view.html',
+        controller: 'AgentProductViewCtrl',
+        controllerAs: 'agentProductViewCtrl'
+      })
+
+      .state('agent-product-edit', {
+        params:{"navValue":"agent-product-view"},
+        url: '/agent/product/edit/:id',
+        templateUrl: 'app/agent/product/product-edit.html',
+        controller: 'AgentProductEditCtrl',
+        controllerAs: 'agentProductEditCtrl'
+      })
 
       // 事件管理
       .state('agent-event-view', {

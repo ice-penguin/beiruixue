@@ -50,13 +50,15 @@
 					<div class="hidden-text mb_event_sign_title" ng-bind="ev._info.name?ev._info.name:'admin'">
 						账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称账号名称
 					</div>
-					<div class="hidden-text mb_event_sign_content" ng-bind="ev.content">
+					<div class="mb_event_sign_content" style="height:auto" ng-bind="ev.content">
 						具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件具体事件
 					</div>
+					<div style="clear:both"></div>
 				</div>
-				<div class="mb_event_sign_right" ng-bind="ev.createDate | date:'yyyy-mm-dd/hh:MM'">
+				<div class="mb_event_sign_right" ng-bind="ev.createDate | date:'yyyy-MM-dd/hh:MM'">
 					2016-01-31
 				</div>
+				<div style="clear:both"></div>
 			</div>
 			<pagination style="float:right;margin-right:30px;" ng-if="adminEventViewCtrl.pagination.numPages > 1" total-items="adminEventViewCtrl.pagination.totalItems" ng-model="adminEventViewCtrl.pagination.page" items-per-page="adminEventViewCtrl.pagination.itemsPerPage" max-size="adminEventViewCtrl.pagination.maxSize" boundary-links="{{adminEventViewCtrl.pagination.numPages > 2}}" rotate="false" num-pages="adminEventViewCtrl.pagination.numPages" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="adminEventViewCtrl.pageChanged()"></pagination>
 		</div>

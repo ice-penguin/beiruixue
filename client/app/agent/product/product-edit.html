@@ -1,0 +1,123 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="content" ng-if="agentProductEditCtrl.isPC">
+	<div class="product-addPosition">
+		<div class="account-title">产品管理->编辑产品</div>
+		<div class="account-line"></div>
+		<div class="account-inputs">
+			<div class="input_content">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>产品名:</div>
+				<div type="text" class="input_value" style="width:400px;" ng-bind="agentProductEditCtrl.product.name"></div>
+				<!-- <span class="prompt">20字以内</span> -->
+			</div>
+			<div class="textarea_content">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>描述:</div>
+				<div type="text" class="textarea_value" ng-bind="agentProductEditCtrl.product.description"></div>
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div style="clear:both"></div>
+			<div class="input_content">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>库存:</div>
+				<div type="text" class="input_value" style="width:80px;" ng-bind="agentProductEditCtrl.product.quantity"></div>
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div class="input_content" ng-show="agentProductEditCtrl.product.state=='1'">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>价格:</div>
+				<div type="text" class="input_value" style="width:80px;" ng-bind="agentProductEditCtrl.product.price"></div>
+				<!-- <span class="prompt">英文字母开头</span> -->
+			</div>
+			<div class="input_content">
+				<div class="input_name"><span class="necessary" style="color:#fff">*</span>产品图片:</div>
+				<img class="product-submitImg" ng-hide="agentProductEditCtrl.product.image">
+				<img class="product-submitImg" ng-show="agentProductEditCtrl.product.image" ng-src="{{agentProductEditCtrl.imageFile+agentProductEditCtrl.product.image}}">
+				<!-- <progressbar ng-show="agentProductEditCtrl.loaded > 0" ng-class="{active: agentProductEditCtrl.loaded < 100}" max="100" value="agentProductEditCtrl.loaded">
+					<span ng-bind="agentProductEditCtrl.loaded" ></span>%
+				</progressbar > -->
+				<!-- <div class="product-submitPrompt" ngf-select ngf-change="agentProductEditCtrl.upload($files,0)">点击更换</div> -->
+				<div class="product-submitPrompt"></div>
+			</div>
+			<div style="clear:both"></div>
+			<div class="input_content" style="position:relative">
+				<div class="input_name"><span class="necessary">*</span>产品类型:</div>
+				<div type="text" class="input_value" style="width:168px;">
+					<div class="account-selectBox" ng-bind="agentProductEditCtrl.productCategory"></div>
+					<!-- <div class="account-selectBtn" ng-click="agentProductEditCtrl.showSelectChooses=!agentProductEditCtrl.showSelectChooses">∨</div> -->
+				</div>
+				<!-- <div class="account-selectChooses" ng-show="agentProductEditCtrl.showSelectChooses">
+					<div class="account-selectChoose" ng-click="agentProductEditCtrl.chooseProduct('1')">普通产品</div>
+					<div class="account-selectChoose" ng-click="agentProductEditCtrl.chooseProduct('2')">主推产品</div>
+				</div> -->
+			</div>
+			<div>
+				<!-- <div class="account-save" ng-click="agentProductEditCtrl.update()">确认修改</div> -->
+				<div class="account-back" ui-sref="agent-product-view">返回</div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="mobile-content" ng-if="!agentProductEditCtrl.isPC">
+	<div class="mb-account-addTitlePosition">
+		<div class="mb-account-back" ui-sref="agent-product-view"></div>
+		<div class="mb-account-addTitle">编辑产品</div>
+	</div>
+	<div class="mb-input_contents" style="margin-top:-10px;;">
+		<div class="mb-product-imgPosition">
+			<img class="mb-product-image" ng-hide="agentProductEditCtrl.product.image">
+			<img class="mb-product-image" ng-show="agentProductEditCtrl.product.image" ng-src="{{agentProductEditCtrl.imageFile+agentProductEditCtrl.product.image}}">
+			<!-- <div ngf-select ngf-change="agentProductEditCtrl.upload($files,0)">
+				<div class="mb-product-word">点击上传</div>
+				<div class="mb-product-btn"></div>
+			</div> -->
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell" style="overflow: hidden;">
+			<div class="mb_role_edit_key">
+				产品名*
+			</div>
+			<div class="inputBg" type="text" ng-bind="agentProductEditCtrl.product.name"></div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell" style="overflow: hidden;">
+			<div class="mb_role_edit_key">
+				描述*
+			</div>
+			<div class="inputBg" type="text" ng-bind="agentProductEditCtrl.product.description"></div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell" style="overflow: hidden;">
+			<div class="mb_role_edit_key">
+				库存*
+			</div>
+			<div class="inputBg" type="text" ng-bind="agentProductEditCtrl.product.quantity"></div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell" ng-show="agentProductEditCtrl.product.state=='1'" style="overflow: hidden;">
+			<div class="mb_role_edit_key">
+				价格*
+			</div>
+			<div class="inputBg" type="text" ng-bind="agentProductEditCtrl.product.price"></div>
+			<div style="clear:both"></div>
+		</div>
+		<div class="mb_role_edit_name mb_role_edit_inputcell">
+			<div class="mb_role_edit_key">
+				产品类别*
+			</div>
+			<div class="mb-account-out-box" type="text">
+				<div class="mb-account-out-selectBox" ng-bind="agentProductEditCtrl.productCategory"></div>
+				<!-- <div class="mb-account-out-selectBtn" ng-click="agentProductEditCtrl.showSelectChooses=!agentProductEditCtrl.showSelectChooses"></div> -->
+				<!-- <div class="mb-account-out-selectChooses" ng-show="agentProductEditCtrl.showSelectChooses">
+					<div class="mb-account-out-selectChoose" ng-click="agentProductEditCtrl.chooseProduct('1')">普通产品</div>
+					<div class="mb-account-out-selectChoose" ng-click="agentProductEditCtrl.chooseProduct('2')">主推产品</div>
+				</div> -->
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<!-- <div class="mb_role_submit" ng-click="agentProductEditCtrl.update()">
+			确认修改
+		</div>
+		<div class="mb_role_submit" ng-click="agentProductEditCtrl.destory()" style="background:red">
+			删除
+		</div> -->
+	</div>
+</div>
