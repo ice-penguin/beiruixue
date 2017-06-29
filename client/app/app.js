@@ -7,7 +7,7 @@
 		  'ngCookies',
 		  'ngResource',
 		  'ngSanitize',
-		  // 'btford.socket-io',
+		  'btford.socket-io',
 		  'ui.router',
 		  'ui.bootstrap',
       'ngFileUpload'

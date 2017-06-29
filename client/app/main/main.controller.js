@@ -7,7 +7,7 @@
     .controller('MainCtrl', MainCtrl);
 
   /* @ngInject */
-  function MainCtrl($scope, $http, Auth, $state) {
+  function MainCtrl($scope, $http, socket, Auth, $state) {
     var redirect = function () {
         if (Auth.isAdmin()) {
         	console.log("admin");
