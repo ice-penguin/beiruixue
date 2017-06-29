@@ -53,7 +53,7 @@
 				<div class="mb-account-out-selectBox" ng-bind="agentAccountOutCtrl.showProductName"></div>
 				<div class="mb-account-out-selectBtn" ng-click="agentAccountOutCtrl.showProducts=!agentAccountOutCtrl.showProducts"></div>
 				<div class="mb-account-out-selectChooses" ng-show="agentAccountOutCtrl.showProducts">
-					<div class="mb-account-out-selectChoose" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">111111</div>
+					<div class="mb-account-out-selectChoose ellipsis" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">111111</div>
 				</div>
 			</div>
 			<div style="clear:both"></div>
