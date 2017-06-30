@@ -43,7 +43,8 @@ angular.module('beiruixueApp')
 	var loadProduct=function (){
 		var query={
 			page:self.pagination.page,
-            itemsPerPage:self.pagination.itemsPerPage
+            itemsPerPage:self.pagination.itemsPerPage,
+            isActive:'true'
 		};
 		if(self.keywords&&self.keywords != ""){
 			query.name = self.keywords;
