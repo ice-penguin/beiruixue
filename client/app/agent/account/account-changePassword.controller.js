@@ -48,10 +48,13 @@ angular.module('beiruixueApp')
    		
    	}
 
-   	self.changePassword = function(){
+   	self.changePassword = function(state){
    		if(self.body.reNewPassword && self.body.reNewPassword != self.body.newPassword){
    			return alert("两次密码输入不同");
    		}
+      if(state=='needReNewPassword'&&!self.body.reNewPassword){
+        return alert("请再次输入密码");
+      }
    		if(!self.body.newPassword){
    			return alert("请输入新密码");
    		}

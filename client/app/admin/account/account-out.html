@@ -11,11 +11,11 @@
 			<div class="input_content" style="position:relative">
 				<div class="input_name">产品:</div>
 				<div type="text" class="input_value" style="width:168px;">
-					<div class="account-selectBox" ng-bind="adminAccountOutCtrl.showProductName"></div>
+					<div class="account-selectBox hidden-text" title="{{adminAccountOutCtrl.showProductName}}" ng-bind="adminAccountOutCtrl.showProductName"></div>
 					<div class="account-selectBtn" ng-click="adminAccountOutCtrl.showProducts=!adminAccountOutCtrl.showProducts">∨</div>
 				</div>
 				<div class="account-selectChooses" style="height:auto" ng-show="adminAccountOutCtrl.showProducts">
-					<div class="account-selectChoose" ng-repeat="pr in adminAccountOutCtrl.products" ng-bind="pr.name" ng-click="adminAccountOutCtrl.chooseProduct(pr)">普通产品</div>
+					<div class="account-selectChoose hidden-text" title="{{pr.name}}" ng-repeat="pr in adminAccountOutCtrl.products" ng-bind="pr.name" ng-click="adminAccountOutCtrl.chooseProduct(pr)">普通产品</div>
 				</div>
 			</div>
 			<div class="input_content">
@@ -51,7 +51,7 @@
 				产品*
 			</div>
 			<div class="mb-account-out-box" type="text" ng-model="adminAccountOutCtrl.agent.name">
-				<div class="mb-account-out-selectBox" ng-bind="adminAccountOutCtrl.showProductName"></div>
+				<div class="mb-account-out-selectBox hidden-text" ng-bind="adminAccountOutCtrl.showProductName"></div>
 				<div class="mb-account-out-selectBtn" ng-click="adminAccountOutCtrl.showProducts=!adminAccountOutCtrl.showProducts"></div>
 				<div class="mb-account-out-selectChooses" ng-show="adminAccountOutCtrl.showProducts">
 					<div class="mb-account-out-selectChoose ellipsis" ng-repeat="pr in adminAccountOutCtrl.products" ng-bind="pr.name" ng-click="adminAccountOutCtrl.chooseProduct(pr)">111111</div>

@@ -11,11 +11,11 @@
 			<div class="input_content" style="position:relative">
 				<div class="input_name">产品:</div>
 				<div type="text" class="input_value" style="width:168px;">
-					<div class="account-selectBox" ng-bind="agentAccountOutCtrl.showProductName"></div>
+					<div class="account-selectBox hidden-text" title="{{agentAccountOutCtrl.showProductName}}" ng-bind="agentAccountOutCtrl.showProductName"></div>
 					<div class="account-selectBtn" ng-click="agentAccountOutCtrl.showProducts=!agentAccountOutCtrl.showProducts">∨</div>
 				</div>
 				<div class="account-selectChooses" style="height:auto" ng-show="agentAccountOutCtrl.showProducts">
-					<div class="account-selectChoose" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">普通产品</div>
+					<div class="account-selectChoose hidden-text" title="{{pr.name}}" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">普通产品</div>
 				</div>
 			</div>
 			<div class="input_content">
@@ -32,7 +32,7 @@
 
 <div class="mobile-content" ng-if="!agentAccountOutCtrl.isPC">
 	<div class="mb-account-addTitlePosition">
-		<div class="mb-account-back" ui-sref="admin-account-view"></div>
+		<div class="mb-account-back" ui-sref="agent-account-view"></div>
 		<div class="mb-account-addTitle">发货</div>
 	</div>
 	<div class="mb-input_contents">
@@ -50,7 +50,7 @@
 				产品*
 			</div>
 			<div class="mb-account-out-box" type="text" ng-model="agentAccountOutCtrl.agent.name">
-				<div class="mb-account-out-selectBox" ng-bind="agentAccountOutCtrl.showProductName"></div>
+				<div class="mb-account-out-selectBox hidden-text" ng-bind="agentAccountOutCtrl.showProductName"></div>
 				<div class="mb-account-out-selectBtn" ng-click="agentAccountOutCtrl.showProducts=!agentAccountOutCtrl.showProducts"></div>
 				<div class="mb-account-out-selectChooses" ng-show="agentAccountOutCtrl.showProducts">
 					<div class="mb-account-out-selectChoose ellipsis" ng-repeat="pr in agentAccountOutCtrl.products" ng-bind="pr.name" ng-click="agentAccountOutCtrl.chooseProduct(pr)">111111</div>
